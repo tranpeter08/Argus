@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="">
+    <title>title</title>
+    <link href="main.css" rel="stylesheet" type="text/css" />
+    <link href="float.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <h1>Argus</h1>
+    </header>
+    <main>
+        <form id="employee-data" >
+          <fieldset>
+            <legend>Add an Employee</legend>
+            
+            <label for="first-name">Employee First Name</label>
+            <input type="text" name="first-name" id="first-name" required autofocus>
+            <label for="last-name">Employee Last Name</label>
+            <input type="text" name="last-name" id="last-name" required>
+            
+            <h2>Certifications</h2>
+
+            <label for="CWI">Certified Welding Inspector (A.W.S.)</label>
+            <input type= "checkbox" name="certs" id="CWI" value ="CWI">
+            <label for="UT">Ultrasonic Testing</label>
+            <input type= "checkbox" name="certs" id="UT" value="UT">
+            <label for="MT">Magnatic Particle Testing</label>
+            <input type= "checkbox" name="certs" id="MT" value="MT">
+            <label for="GPR">Ground Penetrating Radar</label>
+            <input type= "checkbox" name="certs" id="GPR" value="GPR">
+            <label for="soils">Soils Inspector</label>
+            <input type= "checkbox" name="certs" id="soils" value="soils">
+
+            <h2>Equipment</h2>
+
+            <label for="equipment-name">Name</label>
+            <input type="text" id="equipment-name">
+            <label for="equipment-number">Part No.</label>
+            <input type="text" id="equipment-number">
+            <button type="button">add Equipment</button>
+
+            <h3>Equipment List</h3>
+
+            <div class="js-equip-list"></div>
+            <button class="create" type="submit">Submit</button>
+            <button class="reset" type="reset">Clear Form</button>
+
+          </fieldset>
+        </form>
+
+        <h2>Employees</h2>
+
+        <button class="view">View</button>
+        <button class="clear">clear</button>
+        <div class="js-results"></div>
+        
+    </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
