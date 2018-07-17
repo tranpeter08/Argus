@@ -1,12 +1,22 @@
 
  //get database reqeust
  function postDataAPI(){
-
+    const settings= {
+        url: '/employees',
+        dataType: 'json',
+        contentType: 'application/json',
+        data:{ stuff:stuf}
+    }
+    $.ajax(settings)
+    .done(renderHTML_GET)
+    .fail(()=>{
+        console.log('Failed GET response')
+    });
  }
 
 function getDataAPI(){
     const settings= {
-        url: 'http://localhost:8080/employees',
+        url: '/employees',
         dataType: 'json',
         contentType: 'application/json',
     }

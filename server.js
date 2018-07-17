@@ -26,7 +26,11 @@ app.post('/employees',(req,res)=>{
 
 //DELETE
 
+if(require.main === module){
+
 app.listen(PORT, ()=>{
     console.log(`Your app is listening on port ${PORT}`);
 
 });
+}
+module.exports = app;
