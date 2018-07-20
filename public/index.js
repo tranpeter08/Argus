@@ -1,6 +1,8 @@
+"use strict";
 
- //get database reqeust
- function postDataAPI(){
+
+//POST database request 
+ function postDataAPI(aFunction, certs, equips){
     const settings= {
         url: '/employees',
         dataType: 'json',
@@ -8,44 +10,30 @@
         data:{ stuff:stuf}
     }
     $.ajax(settings)
-    .done(renderHTML_GET)
+    .done(aFunction)
     .fail(()=>{
-        console.log('Failed GET response')
+        console.log('Failed POST response')
     });
  }
 
-function getDataAPI(){
+ //get database reqeust
+function getDataAPI(aFunction){
     const settings= {
         url: '/employees',
         dataType: 'json',
         contentType: 'application/json',
     }
     $.ajax(settings)
-    .done(renderHTML_GET)
+    .done(aFunction)
     .fail(()=>{
         console.log('Failed GET response')
     });
-}
-
-
-//clear data
-function clearResults(){
-
-}
-
-function listEquip(equipment){
-   return equipment.map((item)=>`<li>${item}</li>`)
-}
-
-function listCerts(certs){
-    return certs.map((aCert)=>`<li>${aCert}</li>`)
 }
 
 function handleData(anEmployee){
     return `
         <hr>
         <li>
-            
             <h3>${anEmployee.employeeName}</h3>
             <h4>Certifications</h4>
             <ul>
@@ -76,39 +64,136 @@ function renderHTML_GET(data){
 function viewEmployees(){
     $('.view').on('click',(event)=>{
         console.log('view button ran');
-       getDataAPI();
+       getDataAPI(renderHTML_GET);
 
     })
 }
 
-//collect equipment data
-function collectEquipment(){
-    $()
+//collect notes for storage
+function collectNotes(notes){
+    let inputNotes = $('.js-add-notes').val();
+    notes.push(inputNotes)
+    console.log(notes);
+}
+
+
+function clearEquipList(storage){
+    $(".js-equip-table").empty();
+}
+
+function clearEquipButton(storage){
+   $(".js-list-clear").on("click", ()=>{
+        console.log("clearEquip ran");
+        console.log(storage);
+        storage.equipment = [];
+        clearEquipList()
+    })
+}
+
+function clearAllInputs(storage){
+    storage.employeeName.firstName = [];
+    storage.employeeName.lastName = [];
+    storage.certifications = [];
+    storage.equipment = []
+    storage.notes = [];
+    clearEquipList();
+    console.log(storage);
+}
+
+//clear data
+function formReset(storage){
+    $(".js-reset").on('click', ()=>{
+        console.log("formReset ran",storage);
+        clearAllInputs(storage);
+    })
+
+}
+
+function listEquip(equipment){
+   return equipment.map((item)=>`<li>${item}</li>`)
+}
+
+function listCerts(certs){
+    return certs.map((aCert)=>`<li>${aCert}</li>`)
+}
+
+function generateList(item){
+    return `
+        <li>${item} <button class="js-item-delete" type="button">Delete</button></li>
+    ` 
+}
+
+function renderAddList(equips){
+    $(".js-equip-table").html(`
+        <h3>Equipment List</h3>            
+        <ol>Description (Part No.)
+            ${(equips.map((item)=> generateList(item))).join('')}
+        </ol>
+    `);
 }
 
 //add equipment and make list on html
-function addEquipment(){
 
+function collectEquipment(storage){
+    $('.js-add-equip').on('click', ()=>{
+        let equipName = $('#equipment-name').val();
+        let equipNumber = $('#equipment-number').val();
+        let equipDesc;
+        if(equipNumber === ""){
+            equipNumber = 'N/A'
+        }
+        equipDesc = `${equipName} (${equipNumber})`;
+        if(equipName !== ""){
+            storage.equipment.push(equipDesc);
+            console.log(storage.equipment);
+            $('.js-equip-clear').val('');
+            renderAddList(storage.equipment);
+        };
+    });
 }
 
 //collect certificatin data
-function collectCerts(){
-    const certifications = []
-    $('input[name=certs]:checked').each(function(){certifications.push($(this).val())});
-    console.log(certifications);
-    return certifications
+function collectCerts(storage){
+    $('input[name=certs]:checked').each(function(){storage.push($(this).val())});
+    console.log(storage);
 }
 
-    //submits employee information to database
+function collectEmployeeName(employee){
+    employee.firstName = $('#first-name').val();
+    employee.lastName = $('#last-name').val();
+}
+
+//submits employee information to database
 function createEmployee(){
+    const postStorage = {
+        employeeName:{
+            firstName: "",
+            lastName: ""
+        },
+        certifications: [], 
+        equipment: [],
+        notes: []
+    }
+    
+    let {employeeName,certifications,equipment,notes} = postStorage
+    
+    collectEquipment(postStorage);
+    clearEquipButton(postStorage);
+    formReset(postStorage);
+
+    //when user clicks submits
     $('#employee-data').on('submit', (event)=>{
-        console.log('form ran');
+        console.log('createEmployee ran');
         event.preventDefault();
-        let firstName = $('#first-name').val();
-        let lastName = $('#last-name').val();
-        collectCerts();
-        
+
+        collectEmployeeName(employeeName)
+        collectCerts(certifications);
+        collectNotes(notes);
+
+        console.log(postStorage);
+
     })
+
 }
 
 function runThis(){

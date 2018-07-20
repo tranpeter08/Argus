@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="">
-    <title>title</title>
+    <title>Argus</title>
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href="float.css" rel="stylesheet" type="text/css" />
   </head>
@@ -17,10 +17,13 @@
           <fieldset>
             <legend>Add an Employee</legend>
             
-            <label for="first-name">Employee First Name</label>
-            <input type="text" name="first-name" id="first-name" required autofocus>
-            <label for="last-name">Employee Last Name</label>
-            <input type="text" name="last-name" id="last-name" required>
+            <h2>Employee Name</h2>
+            <label for="first-name">First</label>
+            <input type="text" name="" id="first-name" required autofocus>
+            <label for="middle-name">Middle</label>
+            <input type="text" name="" id="middle-name" >
+            <label for="last-name">Last</label>
+            <input type="text" name="" id="last-name" required>
             
             <h2>Certifications</h2>
 
@@ -37,17 +40,22 @@
 
             <h2>Equipment</h2>
 
-            <label for="equipment-name">Name</label>
-            <input type="text" id="equipment-name">
+            <label for="equipment-name">Description/Name</label>
+            <input class="js-equip-clear" type="text" id="equipment-name">
             <label for="equipment-number">Part No.</label>
-            <input type="text" id="equipment-number">
-            <button type="button">add Equipment</button>
+            <input class="js-equip-clear"  type="text" id="equipment-number">
 
-            <h3>Equipment List</h3>
+            <button class="js-add-equip" type="button">add Equipment</button>
+            <button class="js-list-clear" type="button">Clear Equipment List</button>
 
-            <div class="js-equip-list"></div>
+            <div class="js-equip-table"></div>
+
+            <h2>Notes</h2>
+
+            <textarea class="js-add-notes" name="" id="" cols="30" rows="10"></textarea>
+
             <button class="create" type="submit">Submit</button>
-            <button class="reset" type="reset">Clear Form</button>
+            <button class="js-reset" type="reset">Clear Form</button>
 
           </fieldset>
         </form>
@@ -56,6 +64,7 @@
 
         <button class="view">View</button>
         <button class="clear">clear</button>
+
         <div class="js-results"></div>
 
     </main>

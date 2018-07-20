@@ -8,6 +8,7 @@ const employeeSchema = mongoose.Schema({
         firstName: {Type: String, required: true},
         lastName: {Type: String, required: true}
     },
+    picture:String,
     certifications:[String],
     equipment:[String],
     notes: String
