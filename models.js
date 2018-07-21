@@ -6,9 +6,9 @@ mongoose.Promise = global.Promise;
 const employeeSchema = mongoose.Schema({
     employeeName:{
         firstName: {Type: String, required: true},
+        middleInit: String,
         lastName: {Type: String, required: true}
     },
-    picture:String,
     certifications:[String],
     equipment:[String],
     notes: String

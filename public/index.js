@@ -1,13 +1,14 @@
 "use strict";
 
-
 //POST database request 
- function postDataAPI(aFunction, certs, equips){
+ function postDataAPI(dataStore,aFunction){
+    console.log(dataStore);
     const settings= {
         url: '/employees',
         dataType: 'json',
         contentType: 'application/json',
-        data:{ stuff:stuf}
+        data: dataStore,
+        method: "POST"
     }
     $.ajax(settings)
     .done(aFunction)
@@ -109,6 +110,26 @@ function formReset(storage){
 
 }
 
+//delete individual item
+function deleteEquipItem(storage){
+    //push delete button
+
+    $(".js-equip-table").on("click", ".js-item-delete", function(event){
+        //get item index
+        let itemIndex = $(this).closest('.js-equip-list').attr('item-index');
+        //update equipment object
+        console.log(storage.equipment)
+        storage.equipment.splice(itemIndex,1);
+        console.log(storage.equipment)
+        //remove list from DOM
+        renderAddList(storage.equipment);
+        
+    })
+    
+    
+    
+}
+
 function listEquip(equipment){
    return equipment.map((item)=>`<li>${item}</li>`)
 }
@@ -117,9 +138,9 @@ function listCerts(certs){
     return certs.map((aCert)=>`<li>${aCert}</li>`)
 }
 
-function generateList(item){
+function generateList(item, index){
     return `
-        <li>${item} <button class="js-item-delete" type="button">Delete</button></li>
+        <li class="js-equip-list" item-index="${index}">${item} <button class="js-item-delete" type="button">Delete</button></li>
     ` 
 }
 
@@ -127,7 +148,7 @@ function renderAddList(equips){
     $(".js-equip-table").html(`
         <h3>Equipment List</h3>            
         <ol>Description (Part No.)
-            ${(equips.map((item)=> generateList(item))).join('')}
+            ${(equips.map((item, index)=> generateList(item, index))).join('')}
         </ol>
     `);
 }
@@ -178,6 +199,7 @@ function createEmployee(){
     let {employeeName,certifications,equipment,notes} = postStorage
     
     collectEquipment(postStorage);
+    deleteEquipItem(postStorage);
     clearEquipButton(postStorage);
     formReset(postStorage);
 
@@ -192,8 +214,8 @@ function createEmployee(){
 
         console.log(postStorage);
 
+        postDataAPI(postStorage);
     })
-
 }
 
 function runThis(){

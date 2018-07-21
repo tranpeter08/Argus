@@ -17,6 +17,17 @@ app.get('/employees',(req, res)=>{
     res.json(Employees);
 });
 
+//GET request with ID
+app.get('/:id', (req,res)=>{
+    Employees.findByID(req.params.id)
+    .then( employee => res.json(Employees.serialize()))
+    .catch(err => {
+        console.error(err);
+        res.status(500).json({error: "An error has occured"})
+    })
+})
+
+
 //POST
 app.post('/employees',(req,res)=>{
     console.log(req.body);
