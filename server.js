@@ -43,7 +43,26 @@ app.get('/employees/:id', (req,res)=>{
 
 //POST
 app.post('/employees', jsonParser,(req,res)=>{
-    console.log(req.body);
+    const requiredFields = ['employeeName','certifications','equipment','notes'];
+    for(let i=0;i<requiredFields.length;i++){
+        const field = requiredFields[i];
+        if(!field in req.body){
+            const message = `Missing '${field}' in request body`
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
+    const requiredNameFields = ['firstName', 'lastName'];
+    for(let i = 0; i < requiredNameFields.length;i++){
+        const nameField = requiredNameFields[i];
+        if(!nameField in req.body.employeeName){
+            const message = `Missing ${nameField} in EmployeeName`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
     Employees.create({
         employeeName: {
             firstName: req.body.employeeName.firstName,
@@ -62,8 +81,50 @@ app.post('/employees', jsonParser,(req,res)=>{
 });
 
 //PUT
+app.put('/employees/:id', (req, res)=>{
+    if(req.params.id !== req.body.id){
+        const message = `response body and parameter ID do not match`
+        console.error(message);
+        res.status(400).json({error: message});
+    }
 
-//DELETE
+    const requiredNameFields = ['firstName', 'lastName'];
+    for(let i = 0; i < requiredNameFields.length;i++){
+        const nameField = requiredNameFields[i];
+        if(!nameField in req.body.employeeName){
+            const message = `Missing ${nameField} in EmployeeName`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
+    const updated = {};
+    const updateableFields = ['employeeName','certifications','equipment','notes'];
+    updateableFields.forEach(field=>{
+        if(field in req.body){
+            updated[field]= req.body[field];
+        }
+    });
+
+    
+
+    Employees.findByIdAndUpdate(req.params.id,{$set: updated},{new: true})
+    .then(updatedEmployee => res.status(204).end())
+    .catch(err => res.status(500).json({error:`An error has occurred`}))
+})
+
+//DELETE 
+app.delete('/employees/:id', (req,res)=>{
+    Employees.findByIdAndRemove(req.params.id)
+    .then(()=>{
+        console.log(`Deleted employee with ID: ${req.params.id}`)
+        res.status(204).end();
+    });
+});
+
+app.use('*', (req, res)=>{
+    res.status(404).json({message: 'Not Found'});
+});
 
 
 let server;

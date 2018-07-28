@@ -15,15 +15,15 @@
     <main>
         <form class="" id="employee-data" action="#" >
           <fieldset>
-            <legend>Add an Employee</legend>
+            <legend>Create an Employee</legend>
             
             <h2>Employee Name</h2>
             <label for="first-name">First</label>
             <input type="text" name="first-name" id="first-name" required autofocus>
-            <label for="middle-initial">Middle Initials</label>
-            <input type="text" name="middle-initial" id="middle-initial" >
+            <label for="middle-initial">Middle Initial</label>
+            <input type="text" name="middle-initial" id="middle-initial" maxlength ="1">
             <label for="last-name">Last</label>
-            <input type="text" name="" id="last-name" required>
+            <input type="text" name="last-name" id="last-name" required>
             
             <h2>Certifications</h2>
 
@@ -60,17 +60,27 @@
           </fieldset>
         </form>
 
-        <h2>Employees</h2>
+        <div class='js-added-employee'></div>
+        
+        
 
+        <h2>Employees</h2>
+        
         <button class="view">View</button>
         <button class="clear">clear</button>
+        <div class="js-verify-delete"></div>
+        <div class="js-get-employees"></div>
 
-        <div class="js-results"></div>
+        <h2>Edit employee</h2>
+        <div class="js-edit-employee"></div>
+
+
 
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
     <script src="index.js"></script>
+    <script src="store.js"></script>
   </body>
 </html>
