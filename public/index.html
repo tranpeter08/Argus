@@ -10,77 +10,128 @@
   </head>
   <body>
     <header>
-      <h1>Argus</h1>
+      <nav>
+        <button class="js-home">Argus</button>
+
+      <nav>
     </header>
+    <section class="js-landing js-hide">
+      <button class="view">View</button>
+      <button 
+        class="js-create js-landing">
+          Create an Employee</button>
+    </section>
     <main>
+      <section class="js-form js-hide">
         <form class="" id="employee-data" action="#" >
           <fieldset>
             <legend>Create an Employee</legend>
             
             <h2>Employee Name</h2>
             <label for="first-name">First</label>
-            <input type="text" name="first-name" id="first-name" required autofocus>
+            <input 
+              type="text" 
+              name="first-name" 
+              id="first-name" required autofocus>
             <label for="middle-initial">Middle Initial</label>
-            <input type="text" name="middle-initial" id="middle-initial" maxlength ="1">
+            <input 
+              type="text" 
+              name="middle-initial" 
+              id="middle-initial" 
+              maxlength ="1">
             <label for="last-name">Last</label>
-            <input type="text" name="last-name" id="last-name" required>
+            <input 
+              type="text" 
+              name="last-name" 
+              id="last-name" required>
             
             <h2>Certifications</h2>
 
-            <label for="CWI">Certified Welding Inspector (A.W.S.)</label>
-            <input type= "checkbox" name="certs" id="CWI" value ="CWI">
+            <label for="CWI">
+              Certified Welding Inspector (A.W.S.)</label>
+            <input 
+              type= "checkbox" 
+              name="certs" 
+              id="CWI" 
+              value ="CWI">
             <label for="UT">Ultrasonic Testing</label>
-            <input type= "checkbox" name="certs" id="UT" value="UT">
+            <input 
+              type= "checkbox" 
+              name="certs" 
+              id="UT" 
+              value="UT">
             <label for="MT">Magnatic Particle Testing</label>
-            <input type= "checkbox" name="certs" id="MT" value="MT">
+            <input 
+              type= "checkbox" 
+              name="certs" 
+              id="MT" 
+              value="MT">
             <label for="GPR">Ground Penetrating Radar</label>
-            <input type= "checkbox" name="certs" id="GPR" value="GPR">
+            <input 
+              type= "checkbox" 
+              name="certs" 
+              id="GPR" 
+              value="GPR">
             <label for="soils">Soils Inspector</label>
-            <input type= "checkbox" name="certs" id="soils" value="soils">
+            <input 
+              type= "checkbox" 
+              name="certs" 
+              id="soils" 
+              value="soils">
 
             <h2>Equipment</h2>
 
             <label for="equipment-name">Description/Name</label>
-            <input class="js-equip-clear" type="text" id="equipment-name">
+            <input 
+              class="js-equip-clear" 
+              type="text" 
+              id="equipment-name">
             <label for="equipment-number">Part No.</label>
-            <input class="js-equip-clear"  type="text" id="equipment-number">
+            <input 
+              class="js-equip-clear"  
+              type="text" 
+              id="equipment-number">
 
-            <button class="js-add-equip" type="button">add Equipment</button>
-            <button class="js-list-clear" type="button">Clear Equipment List</button>
+            <button 
+              class="js-add-equip" 
+              type="button">add Equipment</button>
+            <button 
+              class="js-list-clear" 
+              type="button">Clear Equipment List</button>
 
             <div class="js-equip-table"></div>
 
             <h2>Notes</h2>
 
-            <textarea class="js-add-notes" name="" id="" cols="30" rows="10"></textarea>
+            <textarea 
+              class="js-add-notes" 
+              name="" 
+              id="" cols="30" rows="10"></textarea>
 
-            <button class="create" type="submit">Submit</button>
+            <button 
+              class="js-create create" type="submit">Submit</button>
+            <button 
+              class="js-submit-edit submit-edit" 
+              type="submit">Submit Edit Employee</button>
             <button class="js-reset" type="reset">Clear Form</button>
 
           </fieldset>
         </form>
+      </section>
 
-        <div class='js-added-employee'></div>
-        
-        
-
+      <div class="js-added-employee js-hide"></div>
+      <div class="js-verify-delete js-hide"></div>
+      
+      <section class="js-employees js-hide">
         <h2>Employees</h2>
-        
-        <button class="view">View</button>
-        <button class="clear">clear</button>
-        <div class="js-verify-delete"></div>
         <div class="js-get-employees"></div>
-
-        <h2>Edit employee</h2>
-        <div class="js-edit-employee"></div>
-
-
-
+      </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
     <script src="index.js"></script>
+    <script src="nav.js"></script>
     <script src="store.js"></script>
   </body>
 </html>
