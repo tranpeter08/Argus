@@ -1,39 +1,31 @@
-"use strict";
-
- //get database reqeust
+//get database reqeust
  function requestDataAPI(aFunction, method, anID, data,){
-
-     let getID = anID
-    if(!anID){
-        getID = "";
-    }
-    const settings= {
-        url: `/employees/${getID}`,
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify(data),
-        method: method
-    }
-    $.ajax(settings)
-    .done(aFunction)
-    .fail(()=>{
-        console.log('Failed response')
-    });
-    console.log('reqDataAPI ran')
-}
-
-function hideElement(selector){
-    $(selector).hide();
+     console.log(anID);
+    let getID = anID
+   if(!anID){
+       getID = "";
+   }
+   const settings= {
+       url: `/employees/${getID}`,
+       dataType: 'json',
+       contentType: 'application/json',
+       data: JSON.stringify(data),
+       method: method
+   }
+   $.ajax(settings)
+   .done(aFunction)
+   .fail(()=>{
+       console.log('Failed response')
+   });
+   console.log('reqDataAPI ran')
 }
 
 function showElement(selector){
     $(selector).show();
 }
 
-function closeDeletedMsg(){
-    $(".js-verify-delete").on("click", ".js-close-deleted", ()=>{
-        hideElement(".js-verify-delete");
-    })
+function hideElement(selector){
+    $(selector).hide();
 }
 
 //function after delete
@@ -45,27 +37,37 @@ function handleDelete(){
     requestDataAPI(renderHTML_GET,'GET',null,);
 }
 
-//no button on verify
+//no button on verify message
 function verifyDeleteButtonNo(){
-    $(".js-verify-delete").on("click", ".js-verify-no", (event)=>{
+    $(".js-message-box")
+    .on("click", ".js-verify-no", (event)=>{
         console.log("do not delete")
-        $(".js-verify-delete").empty();
-    })
+
+        requestDataAPI(renderHTML_GET,'GET',null,);
+        $(".js-message-box").empty();
+        
+    });
 }
 
 //yes button on verify message
-function verifyDeleteButtonYes(anID){
-    $(".js-verify-delete").on("click", ".js-verify-yes", ()=>{
-        console.log(anID)
+function verifyDeleteButtonYes(){
+    $(".js-message-box")
+    .on("click", ".js-verify-yes", ()=>{
+
+        const anID = employeeStorage.id;
         requestDataAPI(handleDelete,"DELETE",anID);
-        console.log("deleting");
+
+        console.log("deleting", anID);
+
+        delete employeeStorage.id;
+        $(".js-message-box").empty();
     })
 }
 
 //message to verify delete
 function renderVerifyDelete(employee){
-    console.log("render verify")
-    $(".js-verify-delete").html(`
+    console.log("render verify delete")
+    $(".js-message-box").html(`
         <div>
             <p>Are you sure you want to delete ${employee}?</p>
             <button class="js-verify-yes">Yes</button>
@@ -76,38 +78,37 @@ function renderVerifyDelete(employee){
 
 //button for deleting employee
 function employeeDeleteButton(){
-    $('.js-get-employees')
+    $('.js-employees')
     .on("click", ".js-delete-employee", function(event){
-        const employeeID = $(this)
-            .closest(".js-employee-list").attr("employee-id")
-        const selectedEmployee =  $(this)
-            .closest(".js-employee-list").find(".js-employee-name").text();
-        console.log(employeeID,selectedEmployee);
-        renderVerifyDelete(selectedEmployee);
-        verifyDeleteButtonYes(employeeID);
         console.log("employee delete pressed")
+        const employeeID = $(this)
+            .closest(".js-employee-list")
+            .attr("employee-id");
+
+        employeeStorage.id = employeeID;
+
+        const selectedEmployee =  $(this)
+            .closest(".js-employee-list")
+            .find(".js-employee-name").text();
+
+        renderVerifyDelete(selectedEmployee);
+
+        $(".js-employees").empty();
     })
 }
 
-//render html for edit employee
-function selectEmployeeCerts(certs){
-    certs.forEach(cert=>{
-        console.log(cert);
-        $(`#${cert}`).prop("checked", true);
-    })
-}
-
+//close edit message
 function closeEditMsg(){
-    $(".js-added-employee").on("click",".js-close-edit-msg",()=>{
-        hideElement(".js-added-employee");
-        showElement(".js-employees");
+    $(".js-message-box").on("click",".js-close-edit-msg",()=>{
+        
         requestDataAPI(renderHTML_GET,'GET',null,);
+        $(".js-message-box").empty();
     })
 }
 
 //show a message successful edit
 function successfulEditMsg(){
-    $(".js-added-employee").html(`
+    $(".js-message-box").html(`
         <p>Employee update successful!</p>
         <button class="js-close-edit-msg">Close</button>
     `)
@@ -116,19 +117,15 @@ function successfulEditMsg(){
 
 //submit updated employee info
 function submitEditButton(){
-    $(".js-submit-edit").on("click",(event)=>{
+    $(".js-button-box").on("click",".js-submit-edit",(event)=>{
         console.log("submit edit ran");
-
         event.preventDefault();
 
         const employeeID = employeeStorage.id
-        console.log(employeeStorage);
 
         collectEmployeeName();
         collectCerts();
         collectNotes();
-
-        console.log(employeeStorage);
 
         requestDataAPI(
             successfulEditMsg,"PUT",employeeID,employeeStorage
@@ -136,28 +133,31 @@ function submitEditButton(){
 
         delete employeeStorage.id;
 
-        console.log(employeeStorage);
-
         clearAllInputs();
         clearEquipList();
         clearStorage();
 
-        console.log(employeeStorage);
-
-        hideElement(".js-submit-edit");
-        showElement(".js-create");
+        $(".js-button-box").empty();
         hideElement(".js-form");
-
     })
 }
 
-//get id
-function getDataByID(data){
-    let {
-        employeeName, certifications, equipment,_id, notes
-    } = data;
+//render html for edit employee
+function selectEmployeeCerts(certs){
+    certs.forEach(cert=>{
+        $(`#${cert}`).prop("checked", true);
+    })
+}
 
-    console.log(data);
+//get data by id and fill form
+function fillEmployeeForm(data){
+    console.log("filling form");
+
+    $(".js-legend").text('Edit an emplyee');
+
+    const {
+        employeeName, certifications, equipment, _id, notes
+    } = data;
 
     employeeStorage.equipment = equipment;
     employeeStorage.id = _id;
@@ -170,65 +170,67 @@ function getDataByID(data){
     renderAddEquipList(equipment);
 
     $(".js-add-notes").val(notes);
+}
 
+
+function renderSubmitEditButton(){
     
-}
-
-//close created message
-function closeCreatedMessageButton(){
-    $(".js-added-employee").on("click", ".js-close-created-button",()=>{
-        console.log('close created pressed');
-        $(".js-added-employee").empty();
-    })
-}
-
-//html string for showCreatedEmployee
-function renderCreatedEmployee(data){
-    console.log(data);
-    $('.js-added-employee').html(`
-        <div class="js-">
-            <h2>Create Employee</h2>
-            <p>${data.employeeName} has been created successfully!</p>
-            <button class="js-close-created-button" type=button>Close</button>
-        </div>
+    $(".js-button-box").html(`
+        <button 
+            class="js-submit-edit submit-edit" 
+            type="button">Submit Edit Employee
+        </button>
     `)
+    console.log("redner edit button ran");
 }
 
-//do something after successful post
-function showCreatedEmployee(data){
-    $(".js-added-employee").show();
-    renderCreatedEmployee(data);
+//edit employee button
+function editEmployeeButton(){
+    $(".js-employees")
+    .on("click", ".js-edit-employee-button", function(event){
+        console.log('edit employee button ran');
 
+        const employeeID = $(this)
+        .closest(".js-employee-list").attr("employee-id");
 
+        showElement(".js-form");
+        renderSubmitEditButton();
+        $(".js-employees").empty();
+        
+        requestDataAPI(fillEmployeeForm,"GET",employeeID, null);
+        
+    })
 }
 
 function listEquip(equipment){
     return equipment.map((item)=>`<li>${item}</li>`);
  }
  
- 
  function listCerts(certs){
      return certs.map((aCert)=>`<li>${aCert}</li>`);
  }
- 
 
+//generate list from GET data
 function handleData(anEmployee){
-    const {certifications, equipment, notes} = anEmployee;
-    if(certifications || equipment || notes)
+    console.log("handle GET data for HTML")
+    const {
+        certifications, employeeName, equipment, notes, id
+    } = anEmployee;
+
     return `
         <hr>
-        <li class="js-employee-list" employee-id="${anEmployee.id}">
-            <h3 class="js-employee-name">${anEmployee.employeeName}</h3>
+        <li class="js-employee-list" employee-id="${id}">
+            <h3 class="js-employee-name">${employeeName}</h3>
             <h4>Certifications</h4>
             <ul>
-                ${listCerts(anEmployee.certifications).join('')}
+                ${listCerts(certifications).join('')}
             </ul>
             <h4>Equipment</h4>
             <ul>
-                ${listEquip(anEmployee.equipment).join('')}
+                ${listEquip(equipment).join('')}
             </ul>
             <h4>Notes:</h4>
-            <p>${anEmployee.notes}</p>
+            <p>${notes}</p>
             <button 
             class="js-edit-employee-button" 
             type="button">
@@ -242,82 +244,41 @@ function handleData(anEmployee){
     `
 }
 
-
-//render data from GET to HTML
+//render data from GET request to HTML
 function renderHTML_GET(data){
     console.log('render ran');
-    $('.js-get-employees').html(`
-        <ol>
-            ${data.map((anEmployee)=> handleData(anEmployee)).join('')}
-        </ol>
-    `)
+    $('.js-employees').html(`
+        <div>
+            <h2>Employees</h2>
+            <ol>
+                ${data.map(
+                    (anEmployee)=> handleData(anEmployee)
+                )
+                .join('')}
+            </ol>
+        </div>
+    `);
 }
-
-
-//edit an employee
-function editEmployeeButton(){
-    
-    $(".js-get-employees")
-    .on("click", ".js-edit-employee-button", function(event){
-        console.log('edit employee button ran');
-
-        let employeeID = $(this)
-        .closest(".js-employee-list").attr("employee-id");
-
-        console.log(employeeID);
-
-        showElement(".js-form")
-        showElement(".js-submit-edit");
-
-        hideElement(".js-create");
-        hideElement(".js-employees")
-
-        requestDataAPI(getDataByID,"GET",employeeID, null);
-    })
-}
-
-
+ 
  //view employees in database
 function viewEmployeesButton(){
-    $('.view').on('click',(event)=>{
+    $('.js-view').on('click',()=>{
         console.log('view button ran');
         hideElement(".js-landing");
-        showElement(".js-employees");
-        requestDataAPI(renderHTML_GET,'GET',null,);
-    })
-}
-
-
-//collect notes for storage
-function collectNotes(){
-    let inputNotes = $('.js-add-notes').val();
-    employeeStorage.notes.push(inputNotes)
-    console.log(employeeStorage.notes);
-}
-
-
-function clearEquipList(storage){
-    $(".js-equip-table").empty();
-    console.log("clear equipment list ran");
-}
-
-
-function clearEquipButton(){
-   $(".js-list-clear").on("click", ()=>{
-        console.log("clearEquip ran");
-        employeeStorage.equipment = [];
-        clearEquipList();
-    })
+        requestDataAPI(renderHTML_GET,'GET',null, null);
+    });
 }
 
 function clearStorage(){
-    console.log("clear storage ran");
+    console.log("clear storage ran", employeeStorage);
+
     employeeStorage.employeeName.firstName = [];
     employeeStorage.employeeName.lastName = [];
     employeeStorage.employeeName.middleInit = [];
     employeeStorage.certifications = [];
     employeeStorage.equipment = [];
     employeeStorage.notes = [];
+
     console.log(employeeStorage);
 }
 
@@ -327,8 +288,7 @@ function clearAllInputs(){
     $("input[type=checkbox]").prop("checked", false);
 }
 
-
-//clear data
+//reset form
 function formResetButton(){
     $(".js-reset").on('click', ()=>{
         console.log("formReset ran");
@@ -338,78 +298,37 @@ function formResetButton(){
     })
 }
 
-
-//delete individual equipment items
-function deleteEquipItemButton(){
-    $(".js-equip-table").on("click", ".js-item-delete", function(event){
-        console.log('actual',employeeStorage.equipment);
-
-        let itemIndex = $(this)
-            .closest('.js-equip-list').attr('item-index');
-        console.log("deleting item at index:", itemIndex);
-        console.log('actual',employeeStorage.equipment);
-
-        employeeStorage.equipment.splice(itemIndex,1);
-        renderAddEquipList(employeeStorage.equipment);
-        console.log('actual',employeeStorage.equipment);
-
-        if(employeeStorage.equipment.length === 0){
-            clearEquipList();
-        }
-    });
-
+//close created message
+function closeCreatedMessageButton(){
+    $(".js-message-box").on("click", ".js-close-created-button",()=>{
+        console.log('close created pressed');
+        $(".js-message-box").empty();
+        requestDataAPI(renderHTML_GET, "GET",null);
+    })
 }
 
-//generate list for equipment
-function generateEquipList(item, index){
-    return `
-        <li class="js-equip-list" item-index="${index}">
-            ${item} <button 
-                class="js-item-delete" 
-                type="button">Delete</button>
-        </li>
-    ` 
+//html string for showCreatedEmployee
+function renderCreatedEmployee(data){
+    console.log("render created employee ran",data);
+    $('.js-message-box').html(`
+        <div class="js-">
+            <h2>Employee Created</h2>
+            <p>${data.employeeName} has been created successfully!</p>
+            <button 
+            class="js-close-created-button" 
+            type=button>
+                Close
+            </button>
+        </div>
+    `)
 }
 
-//html for equipment list
-function renderAddEquipList(equips){
-        $(".js-equip-table").html(`
-            <h3>Equipment List</h3>            
-            <ol>
-                ${(equips.map((item, index)=> 
-                    generateEquipList(item, index))).join('')}
-            </ol>
-        `);
+//collect notes
+function collectNotes(){
+    let inputNotes = $('.js-add-notes').val();
+    employeeStorage.notes.push(inputNotes)
+    console.log("collect notes ran",employeeStorage.notes);
 }
-
-
-//collect equipment data
-function collectEquipment(){
-    const {equipment} = employeeStorage;
-    let equipName = $('#equipment-name').val();
-    let equipNumber = $('#equipment-number').val();
-    let equipDesc;
-    if(equipNumber === ""){
-        equipNumber = 'N/A'
-    }
-    equipDesc = `${equipName} (${equipNumber})`;
-    if(equipName !== ""){
-        equipment.push(equipDesc);
-        console.log(equipment);
-        $('.js-equip-clear').val('');
-        renderAddEquipList(equipment);
-    };
-
-}
-
-
-//add equipment and make list on html 
-function collectEquipmentButton(){
-    $('.js-add-equip').on('click', ()=>{
-        collectEquipment();
-    });
-}
-
 
 //collect certificatin data
 function collectCerts(){
@@ -419,62 +338,169 @@ function collectCerts(){
     console.log(certifications);
 }
 
-//collect employee names
-function collectEmployeeName(){
-    console.log("collecting employee name");
-    employeeStorage.employeeName.firstName = $('#first-name').val();
-    employeeStorage.employeeName.middleInit = $('#middle-initial').val();
-    employeeStorage.employeeName.lastName = $('#last-name').val();
-    console.log(employeeStorage.employeeName);
+//clear equipment list
+function clearEquipList(storage){
+    $(".js-equip-list").empty();
+    console.log("clear equipment list ran");
 }
 
+//delete individual equipment items
+function deleteEquipItemButton(){
+    $(".js-equip-list").on("click", ".js-item-delete", function(event){
 
-//submits employee information to database
-function createEmployeeButton(){
-    $('#employee-data').on('submit', (event)=>{
-        console.log('createEmployee ran');
+        let itemIndex = $(this)
+            .closest('.js-equip-list').attr('item-index');
+
+        console.log("deleting item at index:", itemIndex);
+
+        employeeStorage.equipment.splice(itemIndex,1);
+        renderAddEquipList(employeeStorage.equipment);
+
+        console.log("",employeeStorage.equipment);
+
+        if(employeeStorage.equipment.length === 0){
+            clearEquipList();
+        }
+    });
+}
+
+//generate equipment list on form
+function generateEquipList(item, index){
+    return `
+        <li class="js-equip-list" item-index="${index}">
+            ${item} 
+            <button 
+            class="js-item-delete" 
+            type="button">
+                Delete
+            </button>
+        </li>
+    ` 
+}
+
+//html for equipment list
+function renderAddEquipList(equips){
+    $(".js-equip-list").html(`
+        <h3>Equipment List</h3>            
+        <ol>
+            ${(equips.map((item, index)=> 
+                generateEquipList(item, index)))
+            .join('')}
+        </ol>
+    `);
+}
+
+//collect equipment data
+function collectEquipment(){
+    const {equipment} = employeeStorage;
+    let equipName = $('#equipment-name').val();
+    let equipNumber = $('#equipment-number').val();
+    let equipDesc;
+
+    if(equipNumber === ""){
+        equipNumber = 'N/A'
+    }
+
+    equipDesc = `${equipName} (${equipNumber})`;
+
+    if(equipName !== ""){
+        equipment.push(equipDesc);
+
+        console.log("collect equipment ran",employeeStorage.equipment);
+
+        $('.js-equip-clear').val('');
+        renderAddEquipList(equipment);
+    };
+}
+
+//add equipment and make list on html 
+function collectEquipmentButton(){
+    $('.js-add-equip').on('click', ()=>{
+        console.log("collect equipment button pressed");
+        collectEquipment();
+
+    });
+}
+
+//collect certificatin data
+function collectCerts(){
+    const {certifications} = employeeStorage
+    $('input[name=certs]:checked')
+        .each(function(){certifications.push($(this).val())});
+    console.log("collect certs ran", employeeStorage.certifications);
+}
+
+//collect employee name for storage
+function collectEmployeeName(){
+    const {employeeName} = employeeStorage
+
+    employeeName.firstName = $('#first-name').val();
+    employeeName.middleInit = $('#middle-initial').val();
+    employeeName.lastName = $('#last-name').val();
+
+    console.log("collecting employee name", employeeStorage.employeeName);
+}
+
+//submit new employee
+function createEmployeeSubmit(){
+    $("#js-employee-form").on("submit", (event)=>{
         event.preventDefault();
 
-        collectEmployeeName()
+        collectEmployeeName();
         collectCerts();
         collectNotes();
 
-        console.log(employeeStorage);
+        console.log("Create employee submit ran",employeeStorage);
 
-        requestDataAPI(showCreatedEmployee,'POST',null, employeeStorage);
+        requestDataAPI(renderCreatedEmployee,"POST",null,employeeStorage);
 
         clearAllInputs();
         clearEquipList();
         clearStorage();
+
+        $(".js-button-box").empty();
+        
+        hideElement(".js-form");
     })
 }
 
-function createEmployeeNav(){
+
+function renderSubmitButton(){
+    $(".js-button-box").html(`
+        <button 
+            class="js-create create" 
+            type="submit">Submit
+        </button>
+    `)
+}
+
+//create a new employee
+function createEmployeeNavButton(){
     $(".js-create").on("click",()=>{
-        console.log("a");
+        console.log("creat a new employee nav pressed");
         hideElement(".js-landing");
         showElement(".js-form");
-
+        renderSubmitButton();
+        $(".js-legend").text("Create an Employee");
     })
 }
-
 
 function runThis(){
     argusButton();
 
-    createEmployeeNav();
-    createEmployeeButton();
     viewEmployeesButton();
-    closeCreatedMessageButton();
-    editEmployeeButton();
+    createEmployeeSubmit();
+    createEmployeeNavButton();
     collectEquipmentButton();
     deleteEquipItemButton();
     formResetButton();
-    clearEquipButton();
+    closeCreatedMessageButton();
+    editEmployeeButton();
+    submitEditButton();
+    closeEditMsg();
     employeeDeleteButton();
     verifyDeleteButtonNo();
-    closeDeletedMsg();
-    closeEditMsg()
+    verifyDeleteButtonYes();
 }
 
 $(runThis);

@@ -1,16 +1,17 @@
 function argusButton(){
     $(".js-home").on("click", ()=>{
+        console.log("going home");
         if("id" in employeeStorage){
-            delete employeeDeleteButton.id;
+            delete employeeStorage.id;
         }
 
         clearAllInputs();
         clearEquipList();
         clearStorage();
 
-        hideElement(".js-hide")
+        //hide form, employee list, show landing page
+        hideElement(".js-hide");
+        $(".js-empty").empty();
         showElement(".js-landing");
-        
-
     })
 }
