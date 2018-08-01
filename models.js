@@ -31,31 +31,5 @@ employeeSchema.methods.serialize = function () {
 }
 
 const Employees = mongoose.model('Employees', employeeSchema, 'employees');
-/*
-const Employees = [
-    {
-        employeeName : faker.name.findName(),
-        certifications:[faker.lorem.word(),faker.lorem.word(),faker.lorem.word()],
-        equipment:[faker.lorem.word(),faker.lorem.word(),faker.lorem.word()],
-        notes: faker.lorem.paragraph()
-    },{
-        employeeName : faker.name.findName(),
-        certifications:[faker.lorem.word(),faker.lorem.word(),faker.lorem.word()],
-        equipment:[faker.lorem.word(),faker.lorem.word(),faker.lorem.word()],
-        notes: faker.lorem.paragraph()
-    },{
-        employeeName : faker.name.findName(),
-        certifications:[faker.lorem.word(),faker.lorem.word(),faker.lorem.word()],
-        equipment:[faker.lorem.word(),faker.lorem.word(),faker.lorem.word()],
-        notes: faker.lorem.paragraph()
-    },{
-        employeeName : faker.name.findName(),
-        certifications:[faker.lorem.word(),faker.lorem.word(),faker.lorem.word()],
-        equipment:[faker.lorem.word(),faker.lorem.word(),faker.lorem.word()],
-        notes: faker.lorem.paragraph()
-    }
-]
-*/
-
 
 module.exports = {Employees}
