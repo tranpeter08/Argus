@@ -5,7 +5,7 @@ const chaiHTTP = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
 const {app, runServer, closeServer} = require("../server");
-const {TEST_DATABASE_URL} = require("../config");
+const {TEST_DATABASE_URL, TEST_PORT} = require("../config");
 
 const expect = chai.expect;
 
@@ -14,7 +14,7 @@ chai.use(chaiHTTP);
 describe("Employees", function(){
 
     before(function(){
-        return runServer(TEST_DATABASE_URL);
+        return runServer(TEST_DATABASE_URL, TEST_PORT);
     });
 
     after(function(){

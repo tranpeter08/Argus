@@ -7,3 +7,4 @@ deploy:
   app: argus
   on:
     repo: tranpeter08/argus
+services: mongoDB
