@@ -6,5 +6,5 @@ const employeeStorage = {
     },
     certifications: [], 
     equipment: [],
-    notes: []
+    notes: ""
 }

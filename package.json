@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --exit",
+    "test": "nyc mocha --exit",
     "start": "node server.js"
   },
   "author": "Peter Tran",
@@ -15,7 +15,8 @@
     "express": "^4.16.3",
     "mongoose": "^5.2.3",
     "morgan": "^1.9.0",
-    "nodemon": "^1.18.3"
+    "nodemon": "^1.18.3",
+    "nyc": "^12.0.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",

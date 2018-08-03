@@ -277,7 +277,7 @@ function clearStorage(){
     employeeStorage.employeeName.middleInit = [];
     employeeStorage.certifications = [];
     employeeStorage.equipment = [];
-    employeeStorage.notes = [];
+    employeeStorage.notes = "";
 
     console.log(employeeStorage);
 }
@@ -326,7 +326,7 @@ function renderCreatedEmployee(data){
 //collect notes
 function collectNotes(){
     let inputNotes = $('.js-add-notes').val();
-    employeeStorage.notes.push(inputNotes)
+    employeeStorage.notes = inputNotes;
     console.log("collect notes ran",employeeStorage.notes);
 }
 

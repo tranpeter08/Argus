@@ -43,7 +43,9 @@ app.get('/employees/:id', (req,res)=>{
 
 //POST
 app.post('/employees', jsonParser,(req,res)=>{
-    const requiredFields = ['employeeName','certifications','equipment','notes'];
+    const requiredFields = [
+        'employeeName','certifications','equipment','notes'
+    ];
     for(let i=0;i<requiredFields.length;i++){
         const field = requiredFields[i];
         if(!field in req.body){
@@ -88,16 +90,6 @@ app.put('/employees/:id', (req, res)=>{
         res.status(400).json({error: message});
     }
 
-    const requiredNameFields = ['firstName', 'lastName'];
-    for(let i = 0; i < requiredNameFields.length;i++){
-        const nameField = requiredNameFields[i];
-        if(!nameField in req.body.employeeName){
-            const message = `Missing ${nameField} in EmployeeName`;
-            console.error(message);
-            return res.status(400).send(message);
-        }
-    }
-
     const updated = {};
     const updateableFields = ['employeeName','certifications','equipment','notes'];
     updateableFields.forEach(field=>{
@@ -107,10 +99,13 @@ app.put('/employees/:id', (req, res)=>{
     });
 
     
-
-    Employees.findByIdAndUpdate(req.params.id,{$set: updated},{new: true})
+    Employees.findByIdAndUpdate(
+        req.params.id,{$set: updated},{new: true}
+    )
     .then(updatedEmployee => res.status(204).end())
-    .catch(err => res.status(500).json({error:`An error has occurred`}))
+    .catch(
+        err => res.status(500).json({error:`An error has occurred`})
+    )
 })
 
 //DELETE 
