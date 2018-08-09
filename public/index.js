@@ -1,4 +1,4 @@
-//get database reqeust
+//ajax request
  function requestDataAPI(aFunction, method, anID, data,){
      console.log(anID);
     let getID = anID
@@ -26,6 +26,22 @@ function showElement(selector){
 
 function hideElement(selector){
     $(selector).hide();
+}
+
+function cancelFormButton(){
+    $(".js-cancel-form").on("click", ()=>{
+
+        delete employeeStorage.id;
+
+        clearAllInputs();
+        clearEquipList();
+        clearStorage();
+
+        showElement(".js-landing");
+        hideElement(".js-form");
+
+        console.log(employeeStorage);
+    })
 }
 
 //function after delete
@@ -244,18 +260,19 @@ function handleData(anEmployee){
     `
 }
 
+
 //render data from GET request to HTML
 function renderHTML_GET(data){
     console.log('render ran');
     $('.js-employees').html(`
         <div>
             <h2>Employees</h2>
-            <ol>
+            <ul>
                 ${data.map(
                     (anEmployee)=> handleData(anEmployee)
                 )
                 .join('')}
-            </ol>
+            </ul>
         </div>
     `);
 }
@@ -494,6 +511,7 @@ function runThis(){
     collectEquipmentButton();
     deleteEquipItemButton();
     formResetButton();
+    cancelFormButton();
     closeCreatedMessageButton();
     editEmployeeButton();
     submitEditButton();

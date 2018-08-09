@@ -144,6 +144,14 @@ describe("Employees API", function(){
                 expect(resEmployee.notes).to.equal(employee.notes);
             });
         });
+
+        it('should return an error when invalid ID is used', function(){
+            return chai.request(app)
+            .get('/employees/1')
+            .then(function(res){
+                expect(res).to.have.status(500);
+            })
+        });
     });
 
     describe('POST endpoint', function(){
@@ -209,9 +217,9 @@ describe("Employees API", function(){
             
                 expect(employee.notes).to.equal(newEmployee.notes);
 
-            })
-        })
-    })
+            });
+        });
+    });
 
     describe("PUT endpoint", function(){
         it('should update and employee', function(){
@@ -247,12 +255,12 @@ describe("Employees API", function(){
 
     describe("DELETE endpoint",function(){
         it("should delete an Employee", function(){
-            let anEmployee;
+            let employee;
 
             return Employees
             .findOne()
-            .then(function(employee){
-                anEmployee = employee;
+            .then(function(_employee){
+                employee = _employee;
 
                 return chai.request(app)
                     .delete(`/employees/${employee.id}`)
@@ -260,13 +268,14 @@ describe("Employees API", function(){
             .then(function(res){
                 expect(res).to.have.status(204);
 
-                return Employees.findById(anEmployee.id);
+                return Employees.findById(employee.id);
             })
             .then(function(ghost){
                 expect(ghost).to.be.null
             })
 
         
-        })
-    })
+        });
+    });
+
 });

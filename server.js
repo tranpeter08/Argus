@@ -36,7 +36,7 @@ app.get('/employees/:id', (req,res)=>{
     .then( employee => res.json(employee))
     .catch(err => {
         console.error(err);
-        res.status(500).json({error: "An error has occured"})
+        res.status(500).json({error: "An error has occured"});
     })
 })
 
