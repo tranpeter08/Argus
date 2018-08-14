@@ -20,6 +20,16 @@
    console.log('reqDataAPI ran')
 }
 
+function resetStorage(){
+    if("id" in employeeStorage){
+        delete employeeStorage.id;
+    }
+
+    clearAllInputs();
+    clearEquipList();
+    clearStorage();
+}
+
 function showElement(selector){
     $(selector).show();
 }
@@ -28,29 +38,13 @@ function hideElement(selector){
     $(selector).hide();
 }
 
-function cancelFormButton(){
-    $(".js-cancel-form").on("click", ()=>{
-
-        delete employeeStorage.id;
-
-        clearAllInputs();
-        clearEquipList();
-        clearStorage();
-
-        showElement(".js-landing");
-        hideElement(".js-form");
-
-        console.log(employeeStorage);
-    })
-}
-
 //function after delete
 function handleDelete(){
     $(".js-verify-delete").html(`
         <p>Employee has been deleted</p>
         <button class="js-close-deleted">Close</button>
     `);
-    requestDataAPI(renderHTML_GET,'GET',null,);
+    requestDataAPI(handleResGET,'GET',null,);
 }
 
 //no button on verify message
@@ -59,7 +53,7 @@ function verifyDeleteButtonNo(){
     .on("click", ".js-verify-no", (event)=>{
         console.log("do not delete")
 
-        requestDataAPI(renderHTML_GET,'GET',null,);
+        requestDataAPI(handleResGET,'GET',null,);
         $(".js-message-box").empty();
         
     });
@@ -109,7 +103,7 @@ function employeeDeleteButton(){
 
         renderVerifyDelete(selectedEmployee);
 
-        $(".js-employees").empty();
+        $(".js-empty").empty();
     })
 }
 
@@ -117,7 +111,7 @@ function employeeDeleteButton(){
 function closeEditMsg(){
     $(".js-message-box").on("click",".js-close-edit-msg",()=>{
         
-        requestDataAPI(renderHTML_GET,'GET',null,);
+        requestDataAPI(handleResGET,'GET',null,);
         $(".js-message-box").empty();
     })
 }
@@ -136,6 +130,9 @@ function submitEditButton(){
     $(".js-button-box").on("click",".js-submit-edit",(event)=>{
         console.log("submit edit ran");
         event.preventDefault();
+        let firstName = $("#first-name").val();
+        let lastName = $("#first-name").val();
+
 
         const employeeID = employeeStorage.id
 
@@ -211,12 +208,110 @@ function editEmployeeButton(){
 
         showElement(".js-form");
         renderSubmitEditButton();
-        $(".js-employees").empty();
+        $(".js-empty").empty();
         
         requestDataAPI(fillEmployeeForm,"GET",employeeID, null);
         
     })
 }
+
+function lastButton(){
+    $('.last-box').on('click','.last',()=>{
+
+        
+        let totalPages= pageStorage.pages 
+      pageStorage.start=totalPages-1;
+      console.log(pageStorage.start);
+      requestDataAPI(renderHTML_GET,'GET',null, null);
+      renderPrevButton();
+      renderStart();
+      $('.next-box').empty();
+      $('.last-box').empty();
+
+    })
+  }
+  
+  function startButton(){
+    $('.start-box').on('click','.start',()=>{
+        
+        pageStorage.start = 0;
+        console.log(pageStorage.start);
+      requestDataAPI(renderHTML_GET,'GET',null, null);
+      renderNextButton();
+      $('.prev-box').empty();
+      $('.start-box').empty();
+      if(pageStorage.pages>2){
+        renderLast();
+      }
+    })
+  }
+  
+  function nextButton(){
+    $(".next-box").on('click','.next',()=>{
+        pageStorage.start += 1;
+      console.log(pageStorage);
+      requestDataAPI(renderHTML_GET,'GET',null, null);
+      if(pageStorage.start ===pageStorage.pages-1){
+        $('.next-box').empty();
+        $('.last-box').empty();
+      }
+      if(pageStorage.start >0){
+        renderPrevButton();
+      }
+      if(pageStorage.pages>2){
+        renderStart();
+      }
+    })
+  }
+  
+  function prevButton(){
+    $(".prev-box").on('click','.prev',()=>{
+        pageStorage.start -= 1;
+      console.log(pageStorage);
+      requestDataAPI(renderHTML_GET,'GET',null, null);
+      if(pageStorage.start<1){
+        renderNextButton();
+        $('.prev-box').empty();
+        $('.start-box').empty();
+      }
+      if(pageStorage.start<pageStorage.pages-1){
+        renderNextButton();
+      }
+      if(pageStorage.pages>2){
+        renderLast();
+      }
+    })
+  }
+
+function renderLast(){
+    $('.last-box').html(`
+      <button class="last">Last</button>
+    `)
+  }
+  
+  function renderStart(){
+    $('.start-box').html(`
+      <button class="start">Start</button>
+    `)
+  }
+  
+  function renderPrevButton(){
+    $('.prev-box').html(`
+      <button class="prev">Prev</button>
+    `)
+  }
+  
+  function renderNextButton(){
+    $('.next-box').html(`
+      <button class="next">Next</button>
+    `)
+  }
+
+function renderPageNum(){
+    $(".js-page-num")
+      .text(`Page ${pageStorage.start+1} of ${pageStorage.pages}`)
+}
+
 
 function listEquip(equipment){
     return equipment.map((item)=>`<li>${item}</li>`);
@@ -227,62 +322,121 @@ function listEquip(equipment){
  }
 
 //generate list from GET data
-function handleData(anEmployee){
-    console.log("handle GET data for HTML")
+function handleDataList(anEmployee,index){
+    console.log("handle GET data for HTML");
     const {
         certifications, employeeName, equipment, notes, id
     } = anEmployee;
 
     return `
-        <hr>
         <li class="js-employee-list" employee-id="${id}">
-            <h3 class="js-employee-name">${employeeName}</h3>
-            <h4>Certifications</h4>
-            <ul>
-                ${listCerts(certifications).join('')}
-            </ul>
-            <h4>Equipment</h4>
-            <ul>
-                ${listEquip(equipment).join('')}
-            </ul>
-            <h4>Notes:</h4>
-            <p>${notes}</p>
-            <button 
-            class="js-edit-employee-button" 
-            type="button">
-                Edit Employee
-            </button>
-            <button 
-            class="js-delete-employee">
-                Delete
-            </button>
+            <div class="card">
+                <div class= "content">
+                    <h3 class="js-employee-name name">${index+1}) ${employeeName}</h3>
+                    <hr>
+                    <h4>Certifications:</h4>
+                    <ul class="form">
+                        ${listCerts(certifications).join('')}
+                    </ul>
+                    <h4>Equipment:</h4>
+                    <ul class="equip-list form">
+                        ${listEquip(equipment).join('')}
+                    </ul>
+                    <h4>Notes:</h4>
+                    <p>${notes}</p>
+                    <hr>
+                </div>
+                <div class="employee-button-box">
+                    <button 
+                    class="js-edit-employee-button employee-button" 
+                    type="button">
+                        Edit Employee
+                    </button>
+                    <button 
+                    class="js-delete-employee employee-button">
+                        Delete
+                    </button>
+                </div>
+            </div>
         </li>        
     `
-}
+};
 
+function divColumns(data, index){
+    console.log('div columns');
+    const columns = [];
+    for(let n =3*index;n<(3+3*index);n++){
+        if(!data[n]){
+            columns.push(`
+                <div class="col-4"></div>
+            `)
+        }else{
+            columns.push(`
+                <div class="col-4">${handleDataList(data[n],n)}</div>
+            `);
+        };
+    };
+    return columns;
+};
+
+function divRows(data){
+    console.log('div rows');
+    const rows = [];
+    
+    for(let i=3*pageStorage.start; i<3+3*pageStorage.start;i++){
+        rows.push(`
+            <div class="row">
+                ${divColumns(data,i).join('')}
+            </div>
+        `);
+    };
+    return rows;
+};
 
 //render data from GET request to HTML
 function renderHTML_GET(data){
-    console.log('render ran');
+    console.log('render GET HTML ran');
+    
     $('.js-employees').html(`
-        <div>
-            <h2>Employees</h2>
-            <ul>
-                ${data.map(
-                    (anEmployee)=> handleData(anEmployee)
-                )
-                .join('')}
+        <div class="">
+            <h2 class="employees">Employees</h2>
+            
+            <ul class="employee-list">
+                ${divRows(data).join('')}
             </ul>
         </div>
     `);
+    renderPageNum();
 }
  
+function handleResGET(data){
+  
+    let total = data.length;
+    let pages = Math.ceil(total/9);
+    pageStorage.pages = pages;
+    console.log(pageStorage);
+    
+    renderHTML_GET(data);
+    pageStorage.start = 0;
+
+    if(total > 9){
+        renderNextButton();
+    }
+
+    if(pages > 2){
+        renderLast();
+    }
+}
+
  //view employees in database
 function viewEmployeesButton(){
     $('.js-view').on('click',()=>{
-        console.log('view button ran');
-        hideElement(".js-landing");
-        requestDataAPI(renderHTML_GET,'GET',null, null);
+        console.log('view button ran',pageStorage.start);
+        requestDataAPI(handleResGET,'GET',null, null);
+
+        resetStorage();
+        $(".js-about").hide();
+        $(".js-form").hide();
     });
 }
 
@@ -297,6 +451,21 @@ function clearStorage(){
     employeeStorage.notes = "";
 
     console.log(employeeStorage);
+}
+
+function cancelFormButton(){
+    $(".js-cancel-form").on("click", ()=>{
+
+        delete employeeStorage.id;
+
+        clearAllInputs();
+        clearEquipList();
+        clearStorage();
+
+        hideElement(".js-form");
+
+        console.log(employeeStorage);
+    })
 }
 
 function clearAllInputs(){
@@ -320,13 +489,13 @@ function closeCreatedMessageButton(){
     $(".js-message-box").on("click", ".js-close-created-button",()=>{
         console.log('close created pressed');
         $(".js-message-box").empty();
-        requestDataAPI(renderHTML_GET, "GET",null);
+        requestDataAPI(handleResGET, "GET",null);
     })
 }
 
 //html string for showCreatedEmployee
 function renderCreatedEmployee(data){
-    console.log("render created employee ran",data);
+    console.log("render created employee ran");
     $('.js-message-box').html(`
         <div class="js-">
             <h2>Employee Created</h2>
@@ -344,7 +513,7 @@ function renderCreatedEmployee(data){
 function collectNotes(){
     let inputNotes = $('.js-add-notes').val();
     employeeStorage.notes = inputNotes;
-    console.log("collect notes ran",employeeStorage.notes);
+    console.log("collect notes ran");
 }
 
 //collect certificatin data
@@ -352,7 +521,7 @@ function collectCerts(){
     const {certifications} = employeeStorage
     $('input[name=certs]:checked')
         .each(function(){certifications.push($(this).val())});
-    console.log(certifications);
+    console.log('collecting certs');
 }
 
 //clear equipment list
@@ -373,7 +542,6 @@ function deleteEquipItemButton(){
         employeeStorage.equipment.splice(itemIndex,1);
         renderAddEquipList(employeeStorage.equipment);
 
-        console.log("",employeeStorage.equipment);
 
         if(employeeStorage.equipment.length === 0){
             clearEquipList();
@@ -423,7 +591,7 @@ function collectEquipment(){
     if(equipName !== ""){
         equipment.push(equipDesc);
 
-        console.log("collect equipment ran",employeeStorage.equipment);
+        console.log("collect equipment ran");
 
         $('.js-equip-clear').val('');
         renderAddEquipList(equipment);
@@ -444,7 +612,7 @@ function collectCerts(){
     const {certifications} = employeeStorage
     $('input[name=certs]:checked')
         .each(function(){certifications.push($(this).val())});
-    console.log("collect certs ran", employeeStorage.certifications);
+    console.log("collect certs ran");
 }
 
 //collect employee name for storage
@@ -455,7 +623,7 @@ function collectEmployeeName(){
     employeeName.middleInit = $('#middle-initial').val();
     employeeName.lastName = $('#last-name').val();
 
-    console.log("collecting employee name", employeeStorage.employeeName);
+    console.log("collecting employee name");
 }
 
 //submit new employee
@@ -467,9 +635,11 @@ function createEmployeeSubmit(){
         collectCerts();
         collectNotes();
 
-        console.log("Create employee submit ran",employeeStorage);
+        console.log("Create employee submit ran");
 
-        requestDataAPI(renderCreatedEmployee,"POST",null,employeeStorage);
+        requestDataAPI(
+            renderCreatedEmployee,"POST",null,employeeStorage
+        );
 
         clearAllInputs();
         clearEquipList();
@@ -480,7 +650,6 @@ function createEmployeeSubmit(){
         hideElement(".js-form");
     })
 }
-
 
 function renderSubmitButton(){
     $(".js-button-box").html(`
@@ -495,10 +664,12 @@ function renderSubmitButton(){
 function createEmployeeNavButton(){
     $(".js-create").on("click",()=>{
         console.log("creat a new employee nav pressed");
-        hideElement(".js-landing");
         showElement(".js-form");
         renderSubmitButton();
         $(".js-legend").text("Create an Employee");
+        $(".js-empty").empty();
+        $(".js-about").hide();
+        resetStorage();
     })
 }
 
@@ -506,6 +677,10 @@ function runThis(){
     argusButton();
 
     viewEmployeesButton();
+    nextButton();
+    prevButton();
+    startButton();
+    lastButton();
     createEmployeeSubmit();
     createEmployeeNavButton();
     collectEquipmentButton();

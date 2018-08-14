@@ -8,3 +8,7 @@ const employeeStorage = {
     equipment: [],
     notes: ""
 }
+
+const pageStorage = {
+    start: 0
+}

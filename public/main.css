@@ -1,5 +1,180 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+}
 
-.js-form
-{
+legend,
+h1,
+h2,
+h3,
+h4,
+button{
+    font-family: 'Inconsolata', monospace;
+}
+
+nav{
+    background: #8FC1E3;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+button{
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.nav button{
+    background: none;
+    border: none;
+    padding: 5px;
+    position: relative;
+}
+
+.nav button:hover{
+
+    color: #f7f9fb;
+}
+
+.nav button:active{
+    background: #687864;
+}
+
+span,
+p, 
+li{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.about-box{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 15%;
+}
+
+legend,
+.nav,
+h3.name{
+    text-align: center;
+    font-size: 30px;
+}
+
+h3.name{
+    margin: 0;
+}
+
+h2.employees{
+    text-align: center;
+    font-size: 35px;
+}
+
+h4{
+    font-size: 25px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+.employee-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form{
+    list-style: circle;
+}
+
+.js-form{
     display: none;
+}
+
+.inline{
+    display: inline;
+}
+
+.card{
+    border: 2px black solid;
+    padding: 10px;
+    margin-bottom: 6%;
+    border-radius: 5px;
+}
+
+.content{
+    height: 320px;
+    overflow: auto;
+}
+
+.nav-button{
+    font-size: 20px;
+    bottom: 3px;
+}
+
+.home-button{
+    font-size: 25px;
+    bottom: 1.5px;
+    font-weight: bold;
+}
+
+.form-content{
+    border: 2px black solid;
+    padding:10px;
+}
+
+fieldset{
+    border: none;
+}
+
+input:invalid + span:after {
+    content: '✖';
+    color: #f00;
+    padding-left: 5px;
+}
+
+input:valid + span:after {
+    content: '✓';
+    color: #26b72b;
+    padding-left: 5px;
+}
+
+.page-box,
+.page-number{
+    text-align: center;
+}
+
+.page-number{
+    padding-bottom: 5px;
+}
+
+.employee-button-box{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.employee-button{
+    background: #31708E;
+    color:  #F7F9FB;
+}
+
+.employee-button:active{
+    background: #687864;
+}
+
+legend{
+    font-weight: bold;
+    padding: 20px 0;
+}
+
+.page-box button{
+    background: #687864;
+    color: #f7f9fb;
+}
+
+.certs{
+    display: block;
+}
+
+input[type=checkbox]:hover,
+{
+    cursor: pointer;
 }

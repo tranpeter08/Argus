@@ -5,131 +5,198 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="">
     <title>Argus</title>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Montserrat" rel="stylesheet">
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href="float.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <header>
       <nav>
-        <button class="js-home">Argus</button>
-
-
+        <div class="row">
+          <div class="col-4 nav">
+            <button class="js-home home-button ">Argus</button>
+          </div>
+          <div class="col-4 nav">
+            <button class="js-view nav-button">View Employees</button>
+          </div>  
+          <div class="col-4 nav">
+            <button class="js-create nav-button">Create an Employee</button>
+          </div>
+        </div>
       <nav>
     </header>
-    <section class="js-landing js-hide">
-      <button class="js-view">View</button>
-      <button 
-        class="js-create js-landing">
-          Create an Employee</button>
-    </section>
     <main>
+      <section class="js-about about row">
+        <div class="col-12">
+          <div class="about-box">
+            <h2>About</h2>
+            <p> 
+              Argus is a web application geared towards small inspection 
+              companies in the construciton industry specializing in structural
+              steel, concrete, soils, and Non-destructive Testing.  
+              Easily create, view, and edit employee information, equipment and 
+              certifications.
+            </p>
+          </div>
+        </div>
+      </section>
       <section class="js-form js-hide">
         <form class="" id="js-employee-form" action="#" >
           <fieldset>
             <legend class="js-legend"></legend>
-            
-            <h2>Employee Name</h2>
-            <label for="first-name">First</label>
-            <input 
-              type="text" 
-              name="first-name" 
-              id="first-name" required autofocus>
-            <label for="middle-initial">Middle Initial</label>
-            <input 
-              type="text" 
-              name="middle-initial" 
-              id="middle-initial" 
-              maxlength ="1">
-            <label for="last-name">Last</label>
-            <input 
-              type="text" 
-              name="last-name" 
-              id="last-name" required>
-            
-            <h2>Certifications</h2>
+            <div class="form-content">
+              <div class="row">
+                <div class="col-6">
+                  <h2>Employee Name</h2>
+                  <label for="first-name">First</label>
+                  <input
+                    type="text"
+                    name="first-name"
+                    id="first-name" required autofocus>
+                  <br>
+                  <label for="middle-initial">Middle Initial</label>
+                  <input 
+                    type="text" 
+                    name="middle-initial" 
+                    id="middle-initial" 
+                    maxlength ="1">
+                  <br>
+                  <label for="last-name">Last</label>
+                  <input 
+                    type="text" 
+                    name="last-name" 
+                    id="last-name" required>
+                </div>
+              <div class="row">
+                <div class="col-6">  
+                  <h2>Contact Information</h2>
 
-            <label for="CWI">
-              Certified Welding Inspector (A.W.S.)</label>
-            <input 
-              type= "checkbox" 
-              name="certs" 
-              id="CWI" 
-              value ="CWI">
-            <label for="UT">Ultrasonic Testing</label>
-            <input 
-              type= "checkbox" 
-              name="certs" 
-              id="UT" 
-              value="UT">
-            <label for="MT">Magnatic Particle Testing</label>
-            <input 
-              type= "checkbox" 
-              name="certs" 
-              id="MT" 
-              value="MT">
-            <label for="GPR">Ground Penetrating Radar</label>
-            <input 
-              type= "checkbox" 
-              name="certs" 
-              id="GPR" 
-              value="GPR">
-            <label for="soils">Soils Inspector</label>
-            <input 
-              type= "checkbox" 
-              name="certs" 
-              id="soils" 
-              value="soils">
+                  <label for="phone">Telephone</label>
+                  <input type="tel" id="phone" name="phone"
+                    placeholder="123-456-7890"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    required
+                  ><span class="validity"></span>
+                  <br>
+                  <label for="email">E-mail</label>
+                  <input type="email" id="email" name="email"
+                    placeholder="name@domain.com"
+                    required
+                  ><span class="validity"></span>
+                </div>
+              </div>
 
-            <h2>Equipment</h2>
+              <h2>Equipment</h2>
 
-            <label for="equipment-name">Description/Name</label>
-            <input 
-              class="js-equip-clear" 
-              type="text" 
-              id="equipment-name">
-            <label for="equipment-number">Part No.</label>
-            <input 
-              class="js-equip-clear"  
-              type="text" 
-              id="equipment-number">
+              <label for="equipment-name">Description/Name</label>
+              <input 
+                class="js-equip-clear" 
+                type="text" 
+                id="equipment-name">
+                <br>
+              <label for="equipment-number">Part No.</label>
+              <input 
+                class="js-equip-clear"  
+                type="text" 
+                id="equipment-number">
+                <br>
+              <button 
+                class="js-add-equip" 
+                type="button">add Equipment</button>
 
-            <button 
-              class="js-add-equip" 
-              type="button">add Equipment</button>
+              <button 
+                class="js-list-clear" 
+                type="button">Clear Equipment List</button>
 
-            <button 
-              class="js-list-clear" 
-              type="button">Clear Equipment List</button>
+              <div class="js-equip-list"></div>
 
-            <div class="js-equip-list"></div>
+              <h2>Certifications</h2>
 
-            <h2>Notes</h2>
+              <label for="CWI" class="certs">
+                <input 
+                type= "checkbox" 
+                name="certs" 
+                id="CWI" 
+                value ="CWI">
+                Certified Welding Inspector (A.W.S.)</label>
+              
+              <label for="UT" class="certs">
+                <input 
+                type= "checkbox" 
+                name="certs" 
+                id="UT" 
+                value="UT">
+                Ultrasonic Testing</label>
+              
+              <label for="MT" class="certs">
+                <input 
+                type= "checkbox" 
+                name="certs" 
+                id="MT" 
+                value="MT">
+                Magnatic Particle Testing</label>
+              
+              <label for="GPR" class="certs">
+                  <input 
+                  type= "checkbox" 
+                  name="certs" 
+                  id="GPR" 
+                  value="GPR">
+                  Ground Penetrating Radar</label>
+              
+              <label for="soils" class="certs">
+                  <input 
+                  type= "checkbox" 
+                  name="certs" 
+                  id="soils" 
+                  value="soils">
+                  Soils Inspector</label>
+              
 
-            <textarea 
-              class="js-add-notes" 
-              name="" 
-              id="" cols="30" rows="10"></textarea>
 
-            <div class="js-button-box"></div>
 
-            <button 
-              class="js-reset" 
-              type="reset">Clear Form
-            </button>
+              <h2>Notes</h2>
 
-            <button 
-              type="button" 
-              class="js-cancel-form">Cancel
-            </button>
+              <textarea 
+                class="js-add-notes" 
+                name="" 
+                id="" cols="30" rows="10"></textarea>
 
+              <button 
+                class="js-reset" 
+                type="reset">Clear Form
+              </button>
+
+              <button 
+                type="button" 
+                class="js-cancel-form">Cancel
+              </button>
+
+              <div class="js-button-box"></div>
+
+            </div>
           </fieldset>
         </form>
       </section>
 
-      <div class="js-message-box js-empty"></div>
+      <div class="js-message-box "></div>
       
       <section class="js-employees js-empty"></section>
       
+      <div class="row">
+        <div class="col-12 page-number">
+          <span class="js-page-num js-empty"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 js-page-box page-box">
+          <div class="start-box inline js-empty"></div>
+          <div class="prev-box inline js-empty"></div>
+          <div class="next-box inline js-empty"></div>
+          <div class="last-box inline js-empty"></div>
+        </div>
+      </div>
+
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

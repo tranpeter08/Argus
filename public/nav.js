@@ -9,9 +9,9 @@ function argusButton(){
         clearEquipList();
         clearStorage();
 
-        //hide form, employee list, show landing page
+        //hide form, employee list,
         hideElement(".js-hide");
         $(".js-empty").empty();
-        showElement(".js-landing");
+        $(".js-about").show();
     })
 }
