@@ -11,6 +11,10 @@ const employeeSchema = mongoose.Schema({
         middleInit: {type: String, default: ""},
         lastName: {type: String, required: true}
     },
+    contact:{
+        phone:String,
+        email:String
+    },
     certifications:[String],
     equipment:[String],
     notes: String
@@ -24,6 +28,8 @@ employeeSchema.methods.serialize = function () {
     return {
         id: this._id,
         employeeName: this.employeeFullName,
+        phone: this.contact.phone,
+        email: this.contact.email,
         certifications: this.certifications,
         equipment: this.equipment,
         notes: this.notes

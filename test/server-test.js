@@ -36,7 +36,7 @@ function generateEquipment(){
 function generateCertifications(){
     const certifications = [];
     const certCollection = [
-        'CWI','UT','MT','GPR','soils',
+        'CWI','UT','MT','GPR','soils','concrete'
     ];
 
     while(certifications.length < 3){
@@ -58,6 +58,10 @@ function generateEmployeeData(){
             firstName: faker.name.firstName(),
             middleInit: faker.lorem.slug(1),
             lastName: faker.name.lastName()
+        },
+        contact:{
+            phone: faker.lorem.word(),
+            email: faker.lorem.word(),
         },
         certifications: generateCertifications(),
         equipment: generateEquipment(),
@@ -116,11 +120,11 @@ describe("Employees API", function(){
                 expect(res).to.be.json;
                 expect(res.body).to.be.an('array');
                 expect(res.body).to.have.lengthOf.at.least(1);
-
+                
                 res.body.forEach(function(employee){
                     expect(employee).to.be.an('object');
                     expect(employee).to.include.keys(
-                        'employeeName','certifications','equipment','notes'
+                        'employeeName','phone','email','certifications','equipment','notes'
                     );
                 });
 
@@ -128,11 +132,14 @@ describe("Employees API", function(){
                 return Employees.findById(resEmployee.id);
             })
             .then(function(employee){
-                
+                console.log('DATABASE EMPLOYEE:',resEmployee);
                 expect(resEmployee.id).to.equal(employee.id);
                 expect(resEmployee.employeeName).to
                 .equal(`${employee.employeeName.firstName} ${employee.employeeName.middleInit} ${employee.employeeName.lastName}`);
                 
+                expect(resEmployee.phone).to.equal(employee.contact.phone);
+                expect(resEmployee.email).to.equal(employee.contact.email);
+
                 resEmployee.certifications.forEach(function(cert,index){
                     expect(cert).to.equal(employee.certifications[index]);
                 });
@@ -152,7 +159,6 @@ describe("Employees API", function(){
                 expect(res).to.have.status(500);
                 expect(res).to.be.json;
                 expect(res.body.error).to.equal('Cast to ObjectId failed for value "1" at path "_id" for model "Employees"');
-                console.log(res.body);
             })
         });
     });
@@ -173,7 +179,7 @@ describe("Employees API", function(){
                 expect(res).to.be.json;
                 expect(res.body).to.be.an('object');
                 expect(res.body).to.include.keys(
-                    'id','employeeName','certifications','equipment','notes'
+                    'id','employeeName','email','phone','certifications','equipment','notes'
                 );
                 expect(res.body.id).to.not.be.null;
 
@@ -183,6 +189,10 @@ describe("Employees API", function(){
 
                 expect(res.body.employeeName).to
                 .equal(`${newFirstName} ${newMiddileInit} ${newLastName}`);
+
+                expect(res.body.phone).to.equal(newEmployee.contact.phone);
+
+                expect(res.body.email).to.equal(newEmployee.contact.email);
 
                 res.body.certifications.forEach(function(cert,index){
                     expect(cert)

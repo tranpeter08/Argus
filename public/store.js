@@ -4,11 +4,16 @@ const employeeStorage = {
         middleInit: "",
         lastName: ""
     },
+    contact:{
+        phone:"",
+        email:""
+    },
     certifications: [], 
     equipment: [],
     notes: ""
 }
 
 const pageStorage = {
-    start: 0
+    start: 0,
+    pages: 1
 }

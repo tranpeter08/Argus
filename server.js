@@ -38,8 +38,7 @@ app.get('/employees/:id', (req,res)=>{
         console.error(err);
         res.status(500).json({error: err.message});
     })
-})
-
+});
 
 //POST
 app.post('/employees', jsonParser,(req,res)=>{
@@ -71,6 +70,10 @@ app.post('/employees', jsonParser,(req,res)=>{
             middleInit: req.body.employeeName.middleInit,
             lastName: req.body.employeeName.lastName
         },
+        contact:{
+            phone: req.body.contact.phone,
+            email: req.body.contact.email
+        },
         certifications: req.body.certifications,
         equipment: req.body.equipment,
         notes: req.body.notes
@@ -91,7 +94,7 @@ app.put('/employees/:id', (req, res)=>{
     }
 
     const updated = {};
-    const updateableFields = ['employeeName','certifications','equipment','notes'];
+    const updateableFields = ['employeeName','contact','certifications','equipment','notes'];
     updateableFields.forEach(field=>{
         if(field in req.body){
             updated[field]= req.body[field];

@@ -2,6 +2,12 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+body{
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+
 legend,
 h1,
 h2,
@@ -22,7 +28,8 @@ button:hover{
 button{
     font-size: 20px;
     border-radius: 5px;
-    padding: 5px;
+    padding: 5px 10px;
+    border-color: #687864;
 }
 
 .nav button{
@@ -30,10 +37,11 @@ button{
     border: none;
     padding: 5px;
     position: relative;
+    
 }
 
 .nav button:hover{
-
+    text-shadow: 1px 1px 1px black;
     color: #f7f9fb;
 }
 
@@ -51,6 +59,10 @@ li{
     margin-left: 15%;
     margin-right: 15%;
     margin-top: 15%;
+}
+
+.about-box p{
+    line-height: 2em;
 }
 
 legend,
@@ -151,6 +163,8 @@ input:valid + span:after {
     text-align: center;
 }
 
+.verify,
+.close-edit,
 .employee-button{
     background: #31708E;
     color:  #F7F9FB;
@@ -165,6 +179,7 @@ legend{
     padding: 20px 0;
 }
 
+.close-created,
 .page-box button{
     background: #687864;
     color: #f7f9fb;
@@ -174,7 +189,81 @@ legend{
     display: block;
 }
 
-input[type=checkbox]:hover,
+input[type=checkbox]:hover
 {
     cursor: pointer;
 }
+
+.form-button{
+    font-size: 15px;
+
+}
+
+label,
+input{
+    margin-bottom: 10px;
+}
+
+label{
+    margin-right: 10px;
+}
+
+li{
+    padding-bottom: 5px;
+}
+
+#middle-initial{
+    width: 60px;
+}
+
+#email{
+    width: 164px;
+}
+
+label[for=equipment-number]{
+    margin-right: 51px;
+}
+
+.add-equip{
+    margin-right: 10px;
+}
+
+#equipment-number{
+    margin-bottom: 15px;
+}
+
+textarea{
+    margin-bottom: 10px;
+}
+
+.form-control{
+    text-align: center;
+    margin: 10px 0;
+}
+
+button.inline{
+    margin-right: 20px;
+}
+
+fieldset{
+    padding: 0;
+}
+
+.form-button{
+    background: #31708E;
+    color: #F7F9FB;
+}
+
+button.create{
+    background: #8fc1e3;
+    color: black;
+}
+
+button.create:hover{
+    color: #F7F9FB;
+}
+
+.js-message-box{
+    text-align: center;
+}
+
