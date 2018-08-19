@@ -1,8 +1,10 @@
 "use strict";
 
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const passport = require('passport');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -13,9 +15,38 @@ const jsonParser = bodyParser.json();
 const {DATABASE_URL, PORT} = require('./config');
 const {Employees} = require('./models');
 
+const {router: usersRouter} = require('./users');
+const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
+
 app.use(morgan('common'));
 app.use(express.json());
-app.use(express.static("public"))
+app.use(express.static("public"));
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use('/api/users',usersRouter);
+app.use('/api/auth', authRouter);
+
+app.use(function(req, res, next){
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+    if(req.method === 'OPTIONS'){
+        return res.send(204);
+    }
+    next();
+});
+
+
+const jwtAuth = passport.authenticate('jwt', {session: false});
+
+//protected endpoint
+app.get('/api/protected', jwtAuth, (req, res)=>{
+    return res.json({
+        message: 'Success'
+    });
+});
 
 //GET request
 app.get('/employees',(req, res)=>{

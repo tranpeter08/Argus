@@ -26,10 +26,36 @@
       <nav>
     </header>
     <main>
+      <section class="js-registration">
+        <h2>New User Registration</h2>
+        <form action="">
+          <fieldset>
+            <legend>Register</legend>
+            <label for="username">Username</label><br>
+            <input type="text" id="username">
+            <label for="password">Password</label><br>
+            <input type="text" id="password">
+            <button>Register</button>
+          </fieldset>
+        </form>
+      </section>
+      <section class="js-login">
+        <h2>Login</h2>
+        <form action="">
+          <fieldset>
+            <legend>Login</legend>
+            <label for="username-login">Username</label><br>
+            <input type="text" id="username-login">
+            <label for="password-login">Password</label><br>
+            <input type="text" id="password-login">
+            <button class="">Login</button>
+          </fieldset>
+        </form>
+      </section>
       <section class="js-about about row">
         <div class="col-12">
           <div class="about-box">
-            <h2>About</h2>
+            <h1>About</h1>
             <p> 
               Argus is a web application geared towards small inspection 
               companies in the construciton industry specializing in structural
@@ -230,6 +256,7 @@
     crossorigin="anonymous"></script>
     <script src="index.js"></script>
     <script src="nav.js"></script>
+    <script src="login.js"></script>
     <script src="store.js"></script>
   </body>
 </html>

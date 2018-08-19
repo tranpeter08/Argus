@@ -132,7 +132,6 @@ describe("Employees API", function(){
                 return Employees.findById(resEmployee.id);
             })
             .then(function(employee){
-                console.log('DATABASE EMPLOYEE:',resEmployee);
                 expect(resEmployee.id).to.equal(employee.id);
                 expect(resEmployee.employeeName).to
                 .equal(`${employee.employeeName.firstName} ${employee.employeeName.middleInit} ${employee.employeeName.lastName}`);
