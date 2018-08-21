@@ -702,8 +702,6 @@ function createEmployeeNavButton(){
 }
 
 function runThis(){
-    argusButton();
-
     viewEmployeesButton();
     nextButton();
     prevButton();

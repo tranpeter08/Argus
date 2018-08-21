@@ -13,44 +13,62 @@
     <header>
       <nav>
         <div class="row">
-          <div class="col-4 nav">
+          <div class="col-3 nav">
             <button class="js-home home-button ">Argus</button>
           </div>
-          <div class="col-4 nav">
-            <button class="js-view nav-button">View Employees</button>
+          <div class="col-3 nav">
+            <button class="js-login-button nav-button">Login/Register</button>
+            <button class="js-logout nav-button hidden">Log Out</button>
+          </div>
+          <div class="col-3 nav">
+            <button class="js-view js-postlogin nav-button hidden">View Employees</button>
           </div>  
-          <div class="col-4 nav">
-            <button class="js-create nav-button">Create an Employee</button>
+          <div class="col-3 nav">
+            <button class="js-create js-postlogin nav-button hidden">Create an Employee</button>
           </div>
         </div>
       <nav>
     </header>
     <main>
-      <section class="js-registration">
-        <h2>New User Registration</h2>
-        <form action="">
-          <fieldset>
-            <legend>Register</legend>
-            <label for="username">Username</label><br>
-            <input type="text" id="username">
-            <label for="password">Password</label><br>
-            <input type="text" id="password">
-            <button>Register</button>
-          </fieldset>
-        </form>
-      </section>
-      <section class="js-login">
-        <h2>Login</h2>
-        <form action="">
-          <fieldset>
-            <legend>Login</legend>
-            <label for="username-login">Username</label><br>
-            <input type="text" id="username-login">
-            <label for="password-login">Password</label><br>
-            <input type="text" id="password-login">
-            <button class="">Login</button>
-          </fieldset>
-        </form>
+      <section class="js-registration js-hide registration hidden">
+        <h2>Login/Registration</h2>
+        <div class="js-registration-message"></div>
+        <div class="js-registration-forms row">
+          <div class="col-6">
+            <form class="login-form" action="" id="js-login-form">
+              <fieldset>
+                <legend>Login</legend>
+                <div class="login-inputs">
+                  <label for="username-login">Username</label><br>
+                  <input type="text" id="username-login"><br>
+                  <label for="password-login">Password</label><br>
+                  <input type="password" id="password-login">
+                  <div class="js-login-err js-reg-clear reg-msg"></div>
+                </div>
+                <div class="reg-button-container">
+                  <button class="" type="submit">Login</button>
+                </div>
+              </fieldset>
+            </form>
+          </div>  
+          <div class="col-6">
+            <form class="login-form" action="" id="js-register-form">
+              <fieldset>
+                <legend>Register</legend>
+                <div class="login-inputs">
+                  <label for="username">Create a Username</label><br>
+                  <input type="text" id="username" placeholder="(min. 8 characters)"><br>
+                  <label for="password">Create a Password</label><br>
+                  <input type="password" id="password" placeholder="(min. 10 characters)"><br>
+                </div>
+                <div class="js-reg-err js-reg-clear reg-msg"></div>
+                <div class="reg-button-container">
+                  <button type="submit">Register</button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
       </section>
       <section class="js-about about row">
         <div class="col-12">
