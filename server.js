@@ -52,7 +52,6 @@ app.get('/api/protected', jwtAuth, (req, res)=>{
 app.get('/employees',(req, res)=>{
     Employees.find()
     .then(staff => {
-        console.log(staff);
         res.json(staff.map(individual => individual.serialize()));
     })
     .catch(err => {
