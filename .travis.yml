@@ -8,3 +8,5 @@ deploy:
   on:
     repo: tranpeter08/argus
 services: mongoDB
+env:
+- JWT_SECRET = 'moonshine'
