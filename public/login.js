@@ -41,6 +41,10 @@ console.log(err);
   `);
 }
 
+function storeToken(data){
+  userStoreage.authToken = token;
+}
+
 function handleJWT(data){
 console.log(data);
 //ajax with token
@@ -57,6 +61,8 @@ console.log(data);
   $.ajax(settings)
   .done(handleLogin)
   .fail(handleLoginError)
+
+  storeToken(data.authToken);
 }
 
 function loginButton(){

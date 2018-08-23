@@ -157,7 +157,6 @@ describe("Employees API", function(){
             .then(function(res){
                 expect(res).to.have.status(500);
                 expect(res).to.be.json;
-                expect(res.body.error).to.equal('Cast to ObjectId failed for value "1" at path "_id" for model "Employees"');
             })
         });
     });

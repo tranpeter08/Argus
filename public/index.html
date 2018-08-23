@@ -10,8 +10,8 @@
     <link href="float.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <header>
-      <nav>
+    <header role="banner">
+      <nav role="navigation">
         <div class="row">
           <div class="col-3 nav">
             <button class="js-home home-button ">Argus</button>
@@ -29,8 +29,8 @@
         </div>
       <nav>
     </header>
-    <main>
-      <section class="js-registration js-hide registration hidden">
+    <main role="main">
+      <section class="js-registration js-hide registration hidden" role="region" aria-live="assertive">
         <h2>Login/Registration</h2>
         <div class="js-registration-message"></div>
         <div class="js-registration-forms row">
@@ -70,7 +70,7 @@
           </div>
         </div>
       </section>
-      <section class="js-about about row">
+      <section class="js-about about row" role="region" aria-live="assertive">
         <div class="col-12">
           <div class="about-box">
             <h1>About</h1>
@@ -84,7 +84,7 @@
           </div>
         </div>
       </section>
-      <section class="js-form js-hide">
+      <section class="js-form js-hide" aria-live="assertive">
         <form class="" id="js-employee-form" action="#" >
           <fieldset>
             <legend class="js-legend"></legend>
@@ -122,7 +122,7 @@
                   <h2>Contact Information</h2>
 
                   <label for="phone">Telephone</label>
-                  <input type="tel" id="phone" name="phone"
+                  <input type="text" id="phone" name="phone"
                     class="js-contact"
                     placeholder="123-456-7890"
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -250,9 +250,9 @@
         </form>
       </section>
 
-      <div class="js-message-box "></div>
+      <section class="js-message-box " role="region" aria-live="assertive"></section>
       
-      <section class="js-employees js-empty"></section>
+      <section class="js-employees js-empty" role="region" aria-live="assertive"></section>
       
       <div class="row">
         <div class="col-12 page-number">

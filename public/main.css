@@ -77,7 +77,7 @@ h3.name{
     margin: 0;
 }
 
-h2.employee{
+h2.employees{
     text-align: center;
     font-size: 35px;
 }
@@ -153,6 +153,18 @@ input:valid + span:after {
     padding-left: 5px;
 }
 
+input{
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #cdcdcd;
+    padding: 5px;
+    margin-top: 4px;
+}
+
+label{
+    font-size: 16px
+}
+
 .page-box,
 .page-number{
     text-align: center;
@@ -172,6 +184,7 @@ input:valid + span:after {
 .employee-button{
     background: #31708E;
     color:  #F7F9FB;
+    transition: .2s;
 }
 
 .employee-button:active{
@@ -210,6 +223,7 @@ input{
 
 label{
     margin-right: 10px;
+
 }
 
 li{
@@ -220,8 +234,12 @@ li{
     width: 60px;
 }
 
+#phone{
+    width: 130px;
+}
+
 #email{
-    width: 164px;
+    width: 162px;
 }
 
 label[for=equipment-number]{
@@ -238,6 +256,9 @@ label[for=equipment-number]{
 
 textarea{
     margin-bottom: 10px;
+    width: 280px;
+    height: 186px;
+    border: 1px solid #cdcdcd;
 }
 
 .form-control{
@@ -258,14 +279,28 @@ fieldset{
     background: #31708E;
     color: #F7F9FB;
 }
+.employee-button:hover,
+.login-form button:hover,
+.form-button:hover{
+    background: #5085A5;
+    transition: 0.2s;
+}
 
+.submit-edit,
 button.create{
     background: #8fc1e3;
     color: black;
 }
 
+.submit-edit:hover,
 button.create:hover{
     color: #F7F9FB;
+    background: #8fc1e3;
+}
+
+.submit-edit:active,
+button.create:active{
+    background: #687864;
 }
 
 .js-message-box{
@@ -301,3 +336,4 @@ button.create:hover{
     text-align: center;
     font-size: 30px;
 }
+

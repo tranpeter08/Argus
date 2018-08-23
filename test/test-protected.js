@@ -115,7 +115,6 @@ describe('protected end point', function(){
         expect(res.body).to.be.an('object');
         expect(res.body.message).to.equal('Success');
       });
-
   });
 
 })
