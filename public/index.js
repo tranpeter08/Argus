@@ -320,8 +320,12 @@ function renderLast(){
   }
 
 function renderPageNum(){
+    if(pageStorage.pages ===0){
+      $(".js-page-num").text(`Page 1 of 1`)
+    }else{
     $(".js-page-num")
       .text(`Page ${pageStorage.start+1} of ${pageStorage.pages}`)
+    }
 }
 
 
