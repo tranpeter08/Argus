@@ -116,7 +116,7 @@ h4{
 .reg-msg-box,
 .login-form,
 .card{
-    border: 2px black solid;
+    border: 1px black solid;
     padding: 10px;
     margin-bottom: 6%;
     border-radius: 5px;
@@ -337,7 +337,9 @@ button.create:active{
 }
 
 .login-form fieldset{
-    padding: 0 15%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 3%;
 }
 
 .reg-button-container{
@@ -359,7 +361,7 @@ button.create:active{
 }
 
 .reg-msg-box{
-    width: 360px;
+    min-width: 300px;
     margin: auto;
 }
 
@@ -369,7 +371,7 @@ span{
 }
 
 .login-form{
-    min-width: 320px;
+    max-width: 300px;
     margin: auto;
 }
 
