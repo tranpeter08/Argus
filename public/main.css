@@ -7,7 +7,7 @@ body{
     margin-right: 0;
     margin-top: 0;
     margin-bottom: 20px;
-    background: #efeded;
+    background: #CAEBF2;
 }
 
 legend,
@@ -20,7 +20,8 @@ button{
 }
 
 nav{
-    background: #8FC1E3;
+    background: #EFEFEF;
+    padding: 5px 0;
 }
 
 button:hover{
@@ -31,7 +32,7 @@ button{
     font-size: 20px;
     border-radius: 5px;
     padding: 5px 10px;
-    border-color: #687864;
+    border-color: #A9A9A9;
 }
 
 .nav button{
@@ -43,12 +44,12 @@ button{
 }
 
 .nav button:hover{
-    text-shadow: 1px 1px 1px black;
-    color: #f7f9fb;
+    text-shadow: 2px 2px 1px rgb(224, 224, 224);
+    color: #FF3B3F;
 }
 
 .nav button:active{
-    background: #687864;
+    background: #A9A9A9;
 }
 
 span,
@@ -63,8 +64,13 @@ li{
     margin-top: 15%;
 }
 
+.about-box h1{
+    text-shadow: 2px 2px 1px #EFEFEF;
+}
+
 .about-box p{
     line-height: 2em;
+    text-shadow: 2px 2px 1px #EFEFEF;
 }
 
 legend,
@@ -97,7 +103,7 @@ h4{
 
 .form-content,
 .login-form{
-    background: #F7F9FB;
+    background: #EFEFEF;
 }
 
 .form{
@@ -123,7 +129,7 @@ h4{
 }
 
 .card{
-    background: #F7F9FB;
+    background: #EFEFEF;
 }
 
 .content{
@@ -133,12 +139,10 @@ h4{
 
 .nav-button{
     font-size: 20px;
-    bottom: 3px;
 }
 
 .home-button{
     font-size: 25px;
-    bottom: 1.5px;
     font-weight: bold;
 }
 
@@ -197,9 +201,10 @@ label{
 .verify,
 .close-edit,
 .employee-button{
-    background: #31708E;
+    background: #FF3B3F;
     color:  #F7F9FB;
-    transition: .2s;
+    text-shadow: 2px 2px 1px black;
+    transition: .3s;
 }
 
 .employee-button:active{
@@ -293,13 +298,16 @@ fieldset{
 .reg-msg-close,
 .login-form button,
 .form-button{
-    background: #31708E;
+    background: #FF3B3F;
     color: #F7F9FB;
+    text-shadow: 1px 1px 1px black;
+    transition: 0.3s;
 }
+
 .employee-button:hover,
 .login-form button:hover,
 .form-button:hover{
-    background: #5085A5;
+    background: rgb(200, 0, 0);
     transition: 0.2s;
 }
 
@@ -307,6 +315,7 @@ fieldset{
 button.create{
     background: #8fc1e3;
     color: black;
+    text-shadow: none;
 }
 
 .submit-edit:hover,
