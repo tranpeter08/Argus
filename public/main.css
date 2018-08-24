@@ -7,6 +7,7 @@ body{
     margin-right: 0;
     margin-top: 0;
     margin-bottom: 20px;
+    background: #efeded;
 }
 
 legend,
@@ -94,6 +95,11 @@ h4{
     padding: 0;
 }
 
+.form-content,
+.login-form{
+    background: #F7F9FB;
+}
+
 .form{
     list-style: circle;
 }
@@ -116,6 +122,10 @@ h4{
     border-radius: 5px;
 }
 
+.card{
+    background: #F7F9FB;
+}
+
 .content{
     height: 320px;
     overflow: auto;
@@ -134,8 +144,12 @@ h4{
 
 
 .form-content{
-    border: 2px black solid;
+    border: 1px black solid;
     padding:10px;
+    max-width: 700px;
+    margin: auto;
+    border-radius: 5px;
+    
 }
 
 fieldset{
@@ -260,6 +274,7 @@ textarea{
     width: 280px;
     height: 186px;
     border: 1px solid #cdcdcd;
+    font-size: 16px;
 }
 
 .form-control{
@@ -354,7 +369,7 @@ span{
 }
 
 .login-form{
-    width: 360px;
+    min-width: 320px;
     margin: auto;
 }
 
