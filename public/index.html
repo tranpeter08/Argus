@@ -32,9 +32,9 @@
     <main role="main">
       <section class="js-registration js-hide registration hidden" role="region" aria-live="assertive">
         <h2>Login/Registration</h2>
-        <div class="js-registration-message"></div>
+        <div class="js-registration-message registration-message"></div>
         <div class="js-registration-forms row">
-          <div class="col-6">
+          <div class="col-12">
             <form class="login-form" action="" id="js-login-form">
               <fieldset>
                 <legend>Login</legend>
@@ -46,20 +46,25 @@
                   <div class="js-login-err js-reg-clear reg-msg"></div>
                 </div>
                 <div class="reg-button-container">
-                  <button class="" type="submit">Login</button>
+                  <button class="" type="submit">Login</button><br>
+                  <p >Or register <a class="js-go-register go-register" href="#">here</a></p>
                 </div>
               </fieldset>
             </form>
           </div>  
-          <div class="col-6">
-            <form class="login-form" action="" id="js-register-form">
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <form class="login-form hidden" action="" id="js-register-form">
               <fieldset>
                 <legend>Register</legend>
                 <div class="login-inputs">
                   <label for="username">Create a Username</label><br>
-                  <input type="text" id="username" placeholder="(min. 8 characters)"><br>
+                  <span>(8-20 characters)</span><br>
+                  <input type="text" id="username" ><br>
                   <label for="password">Create a Password</label><br>
-                  <input type="password" id="password" placeholder="(min. 10 characters)"><br>
+                  <span>(min. 10 characters)</span><br>
+                  <input type="password" id="password" ><br>
                 </div>
                 <div class="js-reg-err js-reg-clear reg-msg"></div>
                 <div class="reg-button-container">

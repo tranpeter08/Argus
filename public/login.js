@@ -14,18 +14,21 @@ function ajaxReq(data, url, method, callback, fail){
   .fail(fail)
 }
 
+function goToLogin(){
+  $('.js-go-register').on('click',()=>{
+    clearRegLoginForms();
+    $("#js-login-form").hide();
+    $("#js-register-form").show();
+  })
+}
+
 function clearRegLoginForms(){
   $(".js-registration-forms input").val("");
   $(".js-reg-clear").empty();
 
 }
 
-function handleLoginError(err){
- console.log(err);
-}
-
-function handleLogin(data){
-  console.log(data);
+function handleLogin(){
   clearRegLoginForms();
   $(".js-registration").hide();
   $(".js-about").show();
@@ -35,36 +38,21 @@ function handleLogin(data){
 }
 
 function handleErrorJWT(err){
-console.log(err);
   $('.js-login-err').html(`
     <p class="reg-err">Incorrect username or password.</p>
   `);
 }
 
-function storeToken(data){
-  userStoreage.authToken = token;
+function storeToken(aToken){
+  userStoreage.authToken = aToken;
 }
 
 function handleJWT(data){
-console.log(data);
-//ajax with token
-  const settings= {
-    url: '/api/protected',
-    dataType: 'json',
-    contentType: 'application/json',
-    method: 'GET',
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader('Authorization', 'Bearer ' + data.authToken)
-    }
-  }
-
-  $.ajax(settings)
-  .done(handleLogin)
-  .fail(handleLoginError)
-
   storeToken(data.authToken);
+  handleLogin();
 }
 
+//login submit
 function loginButton(){
   $("#js-login-form").on("submit",(event)=>{
     event.preventDefault();
@@ -78,10 +66,11 @@ function loginButton(){
       userData,'/api/auth/login','POST',handleJWT,handleErrorJWT
     );
     
+
   });
 }
 
-//handle error for reg
+//handle error for registration
 function registerError(err){
   console.log(err);
   const{message, location} = err.responseJSON
@@ -99,17 +88,22 @@ function registerCloseButton(){
     })
 }
 
-
-
 function handleRegistered(data){
   console.log(data);
   //pop up div created successfully
   //username
   clearRegLoginForms();
   $(".js-registration-message").html(`
-    <p>Username: ${data.username} created successfully!</p>
-    <button class="js-reg-msg-close">Close</button>   
+    <div class="reg-msg-box"> 
+      <p>Username: ${data.username} created successfully!</p>
+      <button class="js-reg-msg-close reg-msg-close">Close</button>
+    </div> 
   `);
+
+  $("#username").val("");
+  $("#password").val("");
+  $("#js-login-form").show();
+  $("#js-register-form").hide();
   $(".js-registration-forms").hide();
 }
 
@@ -125,11 +119,14 @@ function registerSubmitButton(){
     ajaxReq(
       userData,'/api/users','POST',handleRegistered,registerError
     );
+    
+
   });
 }
 
 $(
   registerSubmitButton(),
   loginButton(),
-  registerCloseButton()
+  registerCloseButton(),
+  goToLogin()
 );

@@ -107,6 +107,7 @@ h4{
     display: inline;
 }
 
+.reg-msg-box,
 .login-form,
 .card{
     border: 2px black solid;
@@ -274,6 +275,7 @@ fieldset{
     padding: 0;
 }
 
+.reg-msg-close,
 .login-form button,
 .form-button{
     background: #31708E;
@@ -335,5 +337,34 @@ button.create:active{
 .registration h2{
     text-align: center;
     font-size: 30px;
+}
+
+.registration-message{
+    text-align: center;
+}
+
+.reg-msg-box{
+    width: 360px;
+    margin: auto;
+}
+
+span{
+    font-size: 14px;
+    color: #687864;
+}
+
+.login-form{
+    width: 360px;
+    margin: auto;
+}
+
+a{
+    color: #31708E;
+    transition: .2s;
+}
+
+a:hover{
+    font-size: 20px;
+    color: #8FC1E3;
 }
 
