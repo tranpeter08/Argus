@@ -60,7 +60,7 @@
 @media only screen and (min-width: 720px) {
   /* 3 columns, 3/12 in % */
   .col-3 {
-    width: 28%;
+    width: 25%;
   }
 
   /* 4 columns, 4/12 in % */

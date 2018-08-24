@@ -2,6 +2,7 @@
  function requestDataAPI(aFunction, method, anID, data,){
      console.log(data);
      console.log(anID);
+     console.log(userStoreage.authToken)
     let getID = anID
    if(!anID){
        getID = "";
@@ -11,8 +12,11 @@
        dataType: 'json',
        contentType: 'application/json',
        data: JSON.stringify(data),
-       method: method
-   }
+       method: method,
+       beforeSend: function (xhr) {
+         xhr.setRequestHeader('Authorization', 'Bearer ' + userStoreage.authToken)
+       }
+    }
    $.ajax(settings)
    .done(aFunction)
    .fail(()=>{
@@ -702,8 +706,6 @@ function createEmployeeNavButton(){
 }
 
 function runThis(){
-    argusButton();
-
     viewEmployeesButton();
     nextButton();
     prevButton();

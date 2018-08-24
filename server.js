@@ -49,10 +49,9 @@ app.get('/api/protected', jwtAuth, (req, res)=>{
 });
 
 //GET request
-app.get('/employees',(req, res)=>{
+app.get('/employees', jwtAuth,(req, res)=>{
     Employees.find()
     .then(staff => {
-        console.log(staff);
         res.json(staff.map(individual => individual.serialize()));
     })
     .catch(err => {
@@ -62,7 +61,7 @@ app.get('/employees',(req, res)=>{
 });
 
 //GET request with ID
-app.get('/employees/:id', (req,res)=>{
+app.get('/employees/:id',jwtAuth, (req,res)=>{
     Employees.findById(req.params.id)
     .then( employee => res.json(employee))
     .catch(err => {
@@ -72,7 +71,7 @@ app.get('/employees/:id', (req,res)=>{
 });
 
 //POST
-app.post('/employees', jsonParser,(req,res)=>{
+app.post('/employees', jwtAuth,(req,res)=>{
     const requiredFields = [
         'employeeName','certifications','equipment','notes'
     ];
@@ -117,7 +116,7 @@ app.post('/employees', jsonParser,(req,res)=>{
 });
 
 //PUT
-app.put('/employees/:id', (req, res)=>{
+app.put('/employees/:id',jwtAuth, (req, res)=>{
     if(req.params.id !== req.body.id){
         const message = `response body and parameter ID do not match`
         console.error(message);
@@ -143,7 +142,7 @@ app.put('/employees/:id', (req, res)=>{
 })
 
 //DELETE 
-app.delete('/employees/:id', (req,res)=>{
+app.delete('/employees/:id',jwtAuth, (req,res)=>{
     Employees.findByIdAndRemove(req.params.id)
     .then(()=>{
         console.log(`Deleted employee with ID: ${req.params.id}`)

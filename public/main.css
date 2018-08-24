@@ -5,6 +5,7 @@
 body{
     margin-left: 0;
     margin-right: 0;
+    margin-top: 0;
     margin-bottom: 20px;
 }
 
@@ -97,6 +98,7 @@ h4{
     list-style: circle;
 }
 
+.hidden,
 .js-form{
     display: none;
 }
@@ -105,6 +107,8 @@ h4{
     display: inline;
 }
 
+.reg-msg-box,
+.login-form,
 .card{
     border: 2px black solid;
     padding: 10px;
@@ -128,6 +132,7 @@ h4{
     font-weight: bold;
 }
 
+
 .form-content{
     border: 2px black solid;
     padding:10px;
@@ -149,6 +154,18 @@ input:valid + span:after {
     padding-left: 5px;
 }
 
+input{
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #cdcdcd;
+    padding: 5px;
+    margin-top: 4px;
+}
+
+label{
+    font-size: 16px
+}
+
 .page-box,
 .page-number{
     text-align: center;
@@ -168,6 +185,7 @@ input:valid + span:after {
 .employee-button{
     background: #31708E;
     color:  #F7F9FB;
+    transition: .2s;
 }
 
 .employee-button:active{
@@ -206,6 +224,7 @@ input{
 
 label{
     margin-right: 10px;
+
 }
 
 li{
@@ -216,8 +235,12 @@ li{
     width: 60px;
 }
 
+#phone{
+    width: 130px;
+}
+
 #email{
-    width: 164px;
+    width: 162px;
 }
 
 label[for=equipment-number]{
@@ -234,6 +257,9 @@ label[for=equipment-number]{
 
 textarea{
     margin-bottom: 10px;
+    width: 280px;
+    height: 186px;
+    border: 1px solid #cdcdcd;
 }
 
 .form-control{
@@ -249,21 +275,96 @@ fieldset{
     padding: 0;
 }
 
+.reg-msg-close,
+.login-form button,
 .form-button{
     background: #31708E;
     color: #F7F9FB;
 }
+.employee-button:hover,
+.login-form button:hover,
+.form-button:hover{
+    background: #5085A5;
+    transition: 0.2s;
+}
 
+.submit-edit,
 button.create{
     background: #8fc1e3;
     color: black;
 }
 
+.submit-edit:hover,
 button.create:hover{
     color: #F7F9FB;
+    background: #8fc1e3;
+}
+
+.submit-edit:active,
+button.create:active{
+    background: #687864;
 }
 
 .js-message-box{
     text-align: center;
+}
+
+.login-inputs input{
+    width: 100%;
+}
+
+.login-inputs label{
+    text-align: left;
+}
+
+.login-form input{
+    font-size: 15px;
+}
+
+.login-form fieldset{
+    padding: 0 15%;
+}
+
+.reg-button-container{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.reg-err{
+    color: red;
+}
+
+.registration h2{
+    text-align: center;
+    font-size: 30px;
+}
+
+.registration-message{
+    text-align: center;
+}
+
+.reg-msg-box{
+    width: 360px;
+    margin: auto;
+}
+
+span{
+    font-size: 14px;
+    color: #687864;
+}
+
+.login-form{
+    width: 360px;
+    margin: auto;
+}
+
+a{
+    color: #31708E;
+    transition: .2s;
+}
+
+a:hover{
+    font-size: 20px;
+    color: #8FC1E3;
 }
 

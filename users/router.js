@@ -24,7 +24,7 @@ router.post('/', jsonParser, (req, res)=>{
   }
 
   const stringFields = ['username','password'];
-  const nonStringField = stringField.find(
+  const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
   );
 
@@ -53,7 +53,8 @@ router.post('/', jsonParser, (req, res)=>{
 
   const sizedFields = {
     username: {
-      min: 8
+      min: 8,
+      max: 20
     },
     password:{
       min: 10,
@@ -64,7 +65,7 @@ router.post('/', jsonParser, (req, res)=>{
   const tooSmallField = Object.keys(sizedFields).find(
     field =>
       'min' in sizedFields[field] &&
-        req.body[field].trim().length < sizedFields[fields].min
+        req.body[field].trim().length < sizedFields[field].min
   );
   const tooLargeField = Object.keys(sizedFields).find(
     field =>
@@ -77,9 +78,9 @@ router.post('/', jsonParser, (req, res)=>{
       code: 422,
       reason: 'ValidationError',
       message: tooSmallField
-        ? `Must be at least ${sizedFields[tooSmallField]
+        ? `must be at least ${sizedFields[tooSmallField]
           .min} characters long`
-        : `Must be at most ${sizedField[tooLargeField]
+        : `must be at most ${sizedFields[tooLargeField]
           .max} characters long`,
       location: tooSmallField || tooLargeField
     });
@@ -119,5 +120,13 @@ router.post('/', jsonParser, (req, res)=>{
       });
     });
 });
+
+/*
+router.get('/', (req, res) => {
+  return User.find()
+    .then(users => res.json(users.map(user => user.serialize())))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+*/
 
 module.exports = {router};

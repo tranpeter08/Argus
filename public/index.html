@@ -10,49 +10,72 @@
     <link href="float.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <header>
-      <nav>
+    <header role="banner">
+      <nav role="navigation">
         <div class="row">
-          <div class="col-4 nav">
+          <div class="col-3 nav">
             <button class="js-home home-button ">Argus</button>
           </div>
-          <div class="col-4 nav">
-            <button class="js-view nav-button">View Employees</button>
+          <div class="col-3 nav">
+            <button class="js-login-button nav-button">Login/Register</button>
+            <button class="js-logout nav-button hidden">Log Out</button>
+          </div>
+          <div class="col-3 nav">
+            <button class="js-view js-postlogin nav-button hidden">View Employees</button>
           </div>  
-          <div class="col-4 nav">
-            <button class="js-create nav-button">Create an Employee</button>
+          <div class="col-3 nav">
+            <button class="js-create js-postlogin nav-button hidden">Create an Employee</button>
           </div>
         </div>
       <nav>
     </header>
-    <main>
-      <section class="js-registration">
-        <h2>New User Registration</h2>
-        <form action="">
-          <fieldset>
-            <legend>Register</legend>
-            <label for="username">Username</label><br>
-            <input type="text" id="username">
-            <label for="password">Password</label><br>
-            <input type="text" id="password">
-            <button>Register</button>
-          </fieldset>
-        </form>
+    <main role="main">
+      <section class="js-registration js-hide registration hidden" role="region" aria-live="assertive">
+        <h2>Login/Registration</h2>
+        <div class="js-registration-message registration-message"></div>
+        <div class="js-registration-forms row">
+          <div class="col-12">
+            <form class="login-form" action="" id="js-login-form">
+              <fieldset>
+                <legend>Login</legend>
+                <div class="login-inputs">
+                  <label for="username-login">Username</label><br>
+                  <input type="text" id="username-login"><br>
+                  <label for="password-login">Password</label><br>
+                  <input type="password" id="password-login">
+                  <div class="js-login-err js-reg-clear reg-msg"></div>
+                </div>
+                <div class="reg-button-container">
+                  <button class="" type="submit">Login</button><br>
+                  <p >Or register <a class="js-go-register go-register" href="#">here</a></p>
+                </div>
+              </fieldset>
+            </form>
+          </div>  
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <form class="login-form hidden" action="" id="js-register-form">
+              <fieldset>
+                <legend>Register</legend>
+                <div class="login-inputs">
+                  <label for="username">Create a Username</label><br>
+                  <span>(8-20 characters)</span><br>
+                  <input type="text" id="username" ><br>
+                  <label for="password">Create a Password</label><br>
+                  <span>(min. 10 characters)</span><br>
+                  <input type="password" id="password" ><br>
+                </div>
+                <div class="js-reg-err js-reg-clear reg-msg"></div>
+                <div class="reg-button-container">
+                  <button type="submit">Register</button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
       </section>
-      <section class="js-login">
-        <h2>Login</h2>
-        <form action="">
-          <fieldset>
-            <legend>Login</legend>
-            <label for="username-login">Username</label><br>
-            <input type="text" id="username-login">
-            <label for="password-login">Password</label><br>
-            <input type="text" id="password-login">
-            <button class="">Login</button>
-          </fieldset>
-        </form>
-      </section>
-      <section class="js-about about row">
+      <section class="js-about about row" role="region" aria-live="assertive">
         <div class="col-12">
           <div class="about-box">
             <h1>About</h1>
@@ -66,7 +89,7 @@
           </div>
         </div>
       </section>
-      <section class="js-form js-hide">
+      <section class="js-form js-hide" aria-live="assertive">
         <form class="" id="js-employee-form" action="#" >
           <fieldset>
             <legend class="js-legend"></legend>
@@ -104,7 +127,7 @@
                   <h2>Contact Information</h2>
 
                   <label for="phone">Telephone</label>
-                  <input type="tel" id="phone" name="phone"
+                  <input type="text" id="phone" name="phone"
                     class="js-contact"
                     placeholder="123-456-7890"
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -232,9 +255,9 @@
         </form>
       </section>
 
-      <div class="js-message-box "></div>
+      <section class="js-message-box " role="region" aria-live="assertive"></section>
       
-      <section class="js-employees js-empty"></section>
+      <section class="js-employees js-empty" role="region" aria-live="assertive"></section>
       
       <div class="row">
         <div class="col-12 page-number">
