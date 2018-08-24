@@ -1,8 +1,6 @@
 //ajax request
  function requestDataAPI(aFunction, method, anID, data,){
-     console.log(data);
-     console.log(anID);
-     console.log(userStoreage.authToken)
+
     let getID = anID
    if(!anID){
        getID = "";
