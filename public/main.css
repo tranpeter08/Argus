@@ -40,12 +40,13 @@ button{
     border: none;
     padding: 5px;
     position: relative;
+    color: #FF3B3F;
     
 }
 
 .nav button:hover{
     text-shadow: 2px 2px 1px rgb(224, 224, 224);
-    color: #FF3B3F;
+    color: black;
 }
 
 .nav button:active{
@@ -198,6 +199,7 @@ label{
     text-align: center;
 }
 
+.close-created,
 .verify,
 .close-edit,
 .employee-button{
@@ -216,10 +218,14 @@ legend{
     padding: 20px 0;
 }
 
-.close-created,
+
 .page-box button{
     background: #687864;
     color: #f7f9fb;
+}
+
+.page-box button:hover{
+    background: #A9A9A9;
 }
 
 .certs{
@@ -304,10 +310,12 @@ fieldset{
     transition: 0.3s;
 }
 
+.close-created:hover,
+.close-edit:hover,
 .employee-button:hover,
 .login-form button:hover,
 .form-button:hover{
-    background: rgb(200, 0, 0);
+    background: rgb(74, 255, 234);
     transition: 0.2s;
 }
 
