@@ -7,7 +7,7 @@ body{
     margin-right: 0;
     margin-top: 0;
     margin-bottom: 20px;
-    background-image: url('/public/stainlessBG.jpg');
+    background-image: url('/stainlessBG.jpg');
     background-attachment: fixed;
 }
 
