@@ -72,7 +72,6 @@ function loginButton(){
 
 //handle error for registration
 function registerError(err){
-  console.log(err);
   const{message, location} = err.responseJSON
   $(".js-reg-err").html(`
       <p class="reg-err">${location} ${message}</p>
@@ -89,13 +88,10 @@ function registerCloseButton(){
 }
 
 function handleRegistered(data){
-  console.log(data);
-  //pop up div created successfully
-  //username
   clearRegLoginForms();
   $(".js-registration-message").html(`
-    <div class="reg-msg-box"> 
-      <p>Username: ${data.username} created successfully!</p>
+    <div class="message-box"> 
+      <p>User: ${data.username}<br>created successfully!</p>
       <button class="js-reg-msg-close reg-msg-close">Close</button>
     </div> 
   `);

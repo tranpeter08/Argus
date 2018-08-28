@@ -3,7 +3,7 @@
 
     let getID = anID
    if(!anID){
-       getID = "";
+       getID = '';
    }
    const settings= {
        url: `/employees/${getID}`,
@@ -24,7 +24,7 @@
 }
 
 function resetStorage(){
-    if("id" in employeeStorage){
+    if('id' in employeeStorage){
         delete employeeStorage.id;
     }
 
@@ -43,10 +43,10 @@ function hideElement(selector){
 
 //function after delete
 function handleDelete(){
-    $(".js-verify-delete").html(`
+    $('.js-verify-delete').html(`
         <p>Employee has been deleted</p>
         <button class="js-close-deleted close">Close</button>
-    `);
+   `);
     requestDataAPI(handleResGET,'GET',null,);
 }
 
@@ -77,7 +77,7 @@ function verifyDeleteButtonYes(){
 //message to verify delete
 function renderVerifyDelete(employee){
     $(".js-message-box").html(`
-        <div>
+        <div class='message-box'>
             <p>Are you sure you want to delete ${employee}?</p>
             <button class="js-verify-yes verify">Yes</button>
             <button class="js-verify-no verify">No</button>
@@ -117,9 +117,10 @@ function closeEditMsg(){
 //show a message successful edit
 function successfulEditMsg(){
     $(".js-message-box").html(`
-        
-        <p>Employee update successful!</p>
-        <button class="js-close-edit-msg close-edit">Close</button>
+        <div class='message-box'>
+            <p>Employee update successful!</p>
+            <button class="js-close-edit-msg close-edit">Close</button>
+        </div>
     `)
 }
 
@@ -365,9 +366,9 @@ function handleDataList(anEmployee,index){
                 </div>
                 <div class="employee-button-box">
                     <button 
-                    class="js-edit-employee-button employee-button" 
+                    class="js-edit-employee-button employee-button employee-button-edit" 
                     type="button">
-                        Edit Employee
+                        Edit
                     </button>
                     <button 
                     class="js-delete-employee employee-button">
@@ -515,7 +516,7 @@ function closeCreatedMessageButton(){
 function renderCreatedEmployee(data){
     
     $('.js-message-box').html(`
-        <div class="js-">
+        <div class="message-box">
             <h2>Employee Created</h2>
             <p>${data.employeeName} has been created successfully!</p>
             <button 
