@@ -120,6 +120,14 @@ h4{
     display: none;
 }
 
+.equip-list li{
+    height: 36px;
+}
+
+.delete-equip{
+    float: right;
+}
+
 .inline{
     display: inline;
 }

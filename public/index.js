@@ -581,7 +581,7 @@ function generateEquipList(item, index){
         <li class="js-equip-list" item-index="${index}">
             ${item} 
             <button 
-            class="js-item-delete form-button" 
+            class="js-item-delete delete-equip form-button" 
             type="button">
                 Delete
             </button>
