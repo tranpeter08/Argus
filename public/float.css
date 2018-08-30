@@ -70,7 +70,6 @@ nav button{
   float:left;
 }
 
-
 .icon{
   position: absolute;
   display: block;
@@ -81,12 +80,14 @@ nav button{
 
 .container{
   display: block;
+  background: white;
+  width: 1000px;
 }
 
 .argus-icon{
   position: relative;
   height: 30px;
-  top: .5em;
+  top: .4em;
 }
 
 /* Non-mobile, grid */
@@ -144,8 +145,8 @@ nav button{
   }
 
   .argus-icon{
-    height: 50px;
+    height: 45px;
     position: relative;
-    top: 1em;
-}
+    top: .9em;
+  }
 }

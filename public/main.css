@@ -57,12 +57,16 @@ nav button:hover{
 }
 
 .home-button{
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
   }
 
 .nav-box button{
-    margin-right: 10px;
+    margin: 0 7px;
     letter-spacing: 1px;
+}
+
+.argus-icon{
+    margin-left: 20px;
 }
 
 span,
