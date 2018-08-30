@@ -7,7 +7,7 @@ deploy:
   app: argus
   on:
     repo: tranpeter08/argus
-    all_branches: true
+    branch: master
 services: mongoDB
 env:
 - JWT_SECRET=secret
