@@ -57,8 +57,37 @@ nav{
   position: static;
 }
 
-.nav button{
+nav button{
   height: 40px;
+}
+
+.nav-box{
+  display: none;
+}
+
+.nav-box-responsive{
+  display: block;
+  float:left;
+}
+
+.icon{
+  position: absolute;
+  display: block;
+  float: right;
+  top: 0;
+  right: .5em;
+}
+
+.container{
+  display: block;
+  background: white;
+  width: 1000px;
+}
+
+.argus-icon{
+  position: relative;
+  height: 30px;
+  top: .4em;
 }
 
 /* Non-mobile, grid */
@@ -96,8 +125,28 @@ nav{
     padding-top: 5em;
   }
 
-  .nav button{
+  nav button{
     height: 80px;
   }
 
+.nav-box{
+  float: right;
+  display: inline;
+}
+
+  .icon{
+    display: none;
+  }
+
+
+
+  .container{
+    display: inline;
+  }
+
+  .argus-icon{
+    height: 45px;
+    position: relative;
+    top: .9em;
+  }
 }
