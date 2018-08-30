@@ -20,6 +20,8 @@ button{
     font-family: 'Inconsolata', monospace;
 }
 
+
+
 nav{
     background: rgb(255, 255, 255);
     padding: 0;
@@ -36,7 +38,7 @@ button{
     border: none;
 }
 
-.nav button{
+nav button{
     background: none;
     border: none;
     position: relative;
@@ -46,8 +48,21 @@ button{
     transition: .2s;
 }
 
-.nav button:hover{
+nav button:hover{
     color: rgb(113, 187, 221);
+}
+
+.nav-box{
+    float: right;
+}
+
+.home-button{
+    letter-spacing: 1.5px;
+  }
+
+.nav-box button{
+    margin-right: 10px;
+    letter-spacing: 1px;
 }
 
 span,
@@ -77,7 +92,7 @@ li{
 }
 
 legend,
-.nav,
+nav button,
 h3.name{
     text-align: center;
     font-size: 28px;

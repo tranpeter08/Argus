@@ -55,8 +55,15 @@ function logOutButton(){
     })
 }
 
+function hamburgerIcon() {
+    $('.js-icon').on('click', ()=>{
+        $('.js-nav-box').toggleClass('nav-box-responsive');     
+    })
+}
+
 $(
     argusButton(),
     loginRegisterButton(),
-    logOutButton()
+    logOutButton(),
+    hamburgerIcon()
 )
