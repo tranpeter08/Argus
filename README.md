@@ -12,7 +12,7 @@ Access the live site [here]
 
 | <img alt ='Landing page' src='./screenshots/argus-landing.png' width='350'> | <img alt='Employee page' src='./screenshots/argus-employee.png' width='350'>|<img alt='Create page' src='./screenshots/argus-create.png' width='350'>|
 |:---:|:---:|:---:|
-| Login | View Employees | Create Employee |
+| Landing | View Employees | Create Employee |
 
 # API Documentation
 
