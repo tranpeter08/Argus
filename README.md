@@ -42,3 +42,4 @@ Authentication:
 Testing:
 1. Mocha
 2. Chai
+3. Travis CI
