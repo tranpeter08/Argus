@@ -10,7 +10,7 @@ Access the live site [here]
 
 # Screenshots
 
-| ![Landing Page](./screenshots/argus-landing.png "Landing Page") | ![Employee page](./screenshots/argus-employee.png "Employees Page") | ![Create page](./screenshots/argus-create.png "Create Employee page") |
+| <img alt ='Landing page' src='./screenshots/argus-landing.png' width='350'> | <img alt='Employee page' src='./screenshots/argus-employee.png' width='350'>|<img alt='Create page' src='./screenshots/argus-create.png' width='350'>|
 |:---:|:---:|:---:|
 | Login | View Employees | Create Employee |
 
