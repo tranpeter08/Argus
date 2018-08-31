@@ -91,7 +91,7 @@ nav button{
 }
 
 /* Non-mobile, grid */
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 760px) {
   /* 3 columns, 3/12 in % */
   .col-3 {
     width: 25%;
@@ -137,8 +137,6 @@ nav button{
   .icon{
     display: none;
   }
-
-
 
   .container{
     display: inline;

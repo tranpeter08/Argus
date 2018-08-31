@@ -20,13 +20,13 @@ const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 
 app.use(morgan('common'));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-app.use('/api/users',usersRouter);
-app.use('/api/auth', authRouter);
+app.use('/employees/users',usersRouter);
+app.use('/employees/auth', authRouter);
 
 app.use(function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');
@@ -38,15 +38,7 @@ app.use(function(req, res, next){
     next();
 });
 
-
 const jwtAuth = passport.authenticate('jwt', {session: false});
-
-//protected endpoint
-app.get('/api/protected', jwtAuth, (req, res)=>{
-    return res.json({
-        message: 'Success'
-    });
-});
 
 //GET request
 app.get('/employees', jwtAuth,(req, res)=>{
@@ -61,7 +53,7 @@ app.get('/employees', jwtAuth,(req, res)=>{
 });
 
 //GET request with ID
-app.get('/employees/:id',jwtAuth, (req,res)=>{
+app.get('/employees/:id', jwtAuth, (req,res)=>{
     Employees.findById(req.params.id)
     .then( employee => res.json(employee))
     .catch(err => {
@@ -116,7 +108,7 @@ app.post('/employees', jwtAuth,(req,res)=>{
 });
 
 //PUT
-app.put('/employees/:id',jwtAuth, (req, res)=>{
+app.put('/employees/:id', jwtAuth, (req, res)=>{
     if(req.params.id !== req.body.id){
         const message = `response body and parameter ID do not match`
         console.error(message);
@@ -131,7 +123,6 @@ app.put('/employees/:id',jwtAuth, (req, res)=>{
         }
     });
 
-    
     Employees.findByIdAndUpdate(
         req.params.id,{$set: updated},{new: true}
     )
@@ -142,7 +133,7 @@ app.put('/employees/:id',jwtAuth, (req, res)=>{
 })
 
 //DELETE 
-app.delete('/employees/:id',jwtAuth, (req,res)=>{
+app.delete('/employees/:id', jwtAuth, (req,res)=>{
     Employees.findByIdAndRemove(req.params.id)
     .then(()=>{
         console.log(`Deleted employee with ID: ${req.params.id}`)
@@ -153,7 +144,6 @@ app.delete('/employees/:id',jwtAuth, (req,res)=>{
 app.use('*', (req, res)=>{
     res.status(404).json({message: 'Not Found'});
 });
-
 
 let server;
 
@@ -175,7 +165,6 @@ function runServer(databaseURL, port=PORT){
     });
 }
 
-
 function closeServer(){
     return mongoose.disconnect().then(()=>{
         return new Promise((resolve, reject)=>{
@@ -189,7 +178,6 @@ function closeServer(){
         });
     });
 }
-
 
 if(require.main === module){
     runServer(DATABASE_URL)

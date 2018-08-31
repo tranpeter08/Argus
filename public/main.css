@@ -127,7 +127,7 @@ h4{
 
 .form-content,
 .login-form{
-    background: #f9f9f9;
+    background: #f9f9f9b0;
 }
 
 .form{
@@ -160,7 +160,7 @@ h4{
 }
 
 .card{
-    background: #f9f9f9;
+    background: #f9f9f9b0;
 }
 
 .content{
@@ -442,7 +442,7 @@ a:hover{
 
 .message-box{
     width:300px;
-    background: #f9f9f9;
+    background: #f9f9f9b0;
     padding: 1em;
     margin-left: auto;
     margin-right: auto;

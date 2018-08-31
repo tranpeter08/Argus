@@ -63,7 +63,7 @@ function loginButton(){
     const userData = {username, password};
 
     ajaxReq(
-      userData,'/api/auth/login','POST',handleJWT,handleErrorJWT
+      userData,'/employees/auth/login','POST',handleJWT,handleErrorJWT
     );
     
 
@@ -113,7 +113,7 @@ function registerSubmitButton(){
     const userData = {username, password};
 
     ajaxReq(
-      userData,'/api/users','POST',handleRegistered,registerError
+      userData,'/employees/users','POST',handleRegistered,registerError
     );
     
 
