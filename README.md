@@ -30,6 +30,7 @@ $ mongod
 ```bash
 $ node server.js
 ```
+6. In a browser, go to `http://localhost:8080/` to run Argus locally.
 
 # API Documentation
 
