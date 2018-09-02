@@ -14,6 +14,15 @@ Access the live site [here]
 |:---:|:---:|:---:|
 | Landing | View Employees | Create Employee |
 
+# Installation
+
+1. Clone or download to local repository.
+2. Install dependencies in command line:
+```bash
+
+$ npm install
+```
+
 # API Documentation
 
 See API documentation [here](https://documenter.getpostman.com/view/4490688/RWaC4DBx).
