@@ -17,11 +17,12 @@ Access the live site [here]
 # Installation
 
 1. Clone or download to local repository.
-2. Install dependencies in command line:
+2. Install dependencies in command line in root folder:
 ```bash
 
 $ npm install
 ```
+3. Install [mongoDB](https://docs.mongodb.com/manual/installation/)
 
 # API Documentation
 
