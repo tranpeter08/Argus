@@ -19,10 +19,17 @@ Access the live site [here]
 1. Clone or download to local repository.
 2. Install dependencies in command line in root folder:
 ```bash
-
 $ npm install
 ```
 3. Install [mongoDB](https://docs.mongodb.com/manual/installation/)
+4. In a separate command line window, start the mongo database.
+```bash
+$ mongod
+```
+5. In another command line window, start the server for Argus:
+```bash
+$ node server.js
+```
 
 # API Documentation
 
