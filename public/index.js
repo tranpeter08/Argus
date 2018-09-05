@@ -325,7 +325,6 @@ function renderPageNum(){
     }
 }
 
-
 function listEquip(equipment){
     return equipment.map((item)=>`<li>${item}</li>`);
  }
@@ -342,7 +341,7 @@ function handleDataList(anEmployee,index){
     } = anEmployee;
 
     return `
-        <li class="js-employee-list" employee-id="${id}">
+        <li class="js-employee-list flex-item" employee-id="${id}">
             <div class="card">
                 <div class= "content">
                     <h3 class="js-employee-name name">#${index+1} ${employeeName}</h3>
@@ -378,46 +377,39 @@ function handleDataList(anEmployee,index){
     `
 };
 
-function divColumns(data, index){
+function emptyFlexItems() {
+    let emptyItems = ""
+    for(let i=0;i<3;i++){
+        emptyItems+= '<div class="flex-item empty"></div>'
+    }
+    return emptyItems;
+}
 
-    const columns = [];
-    for(let n =3*index;n<(3+3*index);n++){
-        if(!data[n]){
-            columns.push(`
-                <div class="col-4"></div>
+function flexItems(data){
+    const items = [];
+    for(
+        let n= pageStorage.start*9; 
+        n< pageStorage.start*9 +9;
+        n++
+    ){
+        if(data[n]){
+            items.push(`
+                ${handleDataList(data[n],n)}
             `)
-        }else{
-            columns.push(`
-                <div class="col-4">${handleDataList(data[n],n)}</div>
-            `);
-        };
-    };
-    return columns;
-};
+        }
+    }
+    items.push(emptyFlexItems());
+    return items;
+}
 
-function divRows(data){
-
-    const rows = [];
-    
-    for(let i=3*pageStorage.start; i<3+3*pageStorage.start;i++){
-        rows.push(`
-            <div class="row">
-                ${divColumns(data,i).join('')}
-            </div>
-        `);
-    };
-    return rows;
-};
-
-//render data from GET request to HTML
+//  render data from GET request to HTML
 function renderHTML_GET(data){
-    
     $('.js-employees').html(`
         <div class="">
             <h2 class="employees">Employees</h2>
             
-            <ul class="employee-list">
-                ${divRows(data).join('')}
+            <ul class="employee-list flex-container">
+                ${flexItems(data).join('')}
             </ul>
         </div>
     `);
@@ -425,7 +417,7 @@ function renderHTML_GET(data){
 }
  
 function handleResGET(data){
-  
+    console.log(data);
     let total = data.length;
     let pages = Math.ceil(total/9);
     pageStorage.pages = pages;
@@ -512,7 +504,7 @@ function closeCreatedMessageButton(){
 
 //html string for showCreatedEmployee
 function renderCreatedEmployee(data){
-    
+    console.log('get data',data);
     $('.js-message-box').html(`
         <div class="message-box">
             <h2>Employee Created</h2>
@@ -635,7 +627,6 @@ function collectCerts(){
     const {certifications} = employeeStorage
     $('input[name=certs]:checked')
         .each(function(){certifications.push($(this).val())});
-    console.log('collect certs ran');
 }
 
 function collectEmployeeContact(){
@@ -643,7 +634,6 @@ function collectEmployeeContact(){
     let email = $('#email').val();
     employeeStorage.contact.phone = phone;
     employeeStorage.contact.email = email;
-    console.log(employeeStorage);
 }
 
 //collect employee name for storage
@@ -654,7 +644,6 @@ function collectEmployeeName(){
     employeeName.middleInit = $('#middle-initial').val();
     employeeName.lastName = $('#last-name').val();
 
-    console.log('collecting employee name');
 }
 
 //submit new employee
@@ -666,8 +655,6 @@ function createEmployeeSubmit(){
         collectEmployeeContact();
         collectCerts();
         collectNotes();
-
-        console.log('Create employee submit ran',employeeStorage);
 
         requestDataAPI(
             renderCreatedEmployee,'POST',null,employeeStorage
@@ -695,7 +682,6 @@ function renderSubmitButton(){
 //create a new employee
 function createEmployeeNavButton(){
     $('.js-create').on('click',()=>{
-        console.log('creat a new employee nav pressed');
         showElement('.js-form');
         renderSubmitButton();
         $('.js-legend').text('Create an Employee');

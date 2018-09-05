@@ -1,0 +1,14 @@
+.flex-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.flex-item{
+  min-width: 340px;
+  margin: 1em;
+}
+
+.empty{
+  margin-top: 0;
+}
