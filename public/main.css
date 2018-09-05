@@ -134,14 +134,18 @@ h4{
     list-style: circle;
 }
 
+.cert-legend{
+    font-size: 1.5em;
+    color: black;
+    text-shadow: none;
+    text-align: left;
+}
+
 .hidden,
 .js-form{
     display: none;
 }
 
-.equip-list li{
-    height: 36px;
-}
 
 .delete-equip{
     float: right;
@@ -182,7 +186,7 @@ h4{
     border: none;
     padding:10px;
     max-width: 700px;
-    margin: auto;
+    margin: 0 10px;
 }
 
 fieldset{
@@ -211,6 +215,11 @@ input{
 
 label{
     font-size: 16px
+}
+
+.equip-list ol{
+    padding: 0;
+    margin-left: 10px;
 }
 
 .page-box,
@@ -334,7 +343,7 @@ fieldset{
     padding: 0;
 }
 
-#js-employee-form legend{
+.main-legend{
     color: white;
     text-shadow: 2px 2px 1px black;
 }

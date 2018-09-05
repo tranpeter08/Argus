@@ -56,7 +56,7 @@ function verifyDeleteButtonNo(){
 
         requestDataAPI(handleResGET,'GET',null,);
         $('.js-message-box').empty();
-        
+
     });
 }
 
@@ -377,14 +377,6 @@ function handleDataList(anEmployee,index){
     `
 };
 
-function emptyFlexItems() {
-    let emptyItems = ""
-    for(let i=0;i<3;i++){
-        emptyItems+= '<div class="flex-item empty"></div>'
-    }
-    return emptyItems;
-}
-
 function flexItems(data){
     const items = [];
     for(
@@ -398,7 +390,6 @@ function flexItems(data){
             `)
         }
     }
-    items.push(emptyFlexItems());
     return items;
 }
 
@@ -417,7 +408,6 @@ function renderHTML_GET(data){
 }
  
 function handleResGET(data){
-    console.log(data);
     let total = data.length;
     let pages = Math.ceil(total/9);
     pageStorage.pages = pages;

@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A web app designed to keep track of employees for small inspection companies.">
     <title>Argus</title>
     <link rel="stylesheet" 
       href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
@@ -103,7 +103,7 @@
       <section class="js-form js-hide" aria-live="assertive">
         <form class="" id="js-employee-form" action="#" >
           <fieldset>
-            <legend class="js-legend"></legend>
+            <legend class="js-legend main-legend"></legend>
             <div class="form-content">
               <div class="row">
                 <div class="col-6">
@@ -182,55 +182,58 @@
                 </div>
               
                 <div class="col-6">
-                  <h2>Certifications</h2>
 
-                  <label for="CWI" class="certs">
-                    <input 
-                    type= "checkbox" 
-                    name="certs" 
-                    id="CWI" 
-                    value ="CWI">
-                    Certified Welding Inspector (A.W.S.)</label>
-                  
-                  <label for="UT" class="certs">
-                    <input 
-                    type= "checkbox" 
-                    name="certs" 
-                    id="UT" 
-                    value="UT">
-                    Ultrasonic Testing</label>
-                  
-                  <label for="MT" class="certs">
-                    <input 
-                    type= "checkbox" 
-                    name="certs" 
-                    id="MT" 
-                    value="MT">
-                    Magnatic Particle Testing</label>
-                  
-                  <label for="GPR" class="certs">
+      
+                  <fieldset>
+                    <legend class="cert-legend">Certifications</legend>
+                    <label for="CWI" class="certs">
                       <input 
                       type= "checkbox" 
                       name="certs" 
-                      id="GPR" 
-                      value="GPR">
-                      Ground Penetrating Radar</label>
-                  
-                  <label for="soils" class="certs">
+                      id="CWI" 
+                      value ="CWI">
+                      Certified Welding Inspector (A.W.S.)</label>
+                    
+                    <label for="UT" class="certs">
                       <input 
                       type= "checkbox" 
                       name="certs" 
-                      id="soils" 
-                      value="soils">
-                      Soils Inspector</label>
+                      id="UT" 
+                      value="UT">
+                      Ultrasonic Testing</label>
+                    
+                    <label for="MT" class="certs">
+                      <input 
+                      type= "checkbox" 
+                      name="certs" 
+                      id="MT" 
+                      value="MT">
+                      Magnatic Particle Testing</label>
+                    
+                    <label for="GPR" class="certs">
+                        <input 
+                        type= "checkbox" 
+                        name="certs" 
+                        id="GPR" 
+                        value="GPR">
+                        Ground Penetrating Radar</label>
+                    
+                    <label for="soils" class="certs">
+                        <input 
+                        type= "checkbox" 
+                        name="certs" 
+                        id="soils" 
+                        value="soils">
+                        Soils Inspector</label>
 
-                  <label for="concrete" class="certs">
-                      <input 
-                      type= "checkbox" 
-                      name="certs" 
-                      id="concrete" 
-                      value="concrete">
-                      Concrete Inspector</label>
+                    <label for="concrete" class="certs">
+                        <input 
+                        type= "checkbox" 
+                        name="certs" 
+                        id="concrete" 
+                        value="concrete">
+                        Concrete Inspector</label>
+                  </fieldset>
                 </div>
               </div>
 
@@ -239,6 +242,7 @@
                   <h2>Notes</h2>
 
                   <textarea 
+                    aria-label="textarea"
                     class="js-add-notes" 
                     name="" 
                     id="" cols="30" rows="10"></textarea>
