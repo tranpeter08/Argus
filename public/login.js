@@ -48,7 +48,6 @@ function storeToken(aToken){
 }
 
 function handleJWT(data){
-  console.log('handle JWT:',data);
   storeToken(data.authToken);
   handleLogin();
 }
@@ -89,7 +88,6 @@ function registerCloseButton(){
 }
 
 function handleRegistered(data){
-  console.log('create user:',data);
   clearRegLoginForms();
   $(".js-registration-message").html(`
     <div class="message-box"> 
