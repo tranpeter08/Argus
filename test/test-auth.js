@@ -37,12 +37,12 @@ describe('Auth endpoints', function(){
     return User.remove({})
   });
 
-  describe('/api/auth/login', function(){
+  describe('/employees/auth/login', function(){
 
     it('Should reject requests with no credentials', function(){
       return chai
         .request(app)
-        .post('/api/auth/login')
+        .post('/employees/auth/login')
         .then((res)=>
           expect(res).to.have.status(400)
         );
@@ -51,7 +51,7 @@ describe('Auth endpoints', function(){
     it('Should reject requests with incorrect usernames', function(){
       return chai
         .request(app)
-        .post('/api/auth/login')
+        .post('/employees/auth/login')
         .send({username: 'wrongUsername', password})
         .then((res)=>
           expect(res).to.have.status(401)
@@ -61,7 +61,7 @@ describe('Auth endpoints', function(){
     it('Should reject requests with incorrect passwords', function(){
       return chai
         .request(app)
-        .post('/api/auth/login')
+        .post('/employees/auth/login')
         .send({username, password: 'wrongPassword'})
         .then((res)=>
           expect(res).to.have.status(401)
@@ -71,7 +71,7 @@ describe('Auth endpoints', function(){
     it('Should return a valid auth token', function(){
       return chai
         .request(app)
-        .post('/api/auth/login')
+        .post('/employees/auth/login')
         .send({username, password})
         .then(res => {
           expect(res).to.have.status(200);
@@ -88,12 +88,12 @@ describe('Auth endpoints', function(){
     });
   });
 
-  describe('/api/auth/refresh', function(){
+  describe('/employees/auth/refresh', function(){
 
     it('Should reject requests with no credentials', function(){
       return chai
         .request(app)
-        .post('/api/auth/refresh')
+        .post('/employees/auth/refresh')
         .then((res)=>
           expect(res).to.have.status(401)
         );
@@ -111,7 +111,7 @@ describe('Auth endpoints', function(){
 
       return chai
         .request(app)
-        .post('/api/auth/refresh')
+        .post('/employees/auth/refresh')
         .set('Authorization', `Bearer ${token}`)
         .then((res)=>
           expect(res).to.have.status(401)
@@ -135,7 +135,7 @@ describe('Auth endpoints', function(){
 
       return chai
         .request(app)
-        .post('/api/auth/refresh')
+        .post('/employees/auth/refresh')
         .set('authorization', `Bearer ${token}`)
         .then((res)=>
           expect(res).to.have.status(401)
@@ -159,7 +159,7 @@ describe('Auth endpoints', function(){
 
       return chai
         .request(app)
-        .post('/api/auth/refresh')
+        .post('/employees/auth/refresh')
         .set('authorization', `Bearer ${token}`)
         .then(res =>{
           expect(res).to.have.status(200);
