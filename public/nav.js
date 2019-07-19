@@ -1,7 +1,6 @@
 function argusButton(){
     $(".js-home").on("click", ()=>{
-        console.log("going home");
-        if("id" in employeeStorage){
+        if ("id" in employeeStorage) {
             delete employeeStorage.id;
         }
 
@@ -11,15 +10,13 @@ function argusButton(){
 
         clearRegLoginForms();
 
-        //hide form, employee list, delete token
         hideElement(".js-hide");
         $(".js-empty").empty();
         $(".js-about").show();
 
-        //show login
         $("#js-login-form").show();
         $("#js-register-form").hide();
-    })
+    });
 }
 
 function loginRegisterButton(){
@@ -34,7 +31,6 @@ function loginRegisterButton(){
 
 function logOutButton(){
     $(".js-logout").on("click", ()=>{
-        console.log("going home");
         if("id" in employeeStorage){
             delete employeeStorage.id;
         }
@@ -43,8 +39,6 @@ function logOutButton(){
         clearEquipList();
         clearStorage();
 
-        //hide form, employee list, switch login/out buttons
-        //delete token
         hideElement(".js-hide");
         $(".js-empty").empty();
         $(".js-about").show();

@@ -1,5 +1,6 @@
-//ajax request
- function requestDataAPI(aFunction, method, anID, data,){
+'use strict';
+
+function requestDataAPI(aFunction, method, anID, data,){
 
     let getID = anID
    if(!anID){
@@ -40,7 +41,6 @@ function hideElement(selector){
     $(selector).hide();
 }
 
-//function after delete
 function handleDelete(){
     $('.js-verify-delete').html(`
         <p>Employee has been deleted</p>
@@ -49,7 +49,6 @@ function handleDelete(){
     requestDataAPI(handleResGET,'GET',null,);
 }
 
-//no button on verify message
 function verifyDeleteButtonNo(){
     $('.js-message-box')
     .on('click', '.js-verify-no', (event)=>{
@@ -60,7 +59,6 @@ function verifyDeleteButtonNo(){
     });
 }
 
-//yes button on verify message
 function verifyDeleteButtonYes(){
     $('.js-message-box')
     .on('click', '.js-verify-yes', ()=>{
@@ -73,7 +71,6 @@ function verifyDeleteButtonYes(){
     })
 }
 
-//message to verify delete
 function renderVerifyDelete(employee){
     $('.js-message-box').html(`
         <div class='message-box'>
@@ -84,7 +81,6 @@ function renderVerifyDelete(employee){
     `)
 }
 
-//button for deleting employee
 function employeeDeleteButton(){
     $('.js-employees')
     .on('click', '.js-delete-employee', function(event){
@@ -104,7 +100,6 @@ function employeeDeleteButton(){
     })
 }
 
-//close edit message
 function closeEditMsg(){
     $('.js-message-box').on('click','.js-close-edit-msg',()=>{
         
@@ -113,7 +108,6 @@ function closeEditMsg(){
     })
 }
 
-//show a message successful edit
 function successfulEditMsg(){
     $('.js-message-box').html(`
         <div class='message-box'>
@@ -123,7 +117,6 @@ function successfulEditMsg(){
     `)
 }
 
-//submit updated employee info
 function submitEditButton(){
     $('.js-button-box').on('click','.js-submit-edit',(event)=>{
         event.preventDefault();
@@ -151,18 +144,16 @@ function submitEditButton(){
     })
 }
 
-//render html for edit employee
 function selectEmployeeCerts(certs){
     certs.forEach(cert=>{
         $(`#${cert}`).prop('checked', true);
     })
 }
 
-//get data by id and fill form
 function fillEmployeeForm(data){
 
     const {
-        employeeName,contact, certifications, equipment, _id, notes
+        employeeName, contact, certifications, equipment, _id, notes
     } = data;
 
     $('.js-legend').text(`
@@ -195,7 +186,6 @@ function renderSubmitEditButton(){
     `)
 }
 
-//edit employee button
 function editEmployeeButton(){
     $('.js-employees')
     .on('click', '.js-edit-employee-button', function(event){
@@ -333,7 +323,6 @@ function listEquip(equipment){
      return certs.map((aCert)=>`<li>${aCert}</li>`);
  }
 
-//generate list from GET data
 function handleDataList(anEmployee,index){
 
     const {
@@ -379,11 +368,11 @@ function handleDataList(anEmployee,index){
 
 function flexItems(data){
     const items = [];
-    for(
+    for (
         let n= pageStorage.start*9; 
         n< pageStorage.start*9 +9;
         n++
-    ){
+    ) {
         if(data[n]){
             items.push(`
                 ${handleDataList(data[n],n)}
@@ -393,7 +382,6 @@ function flexItems(data){
     return items;
 }
 
-//  render data from GET request to HTML
 function renderHTML_GET(data){
     $('.js-employees').html(`
         <div class="">
@@ -424,7 +412,6 @@ function handleResGET(data){
     }
 }
 
- //view employees in database
 function viewEmployeesButton(){
     $('.js-view').on('click',()=>{
 
@@ -473,7 +460,6 @@ function clearAllInputs(){
 
 }
 
-//reset form
 function formResetButton(){
     $('.js-reset').on('click', ()=>{
 
@@ -483,7 +469,6 @@ function formResetButton(){
     })
 }
 
-//close created message
 function closeCreatedMessageButton(){
     $('.js-message-box').on('click', '.js-close-created-button',()=>{
         
@@ -492,7 +477,6 @@ function closeCreatedMessageButton(){
     })
 }
 
-//html string for showCreatedEmployee
 function renderCreatedEmployee(data){
     console.log('get data',data);
     $('.js-message-box').html(`
@@ -508,14 +492,11 @@ function renderCreatedEmployee(data){
     `)
 }
 
-//collect notes
 function collectNotes(){
     let inputNotes = $('.js-add-notes').val();
     employeeStorage.notes = inputNotes;
-    
 }
 
-//collect certificatin data
 function collectCerts(){
     const {certifications} = employeeStorage
     $('input[name=certs]:checked')
@@ -523,7 +504,6 @@ function collectCerts(){
     
 }
 
-//clear equipment list
 function clearEquipList(storage){
     $('.js-equip-list').empty();
 }
@@ -535,14 +515,11 @@ function clearEquipListButton(){
     })
 }
 
-//delete individual equipment items
 function deleteEquipItemButton(){
     $('.js-equip-list').on('click', '.js-item-delete', function(event){
 
         let itemIndex = $(this)
             .closest('.js-equip-list').attr('item-index');
-
-        console.log("deleting item at index:", itemIndex);
 
         employeeStorage.equipment.splice(itemIndex,1);
         renderAddEquipList(employeeStorage.equipment);
@@ -554,7 +531,6 @@ function deleteEquipItemButton(){
     });
 }
 
-//generate equipment list on form
 function generateEquipList(item, index){
     return `
         <li class="js-equip-list" item-index="${index}">
@@ -568,7 +544,6 @@ function generateEquipList(item, index){
     ` 
 }
 
-//html for equipment list
 function renderAddEquipList(equips){
     $('.js-equip-list').html(`
         <h3>Equipment List</h3>            
@@ -580,7 +555,6 @@ function renderAddEquipList(equips){
     `);
 }
 
-//collect equipment data
 function collectEquipment(){
     const {equipment} = employeeStorage;
     let equipName = $('#equipment-name').val();
@@ -596,23 +570,17 @@ function collectEquipment(){
     if(equipName !== ""){
         equipment.push(equipDesc);
 
-        console.log('collect equipment ran');
-
         $('.js-equip-clear').val('');
         renderAddEquipList(equipment);
     };
 }
 
-//add equipment and make list on html 
 function collectEquipmentButton(){
     $('.js-add-equip').on('click', ()=>{
-        console.log('collect equipment button pressed');
         collectEquipment();
-
     });
 }
 
-//collect certificatin data
 function collectCerts(){
     const {certifications} = employeeStorage
     $('input[name=certs]:checked')
@@ -626,7 +594,6 @@ function collectEmployeeContact(){
     employeeStorage.contact.email = email;
 }
 
-//collect employee name for storage
 function collectEmployeeName(){
     const {employeeName} = employeeStorage
 
@@ -636,7 +603,6 @@ function collectEmployeeName(){
 
 }
 
-//submit new employee
 function createEmployeeSubmit(){
     $('#js-employee-form').on('submit', (event)=>{
         event.preventDefault();
@@ -669,7 +635,6 @@ function renderSubmitButton(){
     `)
 }
 
-//create a new employee
 function createEmployeeNavButton(){
     $('.js-create').on('click',()=>{
         showElement('.js-form');
@@ -681,7 +646,7 @@ function createEmployeeNavButton(){
     })
 }
 
-function runThis(){
+function docReady(){
     viewEmployeesButton();
     nextButton();
     prevButton();
@@ -703,4 +668,4 @@ function runThis(){
     verifyDeleteButtonYes();
 }
 
-$(runThis);
+$(docReady);
