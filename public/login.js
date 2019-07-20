@@ -3,7 +3,7 @@
 function ajaxReq(data, url, method, callback, fail){
   const settings = {
     url: url,
-    data: JSON.stringify(data || ""),
+    data: JSON.stringify(data || ''),
     dataType: 'json',
     contentType: 'application/json',
     method: method
@@ -11,7 +11,7 @@ function ajaxReq(data, url, method, callback, fail){
 
   $.ajax(settings)
   .done(callback)
-  .fail(fail)
+  .fail(fail);
 }
 
 function goToLogin(){

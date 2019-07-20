@@ -50,12 +50,12 @@ function logOutButton(){
 }
 
 function hamburgerIcon() {
-    $('.js-icon').on('click', (event)=>{
-        $(event.currentTarget).attr('aria-expanded', (i, val)=>{
-            return val === 'true'? 'false' : 'true';
-        });
-        $('.js-nav-box').toggleClass('nav-box-responsive');     
-    })
+  $('.js-icon').on('click', event => {
+    $(event.currentTarget).attr('aria-expanded', (i, val) => {
+      return val === 'true' ? 'false' : 'true';
+    });
+    $('.js-nav-box').toggleClass('nav-box-responsive');     
+  });
 }
 
 $(
