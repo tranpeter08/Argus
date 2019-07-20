@@ -19,7 +19,7 @@ function argusButton(){
     });
 }
 
-function loginRegisterButton(){
+function loginRegisterButton() {
   $(".js-login-button").on("click", ()=>{
     $(".js-about").hide();
     clearRegLoginForms();

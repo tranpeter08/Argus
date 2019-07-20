@@ -1,6 +1,5 @@
 "use strict";
 
-require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
@@ -20,12 +19,12 @@ app.use(express.static('public'));
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-app.use(function(req, res, next){
+app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-  if(req.method === 'OPTIONS'){
-      return res.send(204);
+  if (req.method === 'OPTIONS') {
+    return res.send(204);
   }
   next();
 });
@@ -36,7 +35,7 @@ app.use('/employees/users',usersRouter);
 app.use('/employees/auth', authRouter);
 app.use('/employees', jwtAuth, employeesRouter);
 
-app.use('*', (req, res)=>{
+app.use('*', (req, res) => {
     res.status(404).json({message: 'Not Found'});
 });
 
@@ -59,7 +58,7 @@ function runServer(databaseURL, port=PORT) {
         resolve();
       })
       .on('error', err =>{
-        mongoose.disconnect()
+        mongoose.disconnect();
         reject(err);
       });
     });
@@ -72,7 +71,7 @@ function closeServer(){
       console.log('Closing server');
         server.close(err => {
           if (err) {
-              return reject(err);
+            return reject(err);
           }
           resolve();
         });
@@ -80,7 +79,7 @@ function closeServer(){
   });
 }
 
-if(require.main === module){
+if (require.main === module) {
   runServer(DATABASE_URL)
   .catch(err => console.error(err));
 }

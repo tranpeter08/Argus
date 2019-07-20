@@ -14,8 +14,7 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  },
-  
+  }
 });
 
 UserSchema.methods.serialize = function(){
