@@ -1,0 +1,88 @@
+.nav-main{
+  display: flex;
+  flex-flow: row wrap;
+  padding: 10px 20px;
+  background: rgb(255, 255, 255);
+}
+
+.nav-home-ctnr{
+  display: inline-block;
+}
+
+.nav-links a,
+.nav-home-btn{
+  color: black;
+}
+
+.nav-home-btn{
+  background: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  transition: .2s;
+  letter-spacing: 1px;
+}
+
+.argus-icon{
+  position: relative;
+  height: 30px;
+  top: .4em;
+}
+
+.nav-menu-btn:hover,
+.nav-links a:hover,
+.nav-home-btn:hover{
+  color: rgb(113, 187, 221);
+}
+
+.nav-menu-btn{
+  margin-left: auto;
+  border: none;
+  background: none;
+}
+
+.nav-links{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: absolute;
+  left: 0%;
+  top: 57px;
+  background-color: inherit;
+}
+
+.nav-links li{
+  padding: 0;
+  background-color: inherit;
+  border-top: 1px solid grey;
+}
+
+.nav-links a{
+  text-align: center;
+  display: block;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.collapse{
+  display: none;
+}
+
+/* media query for smaller screens */
+@media screen and (min-width: 540px) {
+  .nav-menu-btn{
+    display: none;
+  }
+
+  .nav-links{
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    position: static;
+    width: auto;
+  }
+
+  .nav-links li{
+    border: none;
+  }
+}

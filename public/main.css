@@ -1,14 +1,12 @@
 *{
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
 
 body{
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 20px;
-    background-image: url('./stainlessBG.jpg');
-    background-attachment: fixed;
+  margin: 0 0 20px;
+  background-image: url('./stainlessBG.jpg');
+  background-attachment: fixed;
 }
 
 legend,
@@ -17,89 +15,39 @@ h2,
 h3,
 h4,
 button{
-    font-family: 'Inconsolata', monospace;
+  font-family: 'Inconsolata', monospace;
 }
 
-
-
-nav{
-    background: rgb(255, 255, 255);
-    padding: 0;
-
-}
-
+a:hover,
 button:hover{
-    cursor: pointer;
-}
-
-button{
-    font-size: 20px;
-    padding: 5px 10px;
-    border: none;
-}
-
-nav button{
-    background: none;
-    border: none;
-    position: relative;
-    color: rgb(0, 0, 0);
-    text-shadow: 1px 1px 1px white;
-    text-align: center;
-    transition: .2s;
-}
-
-nav button:hover{
-    color: rgb(113, 187, 221);
-}
-
-.nav-box{
-    float: right;
-}
-
-.home-button{
-    letter-spacing: 1px;
-  }
-
-.nav-box button{
-    margin: 0 7px;
-    letter-spacing: 1px;
-}
-
-.argus-icon{
-    margin-left: 20px;
-}
-
-span,
-p, 
-li{
-    font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
 }
 
 .about-box{
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 15%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 15%;
 }
 
 .about-box h1{
-    color: white;
-    font-size: 2em;
-    text-shadow: 2px 2px 1px rgb(0, 0, 0);
+  color: white;
+  font-size: 2em;
+  text-shadow: 2px 2px 1px rgb(0, 0, 0);
 }
 
 .about-box p{
-    color: white;
-    font-size: 1.2em;
-    line-height: 2em;
-    text-shadow: 2px 2px 1px rgb(0, 0, 0);
-    letter-spacing: 1px;
+  color: white;
+  font-size: 1.2em;
+  line-height: 2em;
+  text-shadow: 2px 2px 1px rgb(0, 0, 0);
+  letter-spacing: 1px;
 }
 
 legend,
 nav button,
 h3.name{
-    text-align: center;
-    font-size: 28px;
+  text-align: center;
+  font-size: 28px;
 }
 
 h3.name{
@@ -175,7 +123,6 @@ h4{
     font-size: 25px;
     font-weight: bold;
 }
-
 
 .form-content{
     border: none;

@@ -2,27 +2,22 @@
 
 function requestDataAPI(aFunction, method, anID, data) {
   let url = '/employees';
-  
-  // let getID = anID
-  // if(!anID){
-  //     getID = '';
-  // }
-  console.log(anID === true);
 
   if (anId) {
     url = url + '/' + anID;
   }
 
-  const settings= {
+  const settings = {
     url,
     dataType: 'json',
     contentType: 'application/json',
     data: JSON.stringify(data),
     method: method,
     beforeSend: function (xhr) {
-      xhr.setRequestHeader('Authorization', 'Bearer ' + userStoreage.authToken)
+      xhr.setRequestHeader('Authorization', 'Bearer ' + userState.authToken)
     }
   }
+
   $.ajax(settings)
   .done(aFunction)
   .fail((err)=>{

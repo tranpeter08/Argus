@@ -1,3 +1,32 @@
+'use strict';
+
+const login = `<li><a class="js-nav-login">Login/Register</a></li>`
+const navLinksData = [
+  {className: 'js-nav-view', label: 'View Employees'},
+  {className: 'js-nav-add', label: 'Add Employee'},
+  {className: 'js-nav-logout', label: 'Logout'}
+];
+
+function renderNavLinks() {
+  $('.js-nav-links').html(handleLinks());
+}
+
+function handleLinks() {
+  if (userState.authToken) {
+    return secureLinks;
+  }
+
+  return login;
+}
+
+function secureLinks() {
+  return navLinksData.map(({className, label}) => `
+    <li>
+      <a class='${className}'>${label}</a>
+    </li>
+  `);
+}
+
 function argusButton(){
     $(".js-home").on("click", ()=>{
         if ("id" in employeeStorage) {
@@ -49,18 +78,19 @@ function logOutButton(){
     })
 }
 
-function hamburgerIcon() {
-  $('.js-icon').on('click', event => {
+function menuButton() {
+  $('.js-nav-menu-btn').on('click', event => {
     $(event.currentTarget).attr('aria-expanded', (i, val) => {
       return val === 'true' ? 'false' : 'true';
     });
-    $('.js-nav-box').toggleClass('nav-box-responsive');     
+    $('.js-nav-links').toggleClass('collapse');     
   });
 }
 
 $(
-    argusButton(),
-    loginRegisterButton(),
-    logOutButton(),
-    hamburgerIcon()
+  renderNavLinks(),
+  argusButton(),
+  loginRegisterButton(),
+  logOutButton(),
+  menuButton()
 )
