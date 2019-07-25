@@ -31,12 +31,13 @@ function registerUser() {
     let password = $("#password").val();
 
     const userData = {username, password};
+    userState = {userData};
 
     ajaxReq(
-      '/employees/users', 
-      'POST', 
-      userData, 
-      registerSuccess, 
+      '/employees/users',
+      'POST',
+      userData,
+      registerSuccess,
       registerError
     );
   });
@@ -50,7 +51,7 @@ function registerMsg(username) {
   return `
     <section>
       <div class="register-msg-ctnr"> 
-        <p>User: ${username}</p>
+        <p>User "${username}"</p>
         <p>Created successfully!</p>
         <button class="js-reg-msg-close reg-msg-close">Close</button>
       </div>
@@ -58,19 +59,17 @@ function registerMsg(username) {
   `;
 }
 
-function closeRegisterMsg(){
+function closeRegisterMsg() {
   $("#root").on("click", ".js-reg-msg-close", () => {
-    console.log('ysy')
-    // render employees
+    loginUserReq(userState.userData);
   });
+
+  userState = '';
 }
 
+function registerError(err) {
+  const {message, location} = err.responseJSON;
 
-
-
-
-function registerError(err){
-  const{message, location} = err.responseJSON
   $(".js-reg-err").html(`
     <p class="registration-error">* ${location} ${message}</p>
   `);

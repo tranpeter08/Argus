@@ -13,18 +13,19 @@ const employeeDefaults = {
   notes: ''
 }
 
-let employeeState = {...employeeDefaults}
+let employeeState = {...employeeDefaults};
 
-const pageStorage = {
+let pageStorage = {
   start: 0,
   pages: 1
-}
+};
 
-const userState = {
-  authToken : ''
-}
+let userState = {
+  
+};
 
-const authState = {
+let authState = {
   loading: false,
-  authToken: ''
-}
+  authToken: '',
+  username: ''
+};

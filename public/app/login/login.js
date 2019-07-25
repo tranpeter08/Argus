@@ -39,14 +39,26 @@ function loginButton() {
 
     authState.loading = true;
 
-    ajaxReq(
-      '/employees/auth/login',
-      'POST', 
-      data, 
-      loginSuccess,
-      loginError
-    );
+    // ajaxReq(
+    //   '/employees/auth/login',
+    //   'POST', 
+    //   data, 
+    //   loginSuccess,
+    //   loginError
+    // );
+
+    loginUserReq(data);
   });
+}
+
+function loginUserReq(data) {
+  ajaxReq(
+    '/employees/auth/login',
+    'POST', 
+    data, 
+    loginSuccess,
+    loginError
+  );
 }
 
 function loginSuccess({authToken}) {
