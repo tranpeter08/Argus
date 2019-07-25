@@ -48,11 +48,13 @@ function registerSuccess(data) {
 
 function registerMsg(username) {
   return `
-    <div class="register-msg-ctnr"> 
-      <p>User: ${username}</p>
-      <p>Created successfully!</p>
-      <button class="js-reg-msg-close reg-msg-close">Close</button>
-    </div>
+    <section>
+      <div class="register-msg-ctnr"> 
+        <p>User: ${username}</p>
+        <p>Created successfully!</p>
+        <button class="js-reg-msg-close reg-msg-close">Close</button>
+      </div>
+    </section>
   `;
 }
 
