@@ -1,0 +1,45 @@
+.reg-msg-close,
+.register-btn,
+.login-btn{
+  font-size: 20px;
+  padding: 5px 10px;
+  border: none;
+}
+
+.login-inputs input{
+  width: 100%;
+}
+
+.login-inputs label{
+  text-align: left;
+}
+
+.login-form input{
+  font-size: 15px;
+}
+
+.register-form fieldset,
+.login-form fieldset{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 3%;
+}
+
+.register-form,
+.login-form{
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3em;
+}
+
+.registration-error,
+.login-error{
+  font-size: 14px;
+  color: red;
+  margin: 5px 0;
+}
+
+.login-register{
+  text-decoration: underline;
+}

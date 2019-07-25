@@ -1,0 +1,23 @@
+.landing-about{
+  display: flex;
+  flex-flow: column;
+}
+
+.about-ctnr{
+  margin: auto;
+  max-width: 720px;
+  color: white;
+  text-shadow: 1px 1px 3px rgb(0, 0, 0);
+  padding: 0 20px;
+}
+
+.about-ctnr h1{
+  font-size: 28px;
+}
+
+.about-ctnr p{
+  line-height: 1.6;
+  letter-spacing: 1px;
+  font-size: 18px;
+  word-spacing: 1px;
+}

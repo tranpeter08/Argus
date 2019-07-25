@@ -13,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href="./app/navigation/nav-main.css" rel="stylesheet" type="text/css" />
+    <link href="./app/landing/landing.css" rel="stylesheet" type="text/css" />
+    <link href="./app/login/login.css" rel="stylesheet" type="text/css" />
+    <link href="./app/register/register.css" rel="stylesheet" type="text/css" />
     <link href="float.css" rel="stylesheet" type="text/css" />
     <link href="flex.css" rel="stylesheet" type="text/css" />
     <link rel="icon" 
@@ -31,65 +34,20 @@
       <nav>
     </header>
     <main role="main">
-      <div id='root'></div>
-      <section class="js-registration js-hide registration hidden" role="region" aria-live="assertive">
-        <div class="js-registration-message registration-message"></div>
-        <div class="js-registration-forms row">
-          <div class="col-12">
-            <form class="login-form" action="" id="js-login-form">
-              <fieldset>
-                <legend>Login</legend>
-                <div class="login-inputs">
-                  <label for="username-login">Username</label><br>
-                  <input type="text" id="username-login"><br>
-                  <label for="password-login">Password</label><br>
-                  <input type="password" id="password-login">
-                  <div class="js-login-err js-reg-clear reg-msg"></div>
-                </div>
-                <div class="reg-button-container">
-                  <button class="" type="submit">Login</button><br>
-                  <p >Or register <a class="js-go-register go-register" href="#">here</a></p>
-                </div>
-              </fieldset>
-            </form>
-          </div>  
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <form class="login-form hidden" action="" id="js-register-form">
-              <fieldset>
-                <legend>Register</legend>
-                <div class="login-inputs">
-                  <label for="username">Create a Username</label><br>
-                  <span>(8-20 characters)</span><br>
-                  <input type="text" id="username" ><br>
-                  <label for="password">Create a Password</label><br>
-                  <span>(min. 10 characters)</span><br>
-                  <input type="password" id="password" ><br>
-                </div>
-                <div class="js-reg-err js-reg-clear reg-msg"></div>
-                <div class="reg-button-container">
-                  <button type="submit">Register</button>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </section>
-      <section class="js-about about row" role="region" aria-live="assertive">
-        <div class="col-12">
-          <div class="about-box">
+      <div id='root' aria-live="polite">
+        <section class="landing-about" role="region">
+          <div class="about-ctnr">
             <h1>About</h1>
             <p> 
               Argus is a web application geared towards small inspection 
-              companies in the construciton industry specializing in structural
+              companies in the construction industry specializing in structural
               steel, concrete, soils, and Non-destructive Testing.  
               Easily create, view, and edit employee information, equipment and 
               certifications.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
       <section class="js-form js-hide" aria-live="assertive">
         <form class="" id="js-employee-form" action="#" >
           <fieldset>
@@ -285,7 +243,10 @@
     <script src="store.js"></script>
     <script src="index.js"></script>
     <script src="./app/navigation/nav.js"></script>
-    <script src="login.js"></script>
-    
+    <script src="./app/landing/landing.js"></script>
+    <script src="./app/login/login.js"></script>
+    <script src="./app/employees/employees.js"></script>
+    <script src="./app/register/register.js"></script>
+
   </body>
 </html>

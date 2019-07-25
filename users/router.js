@@ -88,9 +88,9 @@ router.post('/', (req, res) => {
     .then(count => {
       if (count > 0) {
         return Promise.reject({
-          code: 422,
+          code: 400,
           reason: 'ValidationError',
-          message: 'Username already taken',
+          message: `"${username}" already taken`,
           location: 'username'
         });
       }

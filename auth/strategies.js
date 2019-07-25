@@ -13,7 +13,8 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
       if (!user) {
         return Promise.reject({
           reason: 'LoginError',
-          message: 'Incorrect username or password'
+          message: 'Incorrect username or password',
+          code: 401
         });
       }
       return user.validatePassword(password);
@@ -22,13 +23,14 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
       if (!isValid) {
         return Promise.reject({
           reason: 'LoginError',
-          message:'Incorrect username or password'
+          message:'Incorrect username or password',
+          code: 401
         });
       }
       return callback(null, user);
     })
-    .catch(err=>{
-      if(err.reason === 'LoginError'){
+    .catch(err => {
+      if (err.reason === 'LoginError') {
         return callback(null, false, err);
       }
       return callback(err, false);

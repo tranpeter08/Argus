@@ -48,7 +48,7 @@ const options = {
 
 function runServer(databaseURL, port=PORT) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(databaseURL, options,err =>{
+    mongoose.connect(databaseURL, options,err => {
       if (err) {
         return reject(err);
       }
@@ -65,23 +65,23 @@ function runServer(databaseURL, port=PORT) {
   });
 }
 
-function closeServer(){
+function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
       console.log('Closing server');
-        server.close(err => {
-          if (err) {
-            return reject(err);
-          }
-          resolve();
-        });
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
     });
   });
 }
 
 if (require.main === module) {
   runServer(DATABASE_URL)
-  .catch(err => console.error(err));
+    .catch(err => console.error(err));
 }
 
 module.exports = {app, runServer, closeServer};

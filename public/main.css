@@ -21,27 +21,7 @@ button{
 a:hover,
 button:hover{
   cursor: pointer;
-}
-
-.about-box{
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 15%;
-}
-
-.about-box h1{
-  color: white;
-  font-size: 2em;
-  text-shadow: 2px 2px 1px rgb(0, 0, 0);
-}
-
-.about-box p{
-  color: white;
-  font-size: 1.2em;
-  line-height: 2em;
-  text-shadow: 2px 2px 1px rgb(0, 0, 0);
-  letter-spacing: 1px;
-}
+} 
 
 legend,
 nav button,
@@ -67,15 +47,21 @@ h4{
     margin-bottom: 18px;
 }
 
+.error{
+  color: red;
+}
+
 .employee-list{
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
+.register-msg-ctnr,
 .form-content,
+.register-form,
 .login-form{
-    background: #f9f9f9b0;
+  background: #f9f9f9b0;
 }
 
 .form{
@@ -101,12 +87,12 @@ h4{
 .reg-msg-box,
 .login-form,
 .card{
-    border: none;
-    padding: 15px;
+  border: none;
+  padding: 15px;
 }
 
 .card{
-    background: #f9f9f9b0;
+  background: #f9f9f9b0;
 }
 
 .content{
@@ -290,22 +276,24 @@ fieldset{
     text-shadow: 2px 2px 1px black;
 }
 
+.register-btn,
 .reg-msg-close,
 .login-form button,
 .form-button{
-    background: rgb(0, 0, 0);
-    color: #F7F9FB;
-    text-shadow: 1px 1px 1px black;
-    transition: 0.3s;
+  background: rgb(0, 0, 0);
+  color: #F7F9FB;
+  text-shadow: 1px 1px 1px black;
+  transition: 0.3s;
 }
 
+.register-btn:hover,
 .verify:hover,
 .close-created:hover,
 .close-edit:hover,
 .employee-button:hover,
 .login-form button:hover,
 .form-button:hover{
-    background: rgb(113, 187, 221);
+  background: rgb(113, 187, 221);
 }
 
 .submit-edit,
@@ -331,54 +319,10 @@ button.create:active{
     text-align: center;
 }
 
-.login-inputs input{
-    width: 100%;
-}
-
-.login-inputs label{
-    text-align: left;
-}
-
-.login-form input{
-    font-size: 15px;
-}
-
-.login-form fieldset{
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 3%;
-}
-
-.reg-button-container{
-    text-align: center;
-    margin-top: 10px;
-}
-
-.reg-err{
-    color: red;
-}
-
-
-.registration-message{
-    text-align: center;
-}
-
 .page-number span{
     font-size: 1em;
     color: #ffffff;
     text-shadow: 1px 1px 1px black;
-}
-
-.login-form{
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3em;
-}
-
-.login-form span{
-    font-size: .8em;
-    color: #687864;
 }
 
 a{

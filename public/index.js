@@ -1,5 +1,27 @@
 'use strict';
 
+console.log('location', location);
+
+function ajaxReq(url, method, data, handleSuccess, handleError, isPublic) {
+  const settings = {
+    url,
+    data: JSON.stringify(data || ''),
+    dataType: 'json',
+    contentType: 'application/json',
+    method
+  }
+
+  if (!isPublic) {
+    settings.headers = {
+      'Authorization': `Bearer ${authState.authToken}`
+    }
+  }
+
+  $.ajax(settings)
+  .done(handleSuccess)
+  .fail(handleError);
+}
+
 function requestDataAPI(aFunction, method, anID, data) {
   let url = '/employees';
 
@@ -26,13 +48,9 @@ function requestDataAPI(aFunction, method, anID, data) {
 }
 
 function resetStorage(){
-  if ('id' in employeeStorage) {
-    delete employeeStorage.id;
-  }
-
   clearAllInputs();
   clearEquipList();
-  clearStorage();
+  resetState();
 }
 
 function showElement(selector) {
@@ -61,10 +79,10 @@ function verifyDeleteButtonNo() {
 function verifyDeleteButtonYes() {
   $('.js-message-box').on('click', '.js-verify-yes', () => {
 
-    const anID = employeeStorage.id;
+    const anID = employeeState.id;
     requestDataAPI(handleDelete,'DELETE',anID);
 
-    delete employeeStorage.id;
+    delete employeeState.id;
     $('.js-message-box').empty();
   });
 }
@@ -85,7 +103,7 @@ function employeeDeleteButton() {
       .closest('.js-employee-list')
       .attr('employee-id');
 
-    employeeStorage.id = employeeID;
+    employeeState.id = employeeID;
 
     const selectedEmployee =  $(this)
       .closest('.js-employee-list')
@@ -120,21 +138,21 @@ function submitEditButton() {
     let firstName = $('#first-name').val();
     let lastName = $('#first-name').val();
 
-    const employeeID = employeeStorage.id
+    const employeeID = employeeState.id
 
     collectEmployeeName();
     collectEmployeeContact();
     collectCerts();
     collectNotes();
     requestDataAPI(
-      successfulEditMsg, 'PUT', employeeID, employeeStorage
+      successfulEditMsg, 'PUT', employeeID, employeeState
     );
 
-    delete employeeStorage.id;
+    delete employeeState.id;
 
     clearAllInputs();
     clearEquipList();
-    clearStorage();
+    resetState();
 
     $('.js-button-box').empty();
     hideElement('.js-form');
@@ -161,8 +179,8 @@ function fillEmployeeForm(data) {
       Editing '${firstName} ${middleInit} ${lastName}'
   `);
 
-  employeeStorage.equipment = equipment;
-  employeeStorage.id = _id;
+  employeeState.equipment = equipment;
+  employeeState.id = _id;
 
   $('#first-name').val(firstName);
   $('#middle-initial').val(middleInit);
@@ -422,26 +440,18 @@ function viewEmployeesButton() {
   });
 }
 
-function clearStorage() {
-
-    employeeStorage.employeeName.firstName = '';
-    employeeStorage.employeeName.lastName = '';
-    employeeStorage.employeeName.middleInit = '';
-    employeeStorage.certifications = [];
-    employeeStorage.equipment = [];
-    employeeStorage.notes = '';
-    employeeStorage.contact.phone = '';
-    employeeStorage.contact.email = '';
+function resetState() {
+  employeeState = {...employeeDefaults};
 }
 
 function cancelFormButton() {
   $('.js-cancel-form').on('click', () => {
 
-    delete employeeStorage.id;
+    delete employeeState.id;
 
     clearAllInputs();
     clearEquipList();
-    clearStorage();
+    resetState();
 
     requestDataAPI(handleResGET, 'GET', null, null);
 
@@ -460,7 +470,7 @@ function formResetButton() {
   $('.js-reset').on('click', () => {
     clearAllInputs();
     clearEquipList();
-    clearStorage();
+    resetState();
   });
 }
 
@@ -488,13 +498,13 @@ function renderCreatedEmployee(data) {
 }
 
 function collectNotes() {
-  employeeStorage.notes = $('.js-add-notes').val();
+  employeeState.notes = $('.js-add-notes').val();
 }
 
 function collectCerts() {
   $('input[name=certs]:checked')
     .each(function() {
-      employeeStorage.certifications.push($(this).val());
+      employeeState.certifications.push($(this).val());
     });
 }
 
@@ -505,7 +515,7 @@ function clearEquipList(storage) {
 function clearEquipListButton() {
   $('.js-list-clear').on('click', () => {
     clearEquipList();
-    employeeStorage.equipment = [];
+    employeeState.equipment = [];
   });
 }
 
@@ -515,10 +525,10 @@ function deleteEquipItemButton() {
       .closest('.js-equip-list')
       .attr('item-index');
 
-    employeeStorage.equipment.splice(itemIndex, 1);
-    renderAddEquipList(employeeStorage.equipment);
+    employeeState.equipment.splice(itemIndex, 1);
+    renderAddEquipList(employeeState.equipment);
 
-    if (employeeStorage.equipment.length === 0) {
+    if (employeeState.equipment.length === 0) {
       clearEquipList();
     }
   });
@@ -561,7 +571,7 @@ function collectEquipment() {
   equipDesc = `${equipName} (${equipNumber})`;
 
   if (equipName) {
-    employeeStorage.equipment.push(equipDesc);
+    employeeState.equipment.push(equipDesc);
 
     $('.js-equip-clear').val('');
     renderAddEquipList(equipment);
@@ -576,14 +586,14 @@ function collectEquipmentButton() {
 
 function collectCerts() {
   $('input[name=certs]:checked').each(function() {
-    employeeStorage.certifications.push($(this).val());
+    employeeState.certifications.push($(this).val());
   });
 }
 
 function collectEmployeeContact() {
   const phone = $('#phone').val();
   const email = $('#email').val();
-  employeeStorage.contact = {phone, email};
+  employeeState.contact = {phone, email};
 }
 
 function collectEmployeeName() {
@@ -591,7 +601,7 @@ function collectEmployeeName() {
   const middleInit = $('#middle-initial').val();
   const lastName = $('#last-name').val();
 
-  employeeStorage.employeeName = {firstName, middleInit, lastName};
+  employeeState.employeeName = {firstName, middleInit, lastName};
 }
 
 function createEmployeeSubmit() {
@@ -604,12 +614,12 @@ function createEmployeeSubmit() {
     collectNotes();
 
     requestDataAPI(
-      renderCreatedEmployee, 'POST', null, employeeStorage
+      renderCreatedEmployee, 'POST', null, employeeState
     );
 
     clearAllInputs();
     clearEquipList();
-    clearStorage();
+    resetState();
 
     $('.js-button-box').empty();
     

@@ -1,4 +1,4 @@
-const employeeStorage = {
+const employeeDefaults = {
   employeeName: {
     firstName: '',
     middleInit: '',
@@ -13,20 +13,7 @@ const employeeStorage = {
   notes: ''
 }
 
-const employeeStoreDefaults = {
-  employeeName: {
-    firstName: '',
-    middleInit: '',
-    lastName: ''
-  },
-  contact: {
-    phone: '',
-    email: ''
-  },
-  certifications: [], 
-  equipment: [],
-  notes: ''
-}
+let employeeState = {...employeeDefaults}
 
 const pageStorage = {
   start: 0,
@@ -35,4 +22,9 @@ const pageStorage = {
 
 const userState = {
   authToken : ''
+}
+
+const authState = {
+  loading: false,
+  authToken: ''
 }

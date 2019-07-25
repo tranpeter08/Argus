@@ -1,6 +1,6 @@
 'use strict';
 
-const login = `<li><a class="js-nav-login">Login/Register</a></li>`
+const loginLink = `<li><a class="js-nav-login">Login/Register</a></li>`
 const navLinksData = [
   {className: 'js-nav-view', label: 'View Employees'},
   {className: 'js-nav-add', label: 'Add Employee'},
@@ -12,11 +12,11 @@ function renderNavLinks() {
 }
 
 function handleLinks() {
-  if (userState.authToken) {
+  if (authState.authToken) {
     return secureLinks;
   }
 
-  return login;
+  return loginLink;
 }
 
 function secureLinks() {
@@ -27,41 +27,35 @@ function secureLinks() {
   `);
 }
 
-function argusButton(){
-    $(".js-home").on("click", ()=>{
-        if ("id" in employeeStorage) {
-            delete employeeStorage.id;
-        }
+function collapseMenu() {
+  const isCollapse = $('.js-nav-links').hasClass('collapse');
 
-        clearAllInputs();
-        clearEquipList();
-        clearStorage();
+  if (isCollapse) {
+    return;
+  }
 
-        clearRegLoginForms();
-
-        hideElement(".js-hide");
-        $(".js-empty").empty();
-        $(".js-about").show();
-
-        $("#js-login-form").show();
-        $("#js-register-form").hide();
-    });
+  $('.js-nav-links').addClass('collapse');
 }
 
-function loginRegisterButton() {
-  $(".js-login-button").on("click", ()=>{
-    $(".js-about").hide();
-    clearRegLoginForms();
-    $('.js-registration').show();
-    $("#js-login-form").show();
-    $("#js-register-form").hide();
-  })
+function homeButton() {
+  $('.js-nav-home-btn').on('click', () => {
+    resetState();
+    renderLanding();
+    collapseMenu();
+  });
+}
+
+function loginButton() {
+  $('.js-nav-login').on('click', () => {
+    renderLogin();
+    collapseMenu();
+  });
 }
 
 function logOutButton(){
     $(".js-logout").on("click", ()=>{
-        if("id" in employeeStorage){
-            delete employeeStorage.id;
+        if("id" in employeeState){
+            delete employeeState.id;
         }
 
         clearAllInputs();
@@ -83,14 +77,29 @@ function menuButton() {
     $(event.currentTarget).attr('aria-expanded', (i, val) => {
       return val === 'true' ? 'false' : 'true';
     });
+
     $('.js-nav-links').toggleClass('collapse');     
+  });
+}
+
+function clickOut() {
+  $(document).on('click', event => {
+    const node = $(event.target);
+    const navLinks = node.closest('.js-nav-links')[0];
+    const navMenuBtn = node.closest('.js-nav-menu-btn')[0];
+    const navHome = node.closest('.js-nav-home-btn')[0];
+
+    if (!(navLinks || navMenuBtn || navHome)) {
+      collapseMenu();
+    }
   });
 }
 
 $(
   renderNavLinks(),
-  argusButton(),
-  loginRegisterButton(),
+  homeButton(),
+  loginButton(),
   logOutButton(),
-  menuButton()
+  menuButton(),
+  clickOut()
 )
