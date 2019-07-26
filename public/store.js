@@ -23,7 +23,7 @@ const employeeFormDefaults = {
   notes: ''
 }
 
-let employeeFormState = {...employeeDefaults};
+let employeeFormState = {...employeeFormDefaults};
 
 let pageStorage = {
   start: 0,

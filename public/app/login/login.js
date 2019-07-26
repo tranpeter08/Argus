@@ -37,21 +37,12 @@ function loginButton() {
     const password = $('#login-password').val();
     const data = {username, password};
 
-    authState.loading = true;
-
-    // ajaxReq(
-    //   '/employees/auth/login',
-    //   'POST', 
-    //   data, 
-    //   loginSuccess,
-    //   loginError
-    // );
-
     loginUserReq(data);
   });
 }
 
 function loginUserReq(data) {
+  authState.loading = true;
   ajaxReq(
     '/employees/auth/login',
     'POST', 
@@ -67,7 +58,7 @@ function loginSuccess({authToken}) {
 
   storeToken(authToken);
   renderNavLinks();
-  renderEmployees();
+  getEmployees();
 }
 
 function storeToken(token) {

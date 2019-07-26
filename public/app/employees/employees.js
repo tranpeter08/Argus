@@ -21,8 +21,8 @@ function renderEmployees() {
   $('#root').html(`
     <section>
       <h2>Employees</h2>
-      <ul class='employee-list'>
-        ${genEmployees}
+      <ul class='employee-list flex-container'>
+        ${genEmployees()}
       </ul>
     </section>
   `);
@@ -33,7 +33,7 @@ function genEmployees() {
   const items = [];
   for (let n = pageStorage.start * 9; n < pageStorage.start * 9 + 9; n++) {
     if (employees[n]) {
-      items.push(`${handleDataList(data[n], n)}`);
+      items.push(`${handleDataList(employees[n], n)}`);
     }
   }
 
