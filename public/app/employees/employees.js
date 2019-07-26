@@ -1,6 +1,6 @@
 function getEmployees() {
   ajaxReq(
-    '/employees', 
+    '/employees',
     'GET', 
     null,
     employeeSuccess,
@@ -10,25 +10,26 @@ function getEmployees() {
 
 function employeeSuccess(data) {
   storeEmployees(data);
-  renderEmployees();
+  renderEmployeesSect();
 }
 
 function storeEmployees(employees) {
   employeesState = {employees};
 }
 
-function renderEmployees() {
+function renderEmployeesSect() {
   $('#root').html(`
     <section>
       <h2>Employees</h2>
-      <ul class='employee-list flex-container'>
-        ${listEmployees()}
+      <ul class='js-employee-list-ctnr employee-list flex-container'>
+        ${employeesList()}
       </ul>
+      <div class='pagination'></div>
     </section>
   `);
 }
 
-function listEmployees() {
+function employeesList() {
   const {employees} = employeesState;
   const items = [];
   for (let n = pageStorage.start * 9; n < pageStorage.start * 9 + 9; n++) {
@@ -95,18 +96,11 @@ function listItems(items = []) {
   return items.map(item => `<li>${item}</li>`).join('');
 }
 
-function listEquip(equipment) {
-  return equipment.map(item => `<li>${item}</li>`);
- }
- 
-function listCerts(certs) {
-  return certs.map(cert => `<li>${cert}</li>`);
+function renderEmployees() {
+  $('.employee-list').html(employeesList());
 }
 
-function viewEmployees() {
-
-}
-
-function employeeError(error) {
-
+function employeeError({responseJSON}) {
+  const errMsg = `<p>${responseJSON.message}</p>`;
+  $('#root').find('.js-employee-list-ctnr').html(errMsg);
 }
