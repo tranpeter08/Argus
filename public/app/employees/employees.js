@@ -22,22 +22,22 @@ function renderEmployees() {
     <section>
       <h2>Employees</h2>
       <ul class='employee-list flex-container'>
-        ${genEmployees()}
+        ${listEmployees()}
       </ul>
     </section>
   `);
 }
 
-function genEmployees() {
+function listEmployees() {
   const {employees} = employeesState;
   const items = [];
   for (let n = pageStorage.start * 9; n < pageStorage.start * 9 + 9; n++) {
     if (employees[n]) {
-      items.push(`${handleDataList(employees[n], n)}`);
+      items.push(`${employeeCard(employees[n], n)}`);
     }
   }
 
-  return items;
+  return items.join('');
 }
 
 function employeeCard(
@@ -63,11 +63,11 @@ function employeeCard(
           <p>E-mail: <a href="mailto:${email}">${email}</a></p>  
           <h4>Certifications:</h4>
           <ul class="form">
-              ${listCerts(certifications).join('')}
+              ${listItems(certifications)}
           </ul>
           <h4>Equipment:</h4>
           <ul class="equip-list form">
-              ${listEquip(equipment).join('')}
+              ${listItems(equipment)}
           </ul>
           <h4>Notes:</h4>
           <p>${notes}</p>
@@ -89,6 +89,10 @@ function employeeCard(
       </div>
     </li>        
   `
+}
+
+function listItems(items = []) {
+  return items.map(item => `<li>${item}</li>`).join('');
 }
 
 function listEquip(equipment) {
