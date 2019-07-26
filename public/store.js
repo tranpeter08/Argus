@@ -1,4 +1,14 @@
-const employeeDefaults = {
+let authState = {
+  loading: false,
+  authToken: '',
+  username: ''
+};
+
+let registerState = {userData: ''};
+
+let employeesState = {employees: ''};
+
+const employeeFormDefaults = {
   employeeName: {
     firstName: '',
     middleInit: '',
@@ -13,19 +23,9 @@ const employeeDefaults = {
   notes: ''
 }
 
-let employeeState = {...employeeDefaults};
+let employeeFormState = {...employeeDefaults};
 
 let pageStorage = {
   start: 0,
   pages: 1
-};
-
-let userState = {
-  
-};
-
-let authState = {
-  loading: false,
-  authToken: '',
-  username: ''
 };

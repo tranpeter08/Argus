@@ -31,7 +31,7 @@ function registerUser() {
     let password = $("#password").val();
 
     const userData = {username, password};
-    userState = {userData};
+    registerState = {userData};
 
     ajaxReq(
       '/employees/users',
