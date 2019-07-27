@@ -8,9 +8,15 @@ function getEmployees() {
   );
 }
 
-function employeeSuccess(data) {
+function employeeSuccess(data) { 
+  pageStorage.start = 0;
   storeEmployees(data);
+  employeesRender();
+}
+
+function employeesRender() {
   renderEmployeesSect();
+  handlePaging();
 }
 
 function storeEmployees(employees) {
@@ -20,11 +26,23 @@ function storeEmployees(employees) {
 function renderEmployeesSect() {
   $('#root').html(`
     <section>
-      <h2>Employees</h2>
+      <h2 class='employees-heading'>Employees</h2>
       <ul class='js-employee-list-ctnr employee-list flex-container'>
         ${employeesList()}
       </ul>
-      <div class='pagination'></div>
+      <div class="row">
+        <div class="col-12 page-number">
+          <span class="js-page-num js-empty"></span>
+        </div>
+      </div>
+      <div class="row bottom">
+      <div class="col-12 js-page-box page-box">
+        <div class="start-box inline js-empty"></div>
+        <div class="prev-box inline js-empty"></div>
+        <div class="next-box inline js-empty"></div>
+        <div class="last-box inline js-empty"></div>
+      </div>
+    </div>
     </section>
   `);
 }
@@ -102,5 +120,5 @@ function renderEmployees() {
 
 function employeeError({responseJSON}) {
   const errMsg = `<p>${responseJSON.message}</p>`;
-  $('#root').find('.js-employee-list-ctnr').html(errMsg);
+  $('.js-employee-list-ctnr').html(errMsg);
 }

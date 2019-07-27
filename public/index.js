@@ -23,11 +23,11 @@ function ajaxReq(url, method, data, handleSuccess, handleError, isPublic) {
   .fail(handleError);
 }
 
-function requestDataAPI(aFunction, method, anID, data) {
+function requestDataAPI(aFunction, method, id, data) {
   let url = '/employees';
 
-  if (anId) {
-    url = url + '/' + anID;
+  if (id) {
+    url = url + '/' + id;
   }
 
   const settings = {
@@ -222,119 +222,7 @@ function editEmployeeButton() {
   });
 }
 
-function lastButton() {
-  $('.last-box').on('click', '.last', () => {
 
-    let totalPages = pageStorage.pages;
-    pageStorage.start = totalPages - 1;
-
-    requestDataAPI(renderHTML_GET, 'GET', null, null);
-    renderPrevButton();
-    renderStart();
-    $('.next-box').empty();
-    $('.last-box').empty();
-
-    window.scrollTo({
-      top:0,
-      behavior: 'smooth'
-    });
-  });
-}
-  
-function startButton() {
-  $('.start-box').on('click', '.start', () => {
-      
-    pageStorage.start = 0;
-    requestDataAPI(renderHTML_GET, 'GET', null, null);
-    renderNextButton();
-    $('.prev-box').empty();
-    $('.start-box').empty();
-    if (pageStorage.pages > 2) {
-      renderLast();
-    }
-
-    window.scrollTo({
-      top:0,
-      behavior: 'smooth'
-    });
-  });
-}
-  
-function nextButton() {
-  $('.next-box').on('click', '.next', () => {
-    pageStorage.start += 1;
-    requestDataAPI(renderHTML_GET, 'GET', null, null);
-
-    if (pageStorage.start === pageStorage.pages - 1) {
-      $('.next-box').empty();
-      $('.last-box').empty();
-    }
-
-    if (pageStorage.start > 0) {
-      renderPrevButton();
-    }
-
-    if (pageStorage.pages > 2) {
-      renderStart();
-    }
-
-    window.scrollTo({
-      top:0,
-      behavior: 'smooth'
-    });
-  });
-}
-  
-function prevButton() {
-  $('.prev-box').on('click', '.prev', () => {
-    pageStorage.start -= 1;
-    requestDataAPI(renderHTML_GET, 'GET', null, null);
-
-    if (pageStorage.start < 1) {
-      renderNextButton();
-      $('.prev-box').empty();
-      $('.start-box').empty();
-    }
-
-    if (pageStorage.start < pageStorage.pages - 1) {
-      renderNextButton();
-    }
-
-    if (pageStorage.pages > 2) {
-      renderLast();
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: 'auto'
-    });
-  });
-}
-
-function renderLast() {
-    $('.last-box').html(`<button class="last">Last</button>`);
-}
-  
-function renderStart() {
-  $('.start-box').html(`<button class="start">Start</button>`);
-}
-
-function renderPrevButton() {
-  $('.prev-box').html(`<button class="prev">Prev</button>`);
-}
-
-function renderNextButton() {
-  $('.next-box').html(`<button class="next">Next</button>`);
-}
-
-function renderPageNum() {
-  if (pageStorage.pages === 0) {
-    $('.js-page-num').text(`Page 1 of 1`);
-  } else {
-    $('.js-page-num')
-    .text(`Page ${pageStorage.start +1} of ${pageStorage.pages}`)
-  }
-}
 
 function renderHTML_GET(data) {
   $('.js-employees').html(`
