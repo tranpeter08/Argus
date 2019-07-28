@@ -9,14 +9,15 @@ function getEmployees() {
 }
 
 function employeeSuccess(data) { 
-  pageStorage.start = 0;
+  pageStorage.current = 1;
   storeEmployees(data);
+  handlePaging();
   employeesRender();
 }
 
 function employeesRender() {
   renderEmployeesSect();
-  handlePaging();
+  renderPageNum();
 }
 
 function storeEmployees(employees) {
@@ -34,23 +35,27 @@ function renderEmployeesSect() {
         <div class="col-12 page-number">
           <span class="js-page-num js-empty"></span>
         </div>
+        </div>
+        <div class="row bottom">
+        <div class="col-12 js-page-box page-box">
+          <div class="start-box inline js-empty">${startBtn()}</div>
+          <div class="prev-box inline js-empty">${prevBtn()}</div>
+          <div class="next-box inline js-empty">${nextBtn()}</div>
+          <div class="last-box inline js-empty">${lastBtn()}</div>
+        </div>
       </div>
-      <div class="row bottom">
-      <div class="col-12 js-page-box page-box">
-        <div class="start-box inline js-empty"></div>
-        <div class="prev-box inline js-empty"></div>
-        <div class="next-box inline js-empty"></div>
-        <div class="last-box inline js-empty"></div>
-      </div>
-    </div>
     </section>
   `);
 }
 
 function employeesList() {
   const {employees} = employeesState;
+  const {current} = pageStorage;
+  const index = current - 1;
+
   const items = [];
-  for (let n = pageStorage.start * 9; n < pageStorage.start * 9 + 9; n++) {
+
+  for (let n = index * 9; n < index * 9 + 9; n++) {
     if (employees[n]) {
       items.push(`${employeeCard(employees[n], n)}`);
     }
@@ -122,3 +127,5 @@ function employeeError({responseJSON}) {
   const errMsg = `<p>${responseJSON.message}</p>`;
   $('.js-employee-list-ctnr').html(errMsg);
 }
+
+$();

@@ -3,130 +3,96 @@ function handlePaging() {
   const pages = Math.ceil(total / 9);
 
   pageStorage.pages = pages;
-
-  renderPageNum();
-
-  if (total > 9) {
-    renderNextButton();
-  }
-
-  if (pages > 2) {
-    renderLast();
-  }
 }
 
 function renderPageNum() {
-  if (pageStorage.pages === 0) {
+  const {current, pages} = pageStorage;
+  if (pages === 0) {
     $('.js-page-num').text(`Page 1 of 1`);
   } else {
     $('.js-page-num')
-    .text(`Page ${pageStorage.start +1} of ${pageStorage.pages}`)
+    .text(`Page ${current} of ${pages}`)
   }
 }
+
+function scrollTop() {
+  window.scrollTo({
+    top:0,
+    behavior: 'auto'
+  });
+}
   
-function startButton() {
+function firstPage() {
   $('#root').on('click', '.start', () => {
-      
-    pageStorage.start = 0;
-    
+    pageStorage.current = 1;
     employeesRender();
-    renderNextButton();
-    $('.prev-box').empty();
-    $('.start-box').empty();
-
-    if (pageStorage.pages > 2) {
-      renderLast();
-    }
-
-    window.scrollTo({
-      top:0,
-      behavior: 'smooth'
-    });
+    scrollTop()
   });
 }
   
-function nextButton() {
+function nextPage() {
   $('#root').on('click', '.next', () => {
-    pageStorage.start += 1;
+    pageStorage.current += 1;
     employeesRender();
-
-    if (pageStorage.start === pageStorage.pages - 1) {
-      $('.next-box').empty();
-      $('.last-box').empty();
-    }
-
-    if (pageStorage.start > 0) {
-      renderPrevButton();
-    }
-
-    if (pageStorage.pages > 2) {
-      renderStart();
-    }
-
-    window.scrollTo({
-      top:0,
-      behavior: 'smooth'
-    });
+    scrollTop();
   });
 }
   
-function prevButton() {
+function prevPage() {
   $('#root').on('click', '.prev', () => {
-    pageStorage.start -= 1;
+    pageStorage.current -= 1;
     employeesRender();
-
-    if (pageStorage.start < 1) {
-      renderNextButton();
-      $('.prev-box').empty();
-      $('.start-box').empty();
-    }
-
-    if (pageStorage.start < pageStorage.pages - 1) {
-      renderNextButton();
-    }
-
-    if (pageStorage.pages > 2) {
-      renderLast();
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: 'auto'
-    });
+    scrollTop();
   });
 }
 
-function lastButton() {
+function lastPage() {
   $('#root').on('click', '.last', () => {
-
-    let totalPages = pageStorage.pages;
-    pageStorage.start = totalPages - 1;
-
-    requestDataAPI(renderHTML_GET, 'GET', null, null);
-    renderPrevButton();
-    renderStart();
-    $('.next-box').empty();
-    $('.last-box').empty();
-
-    window.scrollTo({
-      top:0,
-      behavior: 'smooth'
-    });
+    pageStorage.current = pageStorage.pages;
+    employeesRender();
+    scrollTop();
   });
-}
-
-function renderLast() {
-  $('.last-box').html(`<button class="last">Last</button>`);
 }
   
-function renderStart() {
-  $('.start-box').html(`<button class="start">Start</button>`);
+function startBtn() {
+  const {current, pages} = pageStorage;
+  if (pages > 2 && current > 1) {
+    return `<button class="start">Start</button>`;
+  }
+
+  return '';
 }
 
-function renderPrevButton() {
-  $('.prev-box').html(`<button class="prev">Prev</button>`);
+function nextBtn() {
+  const {current, pages} = pageStorage;
+  if (current !== pages) {
+    return `<button class="next">Next</button>`;
+  }
+
+  return '';
 }
 
-function renderNextButton() {
-  $('.next-box').html(`<button class="next">Next</button>`);
+function prevBtn() {
+  if (pageStorage.current > 1) {
+    return `<button class="prev">Prev</button>`;
+  }
+
+  return '';
 }
+
+function lastBtn() {
+  const {current, pages} = pageStorage;
+
+  if (pages > 2 && current !== pages) {
+    return `<button class="last">Last</button>`;
+  }
+
+  return '';
+}
+
+$(
+  firstPage(),
+  prevPage(),
+  nextPage(),
+  lastPage()
+);

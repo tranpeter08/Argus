@@ -475,10 +475,6 @@ function createEmployeeNavButton() {
 
 function docReady() {
   viewEmployeesButton();
-  nextButton();
-  prevButton();
-  startButton();
-  lastButton();
   createEmployeeSubmit();
   createEmployeeNavButton();
   collectEquipmentButton();

@@ -26,6 +26,6 @@ const employeeFormDefaults = {
 let employeeFormState = {...employeeFormDefaults};
 
 let pageStorage = {
-  start: 0,
-  pages: 1
+  current: 1,
+  pages: ''
 };
