@@ -255,19 +255,9 @@ function handleResGET(data) {
   }
 }
 
-function viewEmployeesButton() {
-  $('.js-view').on('click',()=>{
-
-    requestDataAPI(handleResGET, 'GET', null, null);
-
-    resetStorage();
-    $('.js-about').hide();
-    $('.js-form').hide();
-  });
-}
 
 function resetState() {
-  employeeFormState = {...employeeDefaults};
+  employeeFormState = {...employeeFormDefaults};
 }
 
 function cancelFormButton() {
@@ -430,53 +420,10 @@ function collectEmployeeName() {
   employeeFormState.employeeName = {firstName, middleInit, lastName};
 }
 
-function createEmployeeSubmit() {
-  $('#js-employee-form').on('submit', (event)=>{
-    event.preventDefault();
 
-    collectEmployeeName();
-    collectEmployeeContact();
-    collectCerts();
-    collectNotes();
 
-    requestDataAPI(
-      renderCreatedEmployee, 'POST', null, employeeFormState
-    );
-
-    clearAllInputs();
-    clearEquipList();
-    resetState();
-
-    $('.js-button-box').empty();
-    
-    hideElement('.js-form');
-  })
-}
-
-function renderSubmitButton() {
-  $('.js-button-box').html(`
-    <button 
-      class="js-create-submit create form-button" 
-      type="submit">Submit
-    </button>
-  `);
-}
-
-function createEmployeeNavButton() {
-  $('.js-create').on('click', () => {
-    showElement('.js-form');
-    renderSubmitButton();
-    $('.js-legend').text('Create an Employee');
-    $('.js-empty').empty();
-    $('.js-about').hide();
-    resetStorage();
-  });
-}
 
 function docReady() {
-  viewEmployeesButton();
-  createEmployeeSubmit();
-  createEmployeeNavButton();
   collectEquipmentButton();
   clearEquipListButton();
   deleteEquipItemButton();

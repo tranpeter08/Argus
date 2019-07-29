@@ -11,7 +11,7 @@ const jwtAuth = passport.authenticate('jwt', {session: false});
 router.get('/', jwtAuth, (req, res) => {
   Employees.find()
   .then(staff => {
-    res.json(staff.map(individual => individual.serialize()));
+    res.status(200).json(staff.map(individual => individual.serialize()));
   })
   .catch(err => {
     console.error(err);

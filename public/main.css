@@ -128,8 +128,7 @@ input[type=checkbox]:hover{
   text-align: left;
 }
 
-.hidden,
-.js-form{
+.hidden{
   display: none;
 }
 

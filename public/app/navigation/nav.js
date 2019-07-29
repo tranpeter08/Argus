@@ -52,6 +52,24 @@ function loginButton() {
   });
 }
 
+function viewEmployees() {
+  $('.js-nav-links').on('click', '.js-nav-view',()=>{
+    getEmployees();
+  });
+}
+
+function addEmployee() {
+  $('.js-nav-links').on('click', '.js-nav-add', () => {
+    // showElement('.js-form');
+    // renderSubmitButton();
+    // $('.js-legend').text('Create an Employee');
+    // $('.js-empty').empty();
+    // $('.js-about').hide();
+    // resetStorage();
+    renderAddForm();
+  });
+}
+
 function logOutButton(){
     $(".js-logout").on("click", ()=>{
         if("id" in employeeState){
@@ -99,6 +117,8 @@ $(
   renderNavLinks(),
   homeButton(),
   loginButton(),
+  viewEmployees(),
+  addEmployee(),
   logOutButton(),
   menuButton(),
   clickOut()
