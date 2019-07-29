@@ -298,42 +298,26 @@ function closeCreatedMessageButton() {
   });
 }
 
-function renderCreatedEmployee(data) {
-  $('.js-message-box').html(`
-    <div class='message-box'>
-      <h2>Employee Created</h2>
-      <p>${data.employeeName} has been created successfully!</p>
-      <button 
-        class='js-close-created-button close-created' 
-        type='button'
-      >
-        Close
-      </button>
-    </div>
-  `);
-}
 
 function collectNotes() {
   employeeFormState.notes = $('.js-add-notes').val();
 }
 
 function collectCerts() {
-  $('input[name=certs]:checked')
-    .each(function() {
-      employeeFormState.certifications.push($(this).val());
-    });
+  $('input[name=certs]:checked').each(function() {
+    employeeFormState.certifications.push($(this).val());
+  });
 }
 
-function clearEquipList(storage) {
+function clearEquipListDOM() {
   $('.js-equip-list').empty();
 }
 
-function clearEquipListButton() {
-  $('.js-list-clear').on('click', () => {
-    clearEquipList();
-    employeeFormState.equipment = [];
-  });
+function clearEquipmentStore() {
+  employeeFormState.equipment = [];
 }
+
+
 
 function deleteEquipItemButton() {
   $('.js-equip-list').on('click', '.js-item-delete', function(event) {
@@ -375,30 +359,7 @@ function renderAddEquipList(equips) {
   `);
 }
 
-function collectEquipment() {
-  let equipName = $('#equipment-name').val();
-  let equipNumber = $('#equipment-number').val();
-  let equipDesc;
 
-  if (!equipNumber) {
-    equipNumber = 'N/A';
-  }
-
-  equipDesc = `${equipName} (${equipNumber})`;
-
-  if (equipName) {
-    employeeFormState.equipment.push(equipDesc);
-
-    $('.js-equip-clear').val('');
-    renderAddEquipList(equipment);
-  };
-}
-
-function collectEquipmentButton() {
-  $('.js-add-equip').on('click', ()=>{
-    collectEquipment();
-  });
-}
 
 function collectCerts() {
   $('input[name=certs]:checked').each(function() {
@@ -424,8 +385,6 @@ function collectEmployeeName() {
 
 
 function docReady() {
-  collectEquipmentButton();
-  clearEquipListButton();
   deleteEquipItemButton();
   formResetButton();
   cancelFormButton();

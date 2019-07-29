@@ -13,8 +13,9 @@ function renderSubmitButton() {
   `);
 }
 
-function createEmployeeSubmit() {
-  $('#js-employee-form').on('submit', (event)=>{
+function addEmployeeSubmit() {
+  $('#root').on('submit', '#js-employee-form', event => {
+    console.log('submit');
     event.preventDefault();
 
     collectEmployeeName();
@@ -22,18 +23,25 @@ function createEmployeeSubmit() {
     collectCerts();
     collectNotes();
 
-    requestDataAPI(
-      renderCreatedEmployee, 'POST', null, employeeFormState
-    );
-
-    clearAllInputs();
-    clearEquipList();
-    resetState();
-
-    $('.js-button-box').empty();
     
-    hideElement('.js-form');
+
+    resetState();
   })
 }
 
-$();
+function renderAddSuccess(data) {
+  $('.js-message-box').html(`
+    <div class='message-box'>
+      <h2>Employee Created</h2>
+      <p>${data.employeeName} has been created successfully!</p>
+      <button 
+        class='js-close-created-button close-created' 
+        type='button'
+      >
+        Close
+      </button>
+    </div>
+  `);
+}
+
+$(addEmployeeSubmit());

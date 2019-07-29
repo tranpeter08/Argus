@@ -169,3 +169,40 @@ const employeeForm = `
     </form>
   </section>
 `;
+
+function addEquipment() {
+  $('#root').on('click', '.js-add-equip', () => {
+    storeEquipment();
+  });
+}
+
+function storeEquipment() {
+  let equipName = $('#equipment-name').val();
+  let equipNumber = $('#equipment-number').val();
+  let equipDesc;
+
+  if (!equipNumber) {
+    equipNumber = 'N/A';
+  }
+
+  equipDesc = `${equipName} (${equipNumber})`;
+
+  if (equipName) {
+    employeeFormState.equipment.push(equipDesc);
+
+    $('.js-equip-clear').val('');
+    renderAddEquipList(employeeFormState.equipment);
+  };
+}
+
+function clearEquipList() {
+  $('#root').on('click', '.js-list-clear', () => {
+    $('.js-equip-list').empty();
+    employeeFormState.equipment = [];
+  });
+}
+
+$(
+  clearEquipList(),
+  addEquipment()
+);
