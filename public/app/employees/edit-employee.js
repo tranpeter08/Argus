@@ -34,3 +34,37 @@ function fillEmployeeForm(data) {
 
   $('.js-add-notes').val(notes);
 }
+
+function submitEdit() {
+  const selector = `.${editClassName}`;
+  $('#root').on('submit', selector, event => {
+    event.preventDefault();
+
+    const employeeID = employeeFormState.id;
+
+    collectEmployeeName();
+    collectEmployeeContact();
+    collectCerts();
+    collectNotes();
+
+    ajaxReq(
+      `employees/${employeeID}`,
+      'PUT',
+      employeeFormState,
+      employeeEditOK,
+      employeeEditErr
+    );
+  });
+}
+
+function employeeEditOK() {
+  resetFormState();
+  console.log('sucess')
+}
+
+function employeeEditErr() {
+  console.log('error')
+
+}
+
+$(submitEdit());

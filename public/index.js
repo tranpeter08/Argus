@@ -133,32 +133,7 @@ function successfulEditMsg() {
   `);
 }
 
-function submitEditButton() {
-  $('.js-button-box').on('click','.js-submit-edit',(event)=>{
-    event.preventDefault();
-    let firstName = $('#first-name').val();
-    let lastName = $('#first-name').val();
 
-    const employeeID = employeeFormState.id
-
-    collectEmployeeName();
-    collectEmployeeContact();
-    collectCerts();
-    collectNotes();
-    requestDataAPI(
-      successfulEditMsg, 'PUT', employeeID, employeeFormState
-    );
-
-    delete employeeFormState.id;
-
-    clearAllInputs();
-    clearEquipList();
-    resetFormState();
-
-    $('.js-button-box').empty();
-    hideElement('.js-form');
-  });
-}
 
 function selectEmployeeCerts(certs) {
   certs.forEach(cert => {
@@ -214,7 +189,6 @@ function closeCreatedMessageButton() {
 
 function docReady() {
   closeCreatedMessageButton();
-  submitEditButton();
   closeEditMsg();
   employeeDeleteButton();
   verifyDeleteButtonNo();

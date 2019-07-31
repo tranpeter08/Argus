@@ -8,8 +8,8 @@ function renderAddForm() {
 }
 
 function addEmployeeSubmit() {
-  const className = `.${addClassName}`;
-  $('#root').on('submit', className, event => {
+  const selector = `.${addClassName}`;
+  $('#root').on('submit', selector, event => {
     event.preventDefault();
 
     collectEmployeeName();
