@@ -2,7 +2,7 @@ const addClassName = 'js-employee-form-add';
 
 function renderAddForm() {
   $('#root').html(employeeForm);
-  addFormClass(addClassName);
+  formClassName(addClassName);
   formLegendText('Add an Employee');
   formSubmitBtnText('Add Employee');
 }

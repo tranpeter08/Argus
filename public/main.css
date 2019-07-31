@@ -278,22 +278,19 @@ button.inline{
   background: rgb(113, 187, 221);
 }
 
-.submit-edit,
 .employee-form-submit-btn{
   background: #b5e1ff;
   color: black;
   text-shadow: none;
 }
 
-.submit-edit:hover,
 .employee-form-submit-btn:hover{
   color: #F7F9FB;
   text-shadow: 1px 1px 1px black;
   background: #8fc1e3;
 }
 
-.submit-edit:active,
-button.create:active{
+.employee-form-submit-btn:active{
   background: #687864;
 }
 

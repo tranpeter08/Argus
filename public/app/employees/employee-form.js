@@ -175,7 +175,7 @@ const employeeForm = `
   </section>
 `;
 
-function addFormClass(className) {
+function formClassName(className) {
   $('#js-employee-form').addClass(className);
 }
 

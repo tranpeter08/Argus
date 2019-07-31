@@ -44,6 +44,7 @@ function employeeCard(
             Delete
           </button>
         </div>
+        <div class='js-employee-err'></div>
       </div>
     </li>        
   `
@@ -55,26 +56,32 @@ function listItems(items = []) {
 
 function editEmployee() {
   $('#root').on('click', '.js-edit-employee-button', function() {
-    const employeeID = $(this)
-      .closest('.js-employee')
-      .attr('employee-id');
+    const employee = $(this).closest('.js-employee');
+    const id = employee.attr('employee-id');
 
-    renderSubmitEditButton();
-    $('.js-empty').empty();
+    // renderEditForm();
     
-    requestDataAPI(fillEmployeeForm,'GET',employeeID, null);
+    ajaxReq(
+      `/employees/${id}`,
+      'GET',
+      null,
+      employeeOK,
+      employeeErr(employee)
+    );
   });
 }
 
-function renderSubmitEditButton() {
-  $('.js-button-box').html(`
-    <button 
-      class="js-submit-edit submit-edit form-button" 
-      type="button"
-    >
-      Submit Edit Employee
-    </button>
-  `);
+function employeeOK(data) {
+  renderEditForm();
+  fillEmployeeForm(data);
+}
+
+function employeeErr(employee) {
+  return function ({responseJSON: {message}}) {
+
+    const errMsg = `<p class='error'>${message}</p>`;
+    $(employee).find('.js-employee-err').html(errMsg);
+  }
 }
 
 $(

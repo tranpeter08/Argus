@@ -3,12 +3,12 @@ function getEmployees() {
     '/employees',
     'GET', 
     null,
-    employeeSuccess,
-    employeeError
+    employeesSuccess,
+    employeesError
   );
 }
 
-function employeeSuccess(data) { 
+function employeesSuccess(data) { 
   pageStorage.current = 1;
   storeEmployees(data);
   handlePaging();
@@ -68,7 +68,7 @@ function renderEmployees() {
   $('.employee-list').html(employeesList());
 }
 
-function employeeError({responseJSON}) {
+function employeesError({responseJSON}) {
   const errMsg = `<p>${responseJSON.message}</p>`;
   $('.js-employee-list-ctnr').html(errMsg);
 }
