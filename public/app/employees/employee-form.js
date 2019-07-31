@@ -1,6 +1,6 @@
 const employeeForm = `
   <section class="js-form">
-    <form class="" id="js-employee-form" action="#" >
+    <form id="js-employee-form" action="#" >
       <fieldset>
         <legend class="js-employee-form-legend main-legend"></legend>
         <div class="form-content">
@@ -161,7 +161,11 @@ const employeeForm = `
               </button>
             </div>
             <div class="col-4">
-              <div class="js-button-box" ></div>
+              <button 
+                class="js-employee-form-submit-btn employee-form-submit-btn form-button" 
+                type="submit"
+              >
+              </button>
             </div>
           </div>
           <div class='js-employee-form-error'></div>
@@ -170,6 +174,17 @@ const employeeForm = `
     </form>
   </section>
 `;
+
+function addFormClass(className) {
+  $('#js-employee-form').addClass(className);
+}
+
+function formLegendText(text) {
+  $('.js-employee-form-legend').text(text);
+}
+function formSubmitBtnText(text) {
+  $('.js-employee-form-submit-btn').text(text);
+}
 
 function collectEmployeeName() {
   const firstName = $('#first-name').val();

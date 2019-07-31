@@ -279,14 +279,14 @@ button.inline{
 }
 
 .submit-edit,
-button.create{
+.employee-form-submit-btn{
   background: #b5e1ff;
   color: black;
   text-shadow: none;
 }
 
 .submit-edit:hover,
-button.create:hover{
+.employee-form-submit-btn:hover{
   color: #F7F9FB;
   text-shadow: 1px 1px 1px black;
   background: #8fc1e3;

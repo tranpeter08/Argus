@@ -195,35 +195,6 @@ function fillEmployeeForm(data) {
   $('.js-add-notes').val(notes);
 }
 
-
-function renderSubmitEditButton() {
-  $('.js-button-box').html(`
-    <button 
-      class="js-submit-edit submit-edit form-button" 
-      type="button"
-    >
-      Submit Edit Employee
-    </button>
-  `);
-}
-
-function editEmployeeButton() {
-  $('.js-employees')
-  .on('click', '.js-edit-employee-button', function(event){
-
-    const employeeID = $(this)
-    .closest('.js-employee-list').attr('employee-id');
-
-    showElement('.js-form');
-    renderSubmitEditButton();
-    $('.js-empty').empty();
-    
-    requestDataAPI(fillEmployeeForm,'GET',employeeID, null);
-  });
-}
-
-
-
 function renderHTML_GET(data) {
   $('.js-employees').html(`
     <div class=''>
@@ -272,7 +243,6 @@ function closeCreatedMessageButton() {
 
 function docReady() {
   closeCreatedMessageButton();
-  editEmployeeButton();
   submitEditButton();
   closeEditMsg();
   employeeDeleteButton();

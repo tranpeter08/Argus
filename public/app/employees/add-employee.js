@@ -1,20 +1,15 @@
+const addClassName = 'js-employee-form-add';
+
 function renderAddForm() {
   $('#root').html(employeeForm);
-  $('.js-employee-form-legend').text('Create an Employee');
-  renderSubmitButton();
-}
-
-function renderSubmitButton() {
-  $('.js-button-box').html(`
-    <button 
-      class="js-create-submit create form-button" 
-      type="submit">Submit
-    </button>
-  `);
+  addFormClass(addClassName);
+  formLegendText('Add an Employee');
+  formSubmitBtnText('Add Employee');
 }
 
 function addEmployeeSubmit() {
-  $('#root').on('submit', '#js-employee-form', event => {
+  const className = `.${addClassName}`;
+  $('#root').on('submit', className, event => {
     event.preventDefault();
 
     collectEmployeeName();
@@ -23,7 +18,7 @@ function addEmployeeSubmit() {
     collectNotes();
 
     ajaxReq(
-      '/employeess',
+      '/employees',
       'POST',
       employeeFormState,
       addEmployeeOK,
