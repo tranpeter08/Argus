@@ -8,7 +8,7 @@ let registerState = {userData: ''};
 
 let employeesState = {employees: ''};
 
-const employeeFormDefaults = {
+let employeeFormDefaults = {
   employeeName: {
     firstName: '',
     middleInit: '',

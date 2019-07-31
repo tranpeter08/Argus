@@ -71,7 +71,10 @@ const employeeForm = `
                 <br>
               <button 
                 class="js-add-equip form-button add-equip" 
-                type="button">add Equipment</button>
+                type="button"
+              >
+                add Equipment
+              </button>
 
               <button 
                 class="js-list-clear form-button" 
@@ -79,10 +82,7 @@ const employeeForm = `
 
               <div class="js-equip-list equip-list"></div>
             </div>
-          
             <div class="col-6">
-
-
               <fieldset>
                 <legend class="cert-legend">Certifications</legend>
                 <label for="CWI" class="certs">
@@ -150,7 +150,7 @@ const employeeForm = `
           <div class="row form-control">
             <div class="col-4">
               <button 
-                class="js-reset form-button" 
+                class="js-employee-form-reset form-button" 
                 type="reset">Clear Form
               </button>
             </div>
@@ -164,11 +164,43 @@ const employeeForm = `
               <div class="js-button-box" ></div>
             </div>
           </div>
+          <div class='js-employee-form-error'></div>
         </div>
       </fieldset>
     </form>
   </section>
 `;
+
+function collectEmployeeName() {
+  const firstName = $('#first-name').val();
+  const middleInit = $('#middle-initial').val();
+  const lastName = $('#last-name').val();
+
+  employeeFormState.employeeName = {firstName, middleInit, lastName};
+}
+
+function collectEmployeeContact() {
+  const phone = $('#phone').val();
+  const email = $('#email').val();
+  employeeFormState.contact = {phone, email};
+}
+
+function collectCerts() {
+  $('input[name=certs]:checked').each(function() {
+    employeeFormState.certifications.push($(this).val());
+  });
+}
+
+function renderAddEquipList(equips) {
+  $('.js-equip-list').html(`
+    <h3>Equipment List</h3>            
+    <ol>
+      ${
+        (equips.map((item, index) => generateEquipList(item, index))).join('')
+      }
+    </ol>
+  `);
+}
 
 function addEquipment() {
   $('#root').on('click', '.js-add-equip', () => {
@@ -202,7 +234,53 @@ function clearEquipList() {
   });
 }
 
+function deleteEquipItem() {
+  $('#root').on('click', '.js-item-delete', function() {
+    const itemIndex = $(this)
+      .closest('.js-equip-list')
+      .attr('item-index');
+
+    employeeFormState.equipment.splice(itemIndex, 1);
+    renderAddEquipList(employeeFormState.equipment);
+
+    if (employeeFormState.equipment.length === 0) {
+      clearEquipListDOM();
+    }
+  });
+}
+
+function resetForm() {
+  $('#root').on('click', '.js-employee-form-reset', () => {
+    resetFormState();
+    clearEquipListDOM();
+    $('#js-employee-form').trigger('reset');
+  });
+}
+
+function clearEquipListDOM() {
+  $('.js-equip-list').empty();
+}
+
+function resetFormState() {
+  employeeFormState.employeeName = {
+    firstName: '',
+    middleInit: '',
+    lastName: ''
+  }
+
+  employeeFormState.contact = {
+    phone: '',
+    email: ''
+  }
+
+  employeeFormState.certifications = [];
+  employeeFormState.equipment = [];
+  employeeFormState.notes = '';
+}
+
 $(
+  resetForm(),
+  deleteEquipItem(),
   clearEquipList(),
   addEquipment()
 );

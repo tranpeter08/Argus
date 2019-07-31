@@ -23,10 +23,19 @@ function addEmployeeSubmit() {
     collectCerts();
     collectNotes();
 
-    
-
-    resetState();
+    ajaxReq(
+      '/employeess',
+      'POST',
+      employeeFormState,
+      addEmployeeOK,
+      addEmployeeErr,
+    );
   })
+}
+
+function addEmployeeOK() {
+  resetFormState();
+  renderAddSuccess();
 }
 
 function renderAddSuccess(data) {
@@ -41,6 +50,12 @@ function renderAddSuccess(data) {
         Close
       </button>
     </div>
+  `);
+}
+
+function addEmployeeErr({responseJSON: {message}}) {
+  $('.js-employee-form-error').html(`
+    <p class='error'>${message}</p>
   `);
 }
 

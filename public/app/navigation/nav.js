@@ -39,14 +39,15 @@ function collapseMenu() {
 
 function homeButton() {
   $('.js-nav-home-btn').on('click', () => {
-    resetState();
+    resetFormState();
     renderLanding();
     collapseMenu();
   });
 }
 
 function loginButton() {
-  $('.js-nav-login').on('click', () => {
+  $('.js-nav-links').on('click', '.js-nav-login', () => {
+    console.log('login')
     renderLogin();
     collapseMenu();
   });
@@ -55,39 +56,27 @@ function loginButton() {
 function viewEmployees() {
   $('.js-nav-links').on('click', '.js-nav-view',()=>{
     getEmployees();
+    collapseMenu();
   });
 }
 
 function addEmployee() {
   $('.js-nav-links').on('click', '.js-nav-add', () => {
-    // showElement('.js-form');
-    // renderSubmitButton();
-    // $('.js-legend').text('Create an Employee');
-    // $('.js-empty').empty();
-    // $('.js-about').hide();
-    // resetStorage();
     renderAddForm();
+    collapseMenu();
   });
 }
 
-function logOutButton(){
-    $(".js-logout").on("click", ()=>{
-        if("id" in employeeState){
-            delete employeeState.id;
-        }
+function logOutButton() {
+  $('.js-nav-links').on("click", '.js-nav-logout', () => {
+    clearEquipListDOM();
+    resetFormState();
 
-        clearAllInputs();
-        clearEquipList();
-        clearStorage();
+    authState.authToken = "";
 
-        hideElement(".js-hide");
-        $(".js-empty").empty();
-        $(".js-about").show();
-        $(".js-postlogin").hide();
-        $(".js-logout").hide();
-        $(".js-login-button").show();
-        userStoreage.authToken = "";
-    })
+    renderNavLinks();
+    renderLanding();
+  });
 }
 
 function menuButton() {

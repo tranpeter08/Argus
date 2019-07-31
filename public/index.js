@@ -51,7 +51,7 @@ function requestDataAPI(aFunction, method, id, data) {
 function resetStorage(){
   clearAllInputs();
   clearEquipList();
-  resetState();
+  resetFormState();
 }
 
 function showElement(selector) {
@@ -153,7 +153,7 @@ function submitEditButton() {
 
     clearAllInputs();
     clearEquipList();
-    resetState();
+    resetFormState();
 
     $('.js-button-box').empty();
     hideElement('.js-form');
@@ -255,11 +255,6 @@ function handleResGET(data) {
   }
 }
 
-
-function resetState() {
-  employeeFormState = {...employeeFormDefaults};
-}
-
 function cancelFormButton() {
   $('.js-cancel-form').on('click', () => {
 
@@ -267,7 +262,7 @@ function cancelFormButton() {
 
     clearAllInputs();
     clearEquipList();
-    resetState();
+    resetFormState();
 
     requestDataAPI(handleResGET, 'GET', null, null);
 
@@ -280,14 +275,6 @@ function clearAllInputs() {
   $('.js-add-notes').val('');
   $('.js-contact').val('');
   $('input[type=checkbox]').prop('checked', false);
-}
-
-function formResetButton() {
-  $('.js-reset').on('click', () => {
-    clearAllInputs();
-    clearEquipList();
-    resetState();
-  });
 }
 
 function closeCreatedMessageButton() {
@@ -309,29 +296,8 @@ function collectCerts() {
   });
 }
 
-function clearEquipListDOM() {
-  $('.js-equip-list').empty();
-}
-
 function clearEquipmentStore() {
   employeeFormState.equipment = [];
-}
-
-
-
-function deleteEquipItemButton() {
-  $('.js-equip-list').on('click', '.js-item-delete', function(event) {
-    const itemIndex = $(this)
-      .closest('.js-equip-list')
-      .attr('item-index');
-
-    employeeFormState.equipment.splice(itemIndex, 1);
-    renderAddEquipList(employeeFormState.equipment);
-
-    if (employeeFormState.equipment.length === 0) {
-      clearEquipList();
-    }
-  });
 }
 
 function generateEquipList(item, index) {
@@ -348,45 +314,16 @@ function generateEquipList(item, index) {
   ` 
 }
 
-function renderAddEquipList(equips) {
-  $('.js-equip-list').html(`
-    <h3>Equipment List</h3>            
-    <ol>
-      ${
-        (equips.map((item, index) => generateEquipList(item, index))).join('')
-      }
-    </ol>
-  `);
-}
 
 
 
-function collectCerts() {
-  $('input[name=certs]:checked').each(function() {
-    employeeFormState.certifications.push($(this).val());
-  });
-}
 
-function collectEmployeeContact() {
-  const phone = $('#phone').val();
-  const email = $('#email').val();
-  employeeFormState.contact = {phone, email};
-}
 
-function collectEmployeeName() {
-  const firstName = $('#first-name').val();
-  const middleInit = $('#middle-initial').val();
-  const lastName = $('#last-name').val();
-
-  employeeFormState.employeeName = {firstName, middleInit, lastName};
-}
 
 
 
 
 function docReady() {
-  deleteEquipItemButton();
-  formResetButton();
   cancelFormButton();
   closeCreatedMessageButton();
   editEmployeeButton();
