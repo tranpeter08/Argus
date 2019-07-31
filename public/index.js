@@ -255,21 +255,6 @@ function handleResGET(data) {
   }
 }
 
-function cancelFormButton() {
-  $('.js-cancel-form').on('click', () => {
-
-    delete employeeFormState.id;
-
-    clearAllInputs();
-    clearEquipList();
-    resetFormState();
-
-    requestDataAPI(handleResGET, 'GET', null, null);
-
-    hideElement('.js-form');
-  });
-}
-
 function clearAllInputs() {
   $('input[type=text]').val('');
   $('.js-add-notes').val('');
@@ -285,46 +270,7 @@ function closeCreatedMessageButton() {
   });
 }
 
-
-function collectNotes() {
-  employeeFormState.notes = $('.js-add-notes').val();
-}
-
-function collectCerts() {
-  $('input[name=certs]:checked').each(function() {
-    employeeFormState.certifications.push($(this).val());
-  });
-}
-
-function clearEquipmentStore() {
-  employeeFormState.equipment = [];
-}
-
-function generateEquipList(item, index) {
-  return `
-    <li class="js-equip-list" item-index="${index}">
-      ${item} 
-      <button 
-        class="js-item-delete delete-equip form-button" 
-        type="button"
-      >
-        Delete
-      </button>
-    </li>
-  ` 
-}
-
-
-
-
-
-
-
-
-
-
 function docReady() {
-  cancelFormButton();
   closeCreatedMessageButton();
   editEmployeeButton();
   submitEditButton();

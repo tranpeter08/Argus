@@ -15,7 +15,6 @@ function renderSubmitButton() {
 
 function addEmployeeSubmit() {
   $('#root').on('submit', '#js-employee-form', event => {
-    console.log('submit');
     event.preventDefault();
 
     collectEmployeeName();
@@ -28,7 +27,7 @@ function addEmployeeSubmit() {
       'POST',
       employeeFormState,
       addEmployeeOK,
-      addEmployeeErr,
+      addEmployeeErr
     );
   })
 }

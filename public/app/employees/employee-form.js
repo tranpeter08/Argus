@@ -202,6 +202,20 @@ function renderAddEquipList(equips) {
   `);
 }
 
+function generateEquipList(item, index) {
+  return `
+    <li class="js-equip-list" item-index="${index}">
+      ${item} 
+      <button 
+        class="js-item-delete delete-equip form-button" 
+        type="button"
+      >
+        Delete
+      </button>
+    </li>
+  `;
+}
+
 function addEquipment() {
   $('#root').on('click', '.js-add-equip', () => {
     storeEquipment();
@@ -229,8 +243,8 @@ function storeEquipment() {
 
 function clearEquipList() {
   $('#root').on('click', '.js-list-clear', () => {
-    $('.js-equip-list').empty();
-    employeeFormState.equipment = [];
+    clearEquipListDOM();
+    clearEquipmentStore();
   });
 }
 
@@ -249,16 +263,32 @@ function deleteEquipItem() {
   });
 }
 
+function clearEquipmentStore() {
+  employeeFormState.equipment = [];
+}
+
+function clearEquipListDOM() {
+  $('.js-equip-list').empty();
+}
+
+function collectNotes() {
+  employeeFormState.notes = $('.js-add-notes').val();
+}
+
+function cancelForm() {
+  $('#root').on('click', '.js-cancel-form', () => {
+    resetFormState();
+    renderEmployeesSect();
+    scrollTop();
+  });
+}
+
 function resetForm() {
   $('#root').on('click', '.js-employee-form-reset', () => {
     resetFormState();
     clearEquipListDOM();
     $('#js-employee-form').trigger('reset');
   });
-}
-
-function clearEquipListDOM() {
-  $('.js-equip-list').empty();
 }
 
 function resetFormState() {
@@ -279,6 +309,7 @@ function resetFormState() {
 }
 
 $(
+  cancelForm(),
   resetForm(),
   deleteEquipItem(),
   clearEquipList(),
