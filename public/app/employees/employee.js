@@ -11,7 +11,7 @@ function employeeCard(
   index
 ) {
   return `
-    <li class="js-employee flex-item" employee-id="${id}">
+    <li class="js-employee flex-item" id='${id}' employee-id="${id}">
       <div class="card">
         <div class= "content">
           <h3 class="js-employee-name name">#${index+1} ${employeeName}</h3>

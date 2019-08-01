@@ -1,15 +1,14 @@
-function getEmployees() {
-  ajaxReq(
+function getEmployees(success, fail) {
+  return ajaxReq(
     '/employees',
     'GET', 
     null,
-    employeesSuccess,
-    employeesError
+    success,
+    fail
   );
 }
 
-function employeesSuccess(data) { 
-  pageStorage.current = 1;
+function employeesSuccess(data) {
   storeEmployees(data);
   handlePaging();
   employeesRender();
@@ -71,4 +70,5 @@ function renderEmployees() {
 function employeesError({responseJSON}) {
   const errMsg = `<p>${responseJSON.message}</p>`;
   $('.js-employee-list-ctnr').html(errMsg);
+  resetFormState();
 }

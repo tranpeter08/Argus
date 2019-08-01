@@ -44,7 +44,7 @@ function requestDataAPI(aFunction, method, id, data) {
   $.ajax(settings)
   .done(aFunction)
   .fail((err)=>{
-      console.log('Failed response',err);
+    console.log('Failed response',err);
   });
 }
 
@@ -116,25 +116,6 @@ function employeeDeleteButton() {
   });
 }
 
-function closeEditMsg() {
-  $('.js-message-box').on('click', '.js-close-edit-msg', () => {
-      
-    requestDataAPI(handleResGET, 'GET', null);
-    $('.js-message-box').empty();
-  });
-}
-
-function successfulEditMsg() {
-  $('.js-message-box').html(`
-    <div class='message-box'>
-      <p>Employee update successful!</p>
-      <button class="js-close-edit-msg close-edit">Close</button>
-    </div>
-  `);
-}
-
-
-
 function selectEmployeeCerts(certs) {
   certs.forEach(cert => {
     $(`#${cert}`).prop('checked', true);
@@ -189,7 +170,6 @@ function closeCreatedMessageButton() {
 
 function docReady() {
   closeCreatedMessageButton();
-  closeEditMsg();
   employeeDeleteButton();
   verifyDeleteButtonNo();
   verifyDeleteButtonYes();

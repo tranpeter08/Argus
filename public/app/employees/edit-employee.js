@@ -1,4 +1,10 @@
 const editClassName = 'js-employee-form-edit';
+const editOkMsg = `
+  <div class='message-box'>
+    <p>Employee update successful!</p>
+    <button class="js-close-edit-msg close-edit">Close</button>
+  </div>
+`;
 
 function renderEditForm() {
   $('#root').html(employeeForm);
@@ -58,8 +64,7 @@ function submitEdit() {
 }
 
 function employeeEditOK() {
-  resetFormState();
-  console.log('sucess')
+  renderEditOk();
 }
 
 function employeeEditErr() {
@@ -67,4 +72,24 @@ function employeeEditErr() {
 
 }
 
-$(submitEdit());
+function renderEditOk() {
+  $('#root').html(editOkMsg);
+}
+
+function closeEditMsg() {
+  $('#root').on('click', '.js-close-edit-msg', () => {
+    getEmployees(scrollToEdited, employeesError);
+  });
+}
+
+function scrollToEdited(data) {
+  employeesSuccess(data);
+  const elem = document.getElementById(employeeFormState.id);
+  elem.scrollIntoView(true);
+  resetFormState();
+}
+
+$(
+  closeEditMsg(),
+  submitEdit()
+);

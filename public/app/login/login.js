@@ -59,7 +59,7 @@ function loginSuccess({authToken}) {
   storeToken(authToken);
   renderNavLinks();
   renderEmployeesSect();
-  getEmployees();
+  getEmployees(employeesSuccess, employeesError);
 }
 
 function storeToken(token) {

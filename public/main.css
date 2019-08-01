@@ -162,18 +162,6 @@ input[type=checkbox]:hover{
   font-weight: bold;
 }
 
-.form-content{
-  border: none;
-  padding:10px;
-  max-width: 700px;
-  margin: 0 10px;
-}
-
-.equip-list ol{
-  padding: 0;
-  margin-left: 10px;
-}
-
 .page-box,
 .page-number{
   text-align: center;
@@ -201,52 +189,6 @@ input[type=checkbox]:hover{
 .page-box button:hover{
   background: rgb(178, 178, 178);
   text-shadow: 1px 1px 1px black;
-}
-
-.certs{
-  display: block;
-}
-
-.form-button{
-  font-size: 1.2em;
-  margin: 10px;
-}
-
-#middle-initial{
-  width: 60px;
-}
-
-#phone{
-  width: 130px;
-}
-
-#email{
-  width: 162px;
-}
-
-label[for=equipment-number]{
-  margin-right: 51px;
-}
-
-.add-equip{
-  margin-right: 10px;
-}
-
-#equipment-number{
-  margin-bottom: 15px;
-}
-
-textarea{
-  margin-bottom: 10px;
-  width: 280px;
-  height: 186px;
-  border: 1px solid #cdcdcd;
-  font-size: 16px;
-}
-
-.form-control{
-  text-align: center;
-  margin: 10px 0;
 }
 
 button.inline{
@@ -278,22 +220,6 @@ button.inline{
   background: rgb(113, 187, 221);
 }
 
-.employee-form-submit-btn{
-  background: #b5e1ff;
-  color: black;
-  text-shadow: none;
-}
-
-.employee-form-submit-btn:hover{
-  color: #F7F9FB;
-  text-shadow: 1px 1px 1px black;
-  background: #8fc1e3;
-}
-
-.employee-form-submit-btn:active{
-  background: #687864;
-}
-
 .js-message-box{
   text-align: center;
 }
@@ -308,9 +234,8 @@ button.inline{
   width:300px;
   background: #f9f9f9b0;
   padding: 1em;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 3em;
+  margin: 3em auto 0;
+  text-align: center;
 }
 
 .message-box h2{

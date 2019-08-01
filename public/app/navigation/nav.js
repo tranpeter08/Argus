@@ -47,7 +47,6 @@ function homeButton() {
 
 function loginButton() {
   $('.js-nav-links').on('click', '.js-nav-login', () => {
-    console.log('login')
     renderLogin();
     collapseMenu();
   });
@@ -55,7 +54,7 @@ function loginButton() {
 
 function viewEmployees() {
   $('.js-nav-links').on('click', '.js-nav-view',()=>{
-    getEmployees();
+    getEmployees(employeesSuccess, employeesError);
     collapseMenu();
   });
 }
