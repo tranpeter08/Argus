@@ -88,15 +88,6 @@ function verifyDeleteButtonYes() {
   });
 }
 
-function renderVerifyDelete(employee) {
-  $('.js-message-box').html(`
-    <div class='message-box'>
-      <p>Are you sure you want to delete ${employee}?</p>
-      <button class="js-verify-yes verify">Yes</button>
-      <button class="js-verify-no verify">No</button>
-    </div>
-  `);
-}
 
 function employeeDeleteButton() {
   $('.js-employees').on('click', '.js-delete-employee', function(event) {
@@ -122,37 +113,6 @@ function selectEmployeeCerts(certs) {
   })
 }
 
-function renderHTML_GET(data) {
-  $('.js-employees').html(`
-    <div class=''>
-      <h2 class='employees'>Employees</h2>
-      
-      <ul class='employee-list flex-container'>
-        ${flexItems(data).join('')}
-      </ul>
-    </div>
-  `);
-
-  renderPageNum();
-}
- 
-function handleResGET(data) {
-  let total = data.length;
-  let pages = Math.ceil(total / 9);
-  pageStorage.pages = pages;
-  
-  renderHTML_GET(data);
-  pageStorage.start = 0;
-
-  if (total > 9) {
-    renderNextButton();
-  }
-
-  if (pages > 2) {
-    renderLast();
-  }
-}
-
 function clearAllInputs() {
   $('input[type=text]').val('');
   $('.js-add-notes').val('');
@@ -170,9 +130,6 @@ function closeCreatedMessageButton() {
 
 function docReady() {
   closeCreatedMessageButton();
-  employeeDeleteButton();
-  verifyDeleteButtonNo();
-  verifyDeleteButtonYes();
 }
 
 $(docReady);

@@ -4,7 +4,6 @@ function renderAddForm() {
   $('#root').html(employeeForm);
   formClassName(addClassName);
   formLegendText('Add an Employee');
-  formSubmitBtnText('Add Employee');
 }
 
 function addEmployeeSubmit() {
@@ -27,13 +26,13 @@ function addEmployeeSubmit() {
   })
 }
 
-function addEmployeeOK() {
+function addEmployeeOK(data) {
   resetFormState();
-  renderAddSuccess();
+  renderAddSuccess(data);
 }
 
 function renderAddSuccess(data) {
-  $('.js-message-box').html(`
+  $('#root').html(`
     <div class='message-box'>
       <h2>Employee Created</h2>
       <p>${data.employeeName} has been created successfully!</p>
@@ -53,4 +52,20 @@ function addEmployeeErr({responseJSON: {message}}) {
   `);
 }
 
-$(addEmployeeSubmit());
+function closeCreated() {
+  $('#root').on('click', '.js-close-created-button', () => {
+    getEmployees(renderLastPage, employeesError);
+  });
+}
+
+function renderLastPage(data) {
+  storeEmployees(data);
+  handlePaging();
+  pageState.current = pageState.pages;
+  employeesRender();
+}
+
+$(
+  addEmployeeSubmit(),
+  closeCreated()
+);

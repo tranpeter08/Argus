@@ -20,12 +20,29 @@ let employeeFormDefaults = {
   },
   certifications: [], 
   equipment: [],
-  notes: ''
+  notes: '',
+  id: ''
 }
 
-let employeeFormState = {...employeeFormDefaults};
+let employeeFormState = {
+  employeeName: {
+    firstName: '',
+    middleInit: '',
+    lastName: ''
+  },
+  contact: {
+    phone: '',
+    email: ''
+  },
+  certifications: [], 
+  equipment: [],
+  notes: '',
+  id: ''
+};
 
-let pageStorage = {
+let pageState = {
   current: 1,
   pages: ''
 };
+
+let employeeId;

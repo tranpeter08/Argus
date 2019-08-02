@@ -11,7 +11,7 @@ function employeeCard(
   index
 ) {
   return `
-    <li class="js-employee flex-item" id='${id}' employee-id="${id}">
+    <li class="js-employee flex-item" id='${id}'>
       <div class="card">
         <div class= "content">
           <h3 class="js-employee-name name">#${index+1} ${employeeName}</h3>
@@ -55,36 +55,44 @@ function listItems(items = []) {
 }
 
 function editEmployee() {
-  $('#root').on('click', '.js-edit-employee-button', function() {
+  $('#root').on('click', '.js-edit-employee-button', function () {
     const employee = $(this).closest('.js-employee');
-    const id = employee.attr('employee-id');
-
-    // renderEditForm();
+    const id = employee.attr('id');
     
     ajaxReq(
       `/employees/${id}`,
       'GET',
       null,
-      employeeOK,
+      editEmployeeOK,
       employeeErr(employee)
     );
   });
 }
 
-function employeeOK(data) {
+function editEmployeeOK(data) {
   renderEditForm();
   fillEmployeeForm(data);
 }
 
 function employeeErr(employee) {
   return function ({responseJSON: {message}}) {
-
     const errMsg = `<p class='error'>${message}</p>`;
     $(employee).find('.js-employee-err').html(errMsg);
   }
 }
 
+function deleteEmployee() {
+  $('#root').on('click', '.js-delete-employee', function() {
+    employeeId = $(this).closest('.js-employee').attr('id');
+    const employeeName = $(this)
+      .closest('.js-employee')
+      .find('.js-employee-name').text();
+      
+    renderVerifyDelete(employeeName);
+  });
+}
+
 $(
   editEmployee(),
-  // deleteEmployee(),
+  deleteEmployee()
 );

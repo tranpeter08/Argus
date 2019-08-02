@@ -138,13 +138,12 @@ const employeeForm = `
 
           <div class="row">
             <div class="col-12">
-              <h2>Notes</h2>
-
               <textarea 
-                aria-label="textarea"
+                aria-label="Notes"
                 class="js-add-notes" 
-                name="" 
-                id="" cols="30" rows="10"></textarea>
+                cols="30" rows="10"
+              >
+              </textarea>
             </div>
           </div>
           <div class="row form-control">
@@ -165,6 +164,7 @@ const employeeForm = `
                 class="js-employee-form-submit-btn employee-form-submit-btn form-button" 
                 type="submit"
               >
+                Submit
               </button>
             </div>
           </div>
@@ -181,9 +181,6 @@ function formClassName(className) {
 
 function formLegendText(text) {
   $('.js-employee-form-legend').text(text);
-}
-function formSubmitBtnText(text) {
-  $('.js-employee-form-submit-btn').text(text);
 }
 
 function collectEmployeeName() {
@@ -293,7 +290,7 @@ function collectNotes() {
 function cancelForm() {
   $('#root').on('click', '.js-cancel-form', () => {
     resetFormState();
-    renderEmployeesSect();
+    employeesRender();
     scrollTop();
   });
 }
@@ -302,6 +299,7 @@ function resetForm() {
   $('#root').on('click', '.js-employee-form-reset', () => {
     resetFormState();
     clearEquipListDOM();
+    $('.js-employee-form-error').empty();
     $('#js-employee-form').trigger('reset');
   });
 }
@@ -321,6 +319,7 @@ function resetFormState() {
   employeeFormState.certifications = [];
   employeeFormState.equipment = [];
   employeeFormState.notes = '';
+  employeeFormState.id = '';
 }
 
 $(

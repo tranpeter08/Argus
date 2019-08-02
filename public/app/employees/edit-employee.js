@@ -10,7 +10,6 @@ function renderEditForm() {
   $('#root').html(employeeForm);
 
   formClassName(editClassName);
-  formSubmitBtnText('Edit Employee');
   scrollTop();
 }
 
@@ -64,16 +63,13 @@ function submitEdit() {
 }
 
 function employeeEditOK() {
-  renderEditOk();
-}
-
-function employeeEditErr() {
-  console.log('error')
-
-}
-
-function renderEditOk() {
   $('#root').html(editOkMsg);
+}
+
+function employeeEditErr({responseJSON: {message}}) {
+  $('.js-employee-form-error').html(`
+    <p class='error'>${message}</p>
+  `);
 }
 
 function closeEditMsg() {

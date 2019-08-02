@@ -43,6 +43,10 @@ label[for=equipment-number]{
   margin-bottom: 15px;
 }
 
+.delete-equip{
+  display: block;
+}
+
 textarea{
   margin-bottom: 10px;
   width: 280px;

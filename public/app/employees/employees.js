@@ -49,7 +49,7 @@ function renderEmployeesSect() {
 
 function employeesList() {
   const {employees} = employeesState;
-  const {current} = pageStorage;
+  const {current} = pageState;
   const index = current - 1;
 
   const items = [];

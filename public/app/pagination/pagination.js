@@ -2,11 +2,11 @@ function handlePaging() {
   const total = employeesState.employees.length;
   const pages = Math.ceil(total / 9);
 
-  pageStorage.pages = pages;
+  pageState.pages = pages;
 }
 
 function renderPageNum() {
-  const {current, pages} = pageStorage;
+  const {current, pages} = pageState;
   if (pages === 0) {
     $('.js-page-num').text(`Page 1 of 1`);
   } else {
@@ -24,7 +24,7 @@ function scrollTop() {
   
 function firstPage() {
   $('#root').on('click', '.start', () => {
-    pageStorage.current = 1;
+    pageState.current = 1;
     employeesRender();
     scrollTop()
   });
@@ -32,7 +32,7 @@ function firstPage() {
   
 function nextPage() {
   $('#root').on('click', '.next', () => {
-    pageStorage.current += 1;
+    pageState.current += 1;
     employeesRender();
     scrollTop();
   });
@@ -40,7 +40,7 @@ function nextPage() {
   
 function prevPage() {
   $('#root').on('click', '.prev', () => {
-    pageStorage.current -= 1;
+    pageState.current -= 1;
     employeesRender();
     scrollTop();
   });
@@ -48,14 +48,14 @@ function prevPage() {
 
 function lastPage() {
   $('#root').on('click', '.last', () => {
-    pageStorage.current = pageStorage.pages;
+    pageState.current = pageState.pages;
     employeesRender();
     scrollTop();
   });
 }
   
 function startBtn() {
-  const {current, pages} = pageStorage;
+  const {current, pages} = pageState;
   if (pages > 2 && current > 1) {
     return `<button class="start">Start</button>`;
   }
@@ -64,7 +64,7 @@ function startBtn() {
 }
 
 function nextBtn() {
-  const {current, pages} = pageStorage;
+  const {current, pages} = pageState;
   if (current !== pages) {
     return `<button class="next">Next</button>`;
   }
@@ -73,7 +73,7 @@ function nextBtn() {
 }
 
 function prevBtn() {
-  if (pageStorage.current > 1) {
+  if (pageState.current > 1) {
     return `<button class="prev">Prev</button>`;
   }
 
@@ -81,7 +81,7 @@ function prevBtn() {
 }
 
 function lastBtn() {
-  const {current, pages} = pageStorage;
+  const {current, pages} = pageState;
 
   if (pages > 2 && current !== pages) {
     return `<button class="last">Last</button>`;

@@ -53,7 +53,8 @@ function loginButton() {
 }
 
 function viewEmployees() {
-  $('.js-nav-links').on('click', '.js-nav-view',()=>{
+  $('.js-nav-links').on('click', '.js-nav-view',() => {
+    pageState.current = 1;
     getEmployees(employeesSuccess, employeesError);
     collapseMenu();
   });
