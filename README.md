@@ -4,7 +4,7 @@ Keep track of employees and their information (certs, equipments, contact info) 
 
 # Live Site 
 
-Access the live site [here]
+Access the live [site]!
 
 [here]:https://argus-01.herokuapp.com/
 
