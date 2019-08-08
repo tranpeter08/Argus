@@ -43,8 +43,8 @@ function registerUser() {
   });
 }
 
-function registerSuccess(data) {
-  $("#root").html(registerMsg(data.username));
+function registerSuccess(res) {
+  $("#root").html(registerMsg(res.username));
 }
 
 function registerMsg(username) {
@@ -61,10 +61,10 @@ function registerMsg(username) {
 
 function closeRegisterMsg() {
   $("#root").on("click", ".js-reg-msg-close", () => {
-    loginUserReq(userState.userData);
+    loginUserReq(registerState.userData);
   });
 
-  userState = '';
+  registerState = '';
 }
 
 function registerError(err) {
