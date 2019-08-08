@@ -9,14 +9,14 @@ const router = express.Router();
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
 router.get('/', jwtAuth, (req, res) => {
-  Employees.find()
-  .then(staff => {
-    res.status(200).json(staff.map(individual => individual.serialize()));
-  })
-  .catch(err => {
-    console.error(err);
-    res.status(500).json({error: 'An error has occurred.'});
-  })
+  return Employees.find()
+    .then(staff => {
+      res.status(200).json(staff.map(individual => individual.serialize()));
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({error: 'An error has occurred.'});
+    });
 });
 
 router.get('/:id', jwtAuth, (req,res) => {
@@ -36,10 +36,10 @@ router.post('/', jwtAuth, (req,res) => {
   for (let i=0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
 
-    if (!field in req.body) {
-      const message = `Missing '${field}' in request body`
+    if (!(field in req.body)) {
+      const message = `Missing "${field}" in request body`
       console.error(message);
-      return res.status(400).send(message);
+      return res.status(400).json({message});
     }
   }
 
@@ -47,10 +47,10 @@ router.post('/', jwtAuth, (req,res) => {
     
   for (let i = 0; i < requiredNameFields.length; i++) {
     const nameField = requiredNameFields[i];
-    if (!nameField in req.body.employeeName) {
-      const message = `Missing ${nameField} in EmployeeName`;
+    if (!(nameField in req.body.employeeName)) {
+      const message = `Missing "${nameField}" in employeeName`;
       console.error(message);
-      return res.status(400).send(message);
+      return res.status(400).json({message});
     }
   }
 
@@ -58,7 +58,7 @@ router.post('/', jwtAuth, (req,res) => {
     .then(newEmployee => res.status(201).json(newEmployee.serialize()))
     .catch(err => {
       console.error(err);
-      res.status(500).json({error: 'An error has occured'});
+      res.status(500).json({message: 'An error has occured', error: err});
   });
 });
 
@@ -66,7 +66,7 @@ router.put('/:id', jwtAuth, (req, res) => {
   if (req.params.id !== req.body.id) {
     const message = `response body and parameter ID do not match`
     console.error(message);
-    res.status(400).json({error: message});
+    return res.status(400).json({message});
   }
 
   const updated = {};
@@ -81,7 +81,7 @@ router.put('/:id', jwtAuth, (req, res) => {
   Employees.findByIdAndUpdate(
     req.params.id, {$set: updated}, {new: true}
   )
-  .then(updatedEmployee => res.status(204).end())
+  .then(() => res.status(204).end())
   .catch(err => res.status(500).json({error:`An error has occurred`}));
 });
 
