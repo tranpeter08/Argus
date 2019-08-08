@@ -44,7 +44,7 @@ describe('Auth endpoints', function(){
         .request(app)
         .post('/employees/auth/login')
         .then((res)=>
-          expect(res).to.have.status(400)
+          expect(res).to.have.status(401)
         );
     });
 
