@@ -1,4 +1,4 @@
-# Argus
+# Argus [![Build Status](https://travis-ci.org/tranpeter08/Argus.svg?branch=master)](https://travis-ci.org/tranpeter08/Argus)
 
 Keep track of employees and their information (certs, equipments, contact info) for your inspection company.
 
