@@ -7,9 +7,9 @@ const loginForm = `
         <legend>Login</legend>
         <div class="login-inputs">
           <label for="login-username">Username</label><br>
-          <input type="text" id="login-username" value='testuser11'><br>
+          <input type="text" id="login-username" value='demoUser01'><br>
           <label for="login-password">Password</label><br>
-          <input type="password" id="login-password" value='testuser11'>
+          <input type="password" id="login-password" value='demoUser01'>
           <div class="js-login-err js-reg-clear reg-msg"></div>
         </div>
         <div class="reg-button-container">
