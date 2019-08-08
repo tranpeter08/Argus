@@ -66,9 +66,8 @@ function storeToken(token) {
   authState.authToken = token;
 }
 
-function loginError(res) {
-  console.log(res)
-  const err = `<p class='login-error'>*$</p>`
+function loginError({responseJSON: {message}}) {
+  const err = `<p class='login-error'>${message}</p>`
   $('.js-login-err').html(err);
 }
 
