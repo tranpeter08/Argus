@@ -31,11 +31,26 @@ function deleteEmployeeNo() {
 }
 
 function deleteEmployeeOK() {
-  //
+  const {employees} = employeesState;
+  const results = employees.filter(employee => employee.id !== employeeId);
+
+  employeesState.employees = results;
+
+  handlePaging();
+
+  const {current, pages} = pageState;
+
+  if (current > pages) {
+    pageState.current--;
+  }
+
+  employeesRender();
 }
 
-function deleteEmployeeErr() {
-
+function deleteEmployeeErr({responseJSON: {message}}) {
+  $('.js-employee-delete-error').html(`
+    <p class='error'>${message}</p>
+  `);
 }
 
 $(
