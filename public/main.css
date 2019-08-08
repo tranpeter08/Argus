@@ -1,14 +1,12 @@
 *{
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
 
 body{
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 20px;
-    background-image: url('./stainlessBG.jpg');
-    background-attachment: fixed;
+  margin: 0 0 20px;
+  background-image: url('./stainlessBG.jpg');
+  background-attachment: fixed;
 }
 
 legend,
@@ -17,441 +15,229 @@ h2,
 h3,
 h4,
 button{
-    font-family: 'Inconsolata', monospace;
+  font-family: 'Inconsolata', monospace;
 }
 
-
-
-nav{
-    background: rgb(255, 255, 255);
-    padding: 0;
-
-}
-
+a:hover,
 button:hover{
-    cursor: pointer;
-}
-
-button{
-    font-size: 20px;
-    padding: 5px 10px;
-    border: none;
-}
-
-nav button{
-    background: none;
-    border: none;
-    position: relative;
-    color: rgb(0, 0, 0);
-    text-shadow: 1px 1px 1px white;
-    text-align: center;
-    transition: .2s;
-}
-
-nav button:hover{
-    color: rgb(113, 187, 221);
-}
-
-.nav-box{
-    float: right;
-}
-
-.home-button{
-    letter-spacing: 1px;
-  }
-
-.nav-box button{
-    margin: 0 7px;
-    letter-spacing: 1px;
-}
-
-.argus-icon{
-    margin-left: 20px;
-}
-
-span,
-p, 
-li{
-    font-family: 'Montserrat', sans-serif;
-}
-
-.about-box{
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 15%;
-}
-
-.about-box h1{
-    color: white;
-    font-size: 2em;
-    text-shadow: 2px 2px 1px rgb(0, 0, 0);
-}
-
-.about-box p{
-    color: white;
-    font-size: 1.2em;
-    line-height: 2em;
-    text-shadow: 2px 2px 1px rgb(0, 0, 0);
-    letter-spacing: 1px;
-}
+  cursor: pointer;
+} 
 
 legend,
 nav button,
 h3.name{
-    text-align: center;
-    font-size: 28px;
+  text-align: center;
+  font-size: 28px;
 }
 
 h3.name{
-    margin: 0;
-}
-
-h2.employees{
-    text-align: center;
-    font-size: 30px;
-    color: white;
-    text-shadow: 2px 2px 1px rgb(0, 0, 0);
+  margin: 0;
 }
 
 h4{
-    font-size: 22px;
-    margin-top: 18px;
-    margin-bottom: 18px;
+  font-size: 22px;
+  margin-top: 18px;
+  margin-bottom: 18px;
 }
 
-.employee-list{
-    list-style: none;
-    margin: 0;
-    padding: 0;
+label{
+  font-size: 16px;
+  margin-right: 10px;
 }
 
+legend{
+  font-weight: bold;
+  padding: 20px 0;
+}
+
+label,
+input{
+  margin-bottom: 10px;
+}
+
+li{
+  padding-bottom: 5px;
+}
+
+a{
+  color: #31708E;
+  transition: .2s;
+}
+
+a:hover{
+  font-size: 20px;
+}
+
+fieldset{
+  padding: 0;
+  border: none;
+}
+
+input{
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #cdcdcd;
+  padding: 5px;
+  margin-top: 4px;
+}
+
+input:invalid + span:after {
+  content: '✖';
+  color: #f00;
+  padding-left: 5px;
+}
+
+input:valid + span:after {
+  content: '✓';
+  color: #26b72b;
+  padding-left: 5px;
+}
+
+input[type=checkbox]:hover{
+  cursor: pointer;
+}
+
+.error{
+  color: red;
+}
+
+.employee-button,
+.reg-msg-close,
+.register-btn,
+.login-btn{
+  font-size: 20px;
+  padding: 5px 10px;
+  border: none;
+}
+
+.register-msg-ctnr,
 .form-content,
+.register-form,
 .login-form{
-    background: #f9f9f9b0;
+  background: #f9f9f9b0;
 }
 
 .form{
-    list-style: circle;
+  list-style: circle;
 }
 
 .cert-legend{
-    font-size: 1.5em;
-    color: black;
-    text-shadow: none;
-    text-align: left;
+  font-size: 1.5em;
+  color: black;
+  text-shadow: none;
+  text-align: left;
 }
 
-.hidden,
-.js-form{
-    display: none;
+.hidden{
+  display: none;
 }
 
 .inline{
-    display: inline;
+  display: inline;
 }
 
 .reg-msg-box,
 .login-form,
 .card{
-    border: none;
-    padding: 15px;
+  border: none;
+  padding: 15px;
 }
 
 .card{
-    background: #f9f9f9b0;
+  background: #f9f9f9b0;
 }
 
 .content{
-    height: 320px;
-    overflow: auto;
+  height: 320px;
+  overflow: auto;
 }
 
 .nav-button{
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .home-button{
-    font-size: 25px;
-    font-weight: bold;
-}
-
-
-.form-content{
-    border: none;
-    padding:10px;
-    max-width: 700px;
-    margin: 0 10px;
-}
-
-fieldset{
-    border: none;
-}
-
-input:invalid + span:after {
-    content: '✖';
-    color: #f00;
-    padding-left: 5px;
-}
-
-input:valid + span:after {
-    content: '✓';
-    color: #26b72b;
-    padding-left: 5px;
-}
-
-input{
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #cdcdcd;
-    padding: 5px;
-    margin-top: 4px;
-}
-
-label{
-    font-size: 16px
-}
-
-.equip-list ol{
-    padding: 0;
-    margin-left: 10px;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .page-box,
 .page-number{
-    text-align: center;
+  text-align: center;
 }
 
 .page-number{
-    padding-bottom: .8em;
-}
-
-.employee-button-box{
-    text-align: center;
-}
-
-.employee-button{
-    margin-top: 10px;
+  padding-bottom: .8em;
 }
 
 .close-created,
 .verify,
 .close-edit,
 .employee-button{
-    background: rgb(0, 0, 0);
-    color:  #F7F9FB;
-    text-shadow: 2px 2px 1px black;
-    transition: .3s;
+  background: rgb(0, 0, 0);
+  color:  #F7F9FB;
+  text-shadow: 2px 2px 1px black;
+  transition: .3s;
 }
-
-
-.employee-button-edit{
-    margin-right:1.5em;
-}
-
-legend{
-    font-weight: bold;
-    padding: 20px 0;
-}
-
 
 .page-box button{
-    background: #6c6c6c;
-    color: #f7f9fb;
+  background: #6c6c6c;
+  color: #f7f9fb;
 }
 
 .page-box button:hover{
-    background: rgb(178, 178, 178);
-    text-shadow: 1px 1px 1px black;
-}
-
-.certs{
-    display: block;
-}
-
-input[type=checkbox]:hover
-{
-    cursor: pointer;
-}
-
-.form-button{
-    font-size: 1.2em;
-    margin: 10px;
-}
-
-label,
-input{
-    margin-bottom: 10px;
-}
-
-label{
-    margin-right: 10px;
-
-}
-
-li{
-    padding-bottom: 5px;
-}
-
-#middle-initial{
-    width: 60px;
-}
-
-#phone{
-    width: 130px;
-}
-
-#email{
-    width: 162px;
-}
-
-label[for=equipment-number]{
-    margin-right: 51px;
-}
-
-.add-equip{
-    margin-right: 10px;
-}
-
-#equipment-number{
-    margin-bottom: 15px;
-}
-
-textarea{
-    margin-bottom: 10px;
-    width: 280px;
-    height: 186px;
-    border: 1px solid #cdcdcd;
-    font-size: 16px;
-}
-
-.form-control{
-    text-align: center;
-    margin: 10px 0;
+  background: rgb(178, 178, 178);
+  text-shadow: 1px 1px 1px black;
 }
 
 button.inline{
-    margin-right: 20px;
-}
-
-fieldset{
-    padding: 0;
+  margin-right: 20px;
 }
 
 .main-legend{
-    color: white;
-    text-shadow: 2px 2px 1px black;
+  color: white;
+  text-shadow: 2px 2px 1px black;
 }
 
+.register-btn,
 .reg-msg-close,
 .login-form button,
 .form-button{
-    background: rgb(0, 0, 0);
-    color: #F7F9FB;
-    text-shadow: 1px 1px 1px black;
-    transition: 0.3s;
+  background: rgb(0, 0, 0);
+  color: #F7F9FB;
+  text-shadow: 1px 1px 1px black;
+  transition: 0.3s;
 }
 
+.register-btn:hover,
 .verify:hover,
 .close-created:hover,
 .close-edit:hover,
 .employee-button:hover,
 .login-form button:hover,
 .form-button:hover{
-    background: rgb(113, 187, 221);
-}
-
-.submit-edit,
-button.create{
-    background: #b5e1ff;
-    color: black;
-    text-shadow: none;
-}
-
-.submit-edit:hover,
-button.create:hover{
-    color: #F7F9FB;
-    text-shadow: 1px 1px 1px black;
-    background: #8fc1e3;
-}
-
-.submit-edit:active,
-button.create:active{
-    background: #687864;
+  background: rgb(113, 187, 221);
 }
 
 .js-message-box{
-    text-align: center;
-}
-
-.login-inputs input{
-    width: 100%;
-}
-
-.login-inputs label{
-    text-align: left;
-}
-
-.login-form input{
-    font-size: 15px;
-}
-
-.login-form fieldset{
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 3%;
-}
-
-.reg-button-container{
-    text-align: center;
-    margin-top: 10px;
-}
-
-.reg-err{
-    color: red;
-}
-
-
-.registration-message{
-    text-align: center;
+  text-align: center;
 }
 
 .page-number span{
-    font-size: 1em;
-    color: #ffffff;
-    text-shadow: 1px 1px 1px black;
-}
-
-.login-form{
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3em;
-}
-
-.login-form span{
-    font-size: .8em;
-    color: #687864;
-}
-
-a{
-    color: #31708E;
-    transition: .2s;
-}
-
-a:hover{
-    font-size: 20px;
+  font-size: 1em;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px black;
 }
 
 .message-box{
-    width:300px;
-    background: #f9f9f9b0;
-    padding: 1em;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3em;
+  width:300px;
+  background: #f9f9f9b0;
+  padding: 1em;
+  margin: 3em auto 0;
+  text-align: center;
 }
 
 .message-box h2{
-    margin-top: 0;
+  margin-top: 0;
 }

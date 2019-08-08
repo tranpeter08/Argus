@@ -1,4 +1,14 @@
-const employeeStorage = {
+let authState = {
+  loading: false,
+  authToken: '',
+  username: ''
+};
+
+let registerState = {userData: ''};
+
+let employeesState = {employees: ''};
+
+let employeeFormDefaults = {
   employeeName: {
     firstName: '',
     middleInit: '',
@@ -10,14 +20,29 @@ const employeeStorage = {
   },
   certifications: [], 
   equipment: [],
-  notes: ''
+  notes: '',
+  id: ''
 }
 
-const pageStorage = {
-  start: 0,
-  pages: 1
-}
+let employeeFormState = {
+  employeeName: {
+    firstName: '',
+    middleInit: '',
+    lastName: ''
+  },
+  contact: {
+    phone: '',
+    email: ''
+  },
+  certifications: [], 
+  equipment: [],
+  notes: '',
+  id: ''
+};
 
-const userStoreage = {
-  authToken : ""
-}
+let pageState = {
+  current: 1,
+  pages: ''
+};
+
+let employeeId;

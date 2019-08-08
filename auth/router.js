@@ -15,11 +15,22 @@ const createAuthToken = function(user) {
   });
 };
 
-const localAuth = passport.authenticate('local', {session: false});
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {session: false}, 
+    (error, user, info) => {
 
-router.post('/login', localAuth, (req, res) => {
-  const authToken = createAuthToken(req.user.serialize());
-  res.json({authToken});
+      if (info && info.reason === 'LoginError') {
+        return res.status(info.code).json(info);
+      }
+
+      if (user) {
+        const authToken = createAuthToken(user.serialize());
+        return res.json({authToken});
+      }
+
+      return next(error);
+      
+  })(req);
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});

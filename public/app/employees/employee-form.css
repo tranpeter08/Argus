@@ -1,0 +1,77 @@
+.form-content{
+  border: none;
+  padding:10px;
+  max-width: 700px;
+  margin: 0 10px;
+}
+
+.equip-list ol{
+  padding: 0;
+  margin-left: 10px;
+}
+
+.certs{
+  display: block;
+}
+
+.form-button{
+  font-size: 1.2em;
+  margin: 10px;
+}
+
+#middle-initial{
+  width: 60px;
+}
+
+#phone{
+  width: 130px;
+}
+
+#email{
+  width: 162px;
+}
+
+label[for=equipment-number]{
+  margin-right: 51px;
+}
+
+.add-equip{
+  margin-right: 10px;
+}
+
+#equipment-number{
+  margin-bottom: 15px;
+}
+
+.delete-equip{
+  display: block;
+}
+
+textarea{
+  margin-bottom: 10px;
+  width: 280px;
+  height: 186px;
+  border: 1px solid #cdcdcd;
+  font-size: 16px;
+}
+
+.form-control{
+  text-align: center;
+  margin: 10px 0;
+}
+
+.employee-form-submit-btn{
+  background: #b5e1ff;
+  color: black;
+  text-shadow: none;
+}
+
+.employee-form-submit-btn:hover{
+  color: #F7F9FB;
+  text-shadow: 1px 1px 1px black;
+  background: #8fc1e3;
+}
+
+.employee-form-submit-btn:active{
+  background: #687864;
+}
