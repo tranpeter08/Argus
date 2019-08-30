@@ -9,8 +9,6 @@ deploy:
     repo: tranpeter08/argus
     branch: master
 services: mongoDB
-env:
-- JWT_SECRET=secret
 branches:
   only:
   - master
