@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "nyc mocha --exit",
-    "start": "node server.js"
+    "start": "NODE_ENV=production node server.js"
   },
   "author": "Peter Tran",
   "license": "ISC",
